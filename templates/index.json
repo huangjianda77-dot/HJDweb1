@@ -1,8 +1,5 @@
 {
   "sections": {
-    "header": {
-      "type": "header"
-    },
     "hero": {
       "type": "hero"
     },

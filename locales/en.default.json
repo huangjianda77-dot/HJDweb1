@@ -3,5 +3,16 @@
     "password_page": {
       "login_form_heading": "Enter store using password"
     }
+  },
+  "accessibility": {
+    "refresh_page": "Refresh page",
+    "link_messages": {
+      "new_window": "Opens in a new window"
+    }
+  },
+  "cart": {
+    "label": "Cart",
+    "view": "View my cart",
+    "checkout": "Check out"
   }
 }
