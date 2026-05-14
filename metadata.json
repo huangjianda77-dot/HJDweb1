@@ -1,6 +1,6 @@
 {
   "name": "ArcticPlunge - Pro Recovery Hub",
-  "description": "Professional ArcticPlunge storefront following Shopify 2.0 Section-based architecture, optimized for high-performance recovery products.",
+  "description": "A high-performance ArcticPlunge storefront in React, featuring a Shopify 2.0 valid theme structure (layout, templates, sections) for seamless integration and cross-device optimization.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }

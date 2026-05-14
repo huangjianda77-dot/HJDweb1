@@ -33,23 +33,24 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-center lg:items-start text-center lg:text-left"
           >
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-[0.2em] text-white uppercase border border-white/20 backdrop-blur-md rounded-full bg-white/5">
+            <span className="inline-block px-4 py-1.5 mb-6 text-[10px] md:text-xs font-bold tracking-[0.2em] text-white uppercase border border-white/20 backdrop-blur-md rounded-full bg-white/5">
               THE ARCTIC PLUNGE PRO
             </span>
-            <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tighter">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tighter">
               BORN FOR <br />
               <span className="text-blue-400">CHAMPIONS</span>
             </h1>
-            <p className="text-xl text-blue-50/80 mb-12 max-w-lg leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-blue-50/80 mb-12 max-w-lg leading-relaxed font-medium">
               Experience elite-level recovery in your own space. Our triple-layer insulation technology keeps water ice-cold for 24+ hours.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-10 py-5 bg-white text-blue-900 font-bold rounded-none hover:bg-blue-50 transition-all flex items-center justify-center group uppercase tracking-widest text-sm">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <button className="px-10 py-5 bg-white text-blue-900 font-bold rounded-none hover:bg-blue-50 transition-all flex items-center justify-center group uppercase tracking-widest text-xs">
                 Shop Now <ArrowRight className="ml-3 group-hover:translate-x-1 transition-transform" size={18} />
               </button>
-              <button className="px-10 py-5 bg-transparent border-2 border-white/30 text-white font-bold rounded-none hover:bg-white/5 transition-all uppercase tracking-widest text-sm">
+              <button className="px-10 py-5 bg-transparent border-2 border-white/30 text-white font-bold rounded-none hover:bg-white/5 transition-all uppercase tracking-widest text-xs">
                 Watch Demo
               </button>
             </div>

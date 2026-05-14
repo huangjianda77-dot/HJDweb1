@@ -77,13 +77,13 @@ export default function ProductTemplate() {
             </div>
 
             {/* Quantity & ATC */}
-            <div className="flex items-center space-x-4 mb-10">
-              <div className="flex items-center border border-gray-200 h-14">
-                <button className="px-5 text-gray-400 hover:text-gray-900">-</button>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
+              <div className="flex items-center justify-between border border-gray-200 h-14 w-full sm:w-auto">
+                <button className="px-5 text-gray-400 hover:text-gray-900 transition-colors">-</button>
                 <span className="px-4 font-bold text-gray-900">1</span>
-                <button className="px-5 text-gray-400 hover:text-gray-900">+</button>
+                <button className="px-5 text-gray-400 hover:text-gray-900 transition-colors">+</button>
               </div>
-              <button className="flex-1 h-14 bg-blue-900 text-white font-bold uppercase tracking-[0.2em] text-xs hover:bg-blue-800 transition-colors">
+              <button className="flex-1 h-14 bg-blue-900 text-white font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-blue-800 transition-all active:scale-95 shadow-xl shadow-blue-900/10">
                 Add to Cart
               </button>
             </div>
