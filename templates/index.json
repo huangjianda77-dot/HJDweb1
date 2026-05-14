@@ -1,11 +1,25 @@
 {
   "sections": {
-    "main": {
-      "type": "main-index",
-      "settings": {}
+    "header": {
+      "type": "header"
+    },
+    "hero": {
+      "type": "hero"
+    },
+    "features": {
+      "type": "features"
+    },
+    "product": {
+      "type": "main-product"
+    },
+    "cta": {
+      "type": "cta-banner"
     }
   },
   "order": [
-    "main"
+    "hero",
+    "features",
+    "product",
+    "cta"
   ]
 }

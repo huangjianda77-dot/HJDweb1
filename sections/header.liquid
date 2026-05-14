@@ -5,6 +5,30 @@
 }
 {% endschema %}
 
-<div id="shopify-section-header" class="shopify-section-header">
-  {% comment %} React Header will handle rendering {% endcomment %}
-</div>
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16 md:h-20">
+      <div class="flex-shrink-0 flex items-center">
+        <a href="/" class="text-xl md:text-2xl font-black tracking-tighter text-blue-900 uppercase">
+          ARCTIC<span class="text-blue-500">PLUNGE</span>
+        </a>
+      </div>
+      
+      <nav class="hidden md:flex space-x-10">
+        <a href="#" class="text-xs font-bold tracking-widest text-zinc-600 hover:text-blue-600 transition-colors uppercase">Shop All</a>
+        <a href="#" class="text-xs font-bold tracking-widest text-zinc-600 hover:text-blue-600 transition-colors uppercase">Science</a>
+        <a href="#" class="text-xs font-bold tracking-widest text-zinc-600 hover:text-blue-600 transition-colors uppercase">Community</a>
+      </nav>
+
+      <div class="flex items-center space-x-5">
+        <button class="p-2 text-zinc-700 hover:text-blue-600">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <a href="/cart" class="p-2 text-zinc-700 hover:text-blue-600 relative">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span class="absolute top-1 right-1 bg-blue-600 text-white text-[9px] font-bold h-4 w-4 flex items-center justify-center rounded-full">0</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
