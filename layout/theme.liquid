@@ -8,6 +8,19 @@
     
     <title>{{ page_title }}</title>
 
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0813/4380/7725/files/61yue4AWqcL._AC_SY300_SX300_QL70_ML2_.jpg?v=1747631069">
+  <meta property="og:image:width" content="300">
+  <meta property="og:image:height" content="300">
+  <meta property="og:description" content="{{ page_description }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_description }}">
+  <meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/0813/4380/7725/files/61yue4AWqcL._AC_SY300_SX300_QL70_ML2_.jpg?v=1747631069">
+
+
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
