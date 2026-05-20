@@ -1,0 +1,544 @@
+{% liquid
+  assign featured_product = all_products['1st-plunge-ice-bath-recovery-kit-premium-cold-therapy-system']
+  assign variant = featured_product.selected_or_first_available_variant
+  assign primary_image = featured_product.featured_image
+  assign lifestyle_image = featured_product.images[1]
+  assign training_image = featured_product.images[2]
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --bg: #060b14;
+    --panel: #0c1422;
+    --panel-2: #101b2d;
+    --ink: #f8fbff;
+    --muted: #9fb1c7;
+    --line: rgba(125, 211, 252, .18);
+    --cyan: #21d4fd;
+    --blue: #2f80ed;
+    --green: #41f0b4;
+    --warning: #f8c76c;
+    --paper: #f7fbff;
+    color: var(--ink);
+    background: var(--bg);
+  }
+
+  .recovery-page * { box-sizing: border-box; }
+  .recovery-page { overflow: hidden; background: var(--bg); }
+  .recovery-wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
+  .recovery-grid-bg {
+    background-image:
+      linear-gradient(rgba(125,211,252,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(125,211,252,.08) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .recovery-kicker {
+    margin: 0 0 14px;
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .recovery-btn {
+    min-height: 54px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 22px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: 950;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .recovery-btn:hover { transform: translateY(-1px); }
+  .recovery-btn-primary {
+    color: #03111f;
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    box-shadow: 0 20px 48px rgba(33, 212, 253, .24);
+  }
+  .recovery-btn-secondary {
+    color: var(--ink);
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.16);
+  }
+
+  .recovery-hero {
+    position: relative;
+    min-height: 88vh;
+    display: grid;
+    align-items: center;
+    padding: 76px 0 64px;
+    background:
+      linear-gradient(100deg, rgba(6,11,20,.98), rgba(6,11,20,.88) 48%, rgba(6,11,20,.72)),
+      linear-gradient(135deg, #06101f, #071827 45%, #06101f);
+  }
+  .recovery-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(33,212,253,.16), transparent 28%, transparent 72%, rgba(65,240,180,.12)),
+      repeating-linear-gradient(0deg, transparent 0 15px, rgba(255,255,255,.025) 16px);
+    pointer-events: none;
+  }
+  .recovery-hero > .recovery-wrap { position: relative; z-index: 1; }
+  .recovery-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(380px, 1.05fr);
+    gap: 60px;
+    align-items: center;
+  }
+  .recovery-status {
+    width: max-content;
+    max-width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    background: rgba(12,20,34,.72);
+    color: #c8f7ff;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 850;
+  }
+  .recovery-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 6px rgba(65,240,180,.13);
+  }
+  .recovery-hero h1 {
+    margin: 20px 0 0;
+    max-width: 780px;
+    font-size: clamp(42px, 6.7vw, 88px);
+    line-height: .93;
+    font-weight: 950;
+    letter-spacing: 0;
+  }
+  .recovery-hero h1 span { color: var(--cyan); }
+  .recovery-hero-copy {
+    margin: 22px 0 0;
+    max-width: 660px;
+    color: var(--muted);
+    font-size: clamp(17px, 1.7vw, 21px);
+    line-height: 1.62;
+  }
+  .recovery-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .recovery-actions form { margin: 0; }
+  .recovery-price-line { margin-top: 14px; color: #d8e8f8; font-weight: 850; }
+  .recovery-price-line s { color: #708198; margin-left: 10px; }
+
+  .recovery-console {
+    position: relative;
+    min-height: 610px;
+    display: grid;
+    place-items: center;
+  }
+  .recovery-device {
+    width: min(520px, 100%);
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    padding: 32px;
+    border: 1px solid rgba(125,211,252,.22);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.98), rgba(224,247,255,.96));
+    box-shadow:
+      0 38px 90px rgba(0,0,0,.34),
+      inset 0 0 0 1px rgba(255,255,255,.72);
+  }
+  .recovery-device img { width: 100%; height: 100%; object-fit: contain; }
+  .recovery-metric {
+    position: absolute;
+    min-width: 168px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: rgba(6,11,20,.88);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 22px 60px rgba(0,0,0,.28);
+  }
+  .recovery-metric b { display: block; font-size: 32px; line-height: 1; }
+  .recovery-metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; font-weight: 850; text-transform: uppercase; letter-spacing: .08em; }
+  .recovery-metric.temp { left: 0; bottom: 86px; }
+  .recovery-metric.sound { right: 0; top: 76px; }
+  .recovery-metric.capacity { right: 34px; bottom: 34px; }
+
+  .recovery-strip {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: rgba(12,20,34,.78);
+  }
+  .recovery-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .recovery-strip-item {
+    min-height: 132px;
+    display: grid;
+    align-content: center;
+    padding: 22px;
+    border-right: 1px solid var(--line);
+  }
+  .recovery-strip-item:last-child { border-right: 0; }
+  .recovery-strip-item strong { display: block; color: var(--ink); font-size: 30px; line-height: 1; }
+  .recovery-strip-item span { display: block; margin-top: 10px; color: var(--muted); font-weight: 800; line-height: 1.44; }
+
+  .recovery-section { padding: 96px 0; }
+  .recovery-section.light { background: var(--paper); color: #07111f; }
+  .recovery-head { max-width: 800px; margin-bottom: 38px; }
+  .recovery-head h2 {
+    margin: 0;
+    font-size: clamp(32px, 4.9vw, 58px);
+    line-height: 1.02;
+    font-weight: 950;
+    letter-spacing: 0;
+  }
+  .recovery-head p { margin: 18px 0 0; color: var(--muted); font-size: 18px; line-height: 1.65; }
+  .light .recovery-head p { color: #5d6b7c; }
+  .light .recovery-kicker { color: #057a85; }
+
+  .recovery-protocol {
+    display: grid;
+    grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+    gap: 18px;
+  }
+  .recovery-image-panel {
+    min-height: 560px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: #101b2d;
+  }
+  .recovery-image-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .76;
+  }
+  .recovery-image-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent, rgba(6,11,20,.88));
+  }
+  .recovery-image-label {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1;
+  }
+  .recovery-image-label h3 { margin: 0; font-size: 34px; line-height: 1.02; font-weight: 950; }
+  .recovery-image-label p { margin: 12px 0 0; color: #c8d8e8; line-height: 1.6; }
+  .recovery-steps { display: grid; gap: 14px; }
+  .recovery-step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    background: rgba(12,20,34,.72);
+    border-radius: 8px;
+  }
+  .recovery-step-num {
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    color: #06101f;
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    border-radius: 6px;
+    font-weight: 950;
+  }
+  .recovery-step h3 { margin: 0; font-size: 22px; font-weight: 950; }
+  .recovery-step p { margin: 8px 0 0; color: var(--muted); line-height: 1.58; }
+
+  .recovery-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .recovery-tech-card {
+    min-height: 260px;
+    padding: 24px;
+    border: 1px solid rgba(7,17,31,.12);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(15,23,42,.06);
+  }
+  .recovery-tech-card .tag {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 28px;
+    color: #06101f;
+    background: #dffaff;
+    border-radius: 6px;
+    font-weight: 950;
+  }
+  .recovery-tech-card h3 { margin: 0; color: #07111f; font-size: 24px; line-height: 1.12; font-weight: 950; }
+  .recovery-tech-card p { margin: 12px 0 0; color: #5d6b7c; line-height: 1.6; }
+
+  .recovery-dashboard {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 18px;
+    align-items: stretch;
+  }
+  .recovery-dashboard-panel {
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(12,20,34,.78);
+  }
+  .recovery-dashboard-panel h3 { margin: 0 0 22px; font-size: 26px; font-weight: 950; }
+  .recovery-bars { display: grid; gap: 20px; }
+  .recovery-bar-label { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 8px; color: #d8e8f8; font-weight: 850; }
+  .recovery-track { height: 12px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.10); }
+  .recovery-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--green), var(--cyan)); }
+  .recovery-fill.chill { width: 88%; }
+  .recovery-fill.noise { width: 40%; }
+  .recovery-fill.volume { width: 76%; }
+  .recovery-comparison { display: grid; gap: 12px; }
+  .recovery-compare-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+  }
+  .recovery-compare-row:last-child { border-bottom: 0; }
+  .recovery-compare-row b { color: var(--ink); }
+  .recovery-compare-row .yes { color: var(--green); font-weight: 950; }
+
+  .recovery-kit {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .recovery-kit-card {
+    min-height: 250px;
+    display: grid;
+    align-content: end;
+    padding: 22px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    background:
+      linear-gradient(180deg, rgba(33,212,253,.06), rgba(6,11,20,.88)),
+      #101b2d;
+  }
+  .recovery-kit-card h3 { margin: 0; font-size: 22px; font-weight: 950; }
+  .recovery-kit-card p { margin: 9px 0 0; color: var(--muted); line-height: 1.48; }
+
+  .recovery-final {
+    padding: 88px 0;
+    background:
+      linear-gradient(90deg, rgba(6,11,20,.96), rgba(6,11,20,.78)),
+      #06101f;
+    border-top: 1px solid var(--line);
+  }
+  .recovery-final-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .recovery-final h2 {
+    margin: 0;
+    max-width: 760px;
+    font-size: clamp(34px, 5vw, 64px);
+    line-height: 1;
+    font-weight: 950;
+    letter-spacing: 0;
+  }
+  .recovery-final p { margin: 16px 0 0; color: var(--muted); font-size: 18px; line-height: 1.6; }
+  .recovery-final form { margin: 0; }
+
+  @media (max-width: 960px) {
+    .recovery-hero-layout,
+    .recovery-protocol,
+    .recovery-dashboard,
+    .recovery-final-grid { grid-template-columns: 1fr; }
+    .recovery-console { min-height: auto; padding: 20px 0 100px; }
+    .recovery-metric.temp { left: 10px; bottom: 10px; }
+    .recovery-metric.sound { right: 10px; top: 10px; }
+    .recovery-metric.capacity { right: 10px; bottom: 10px; transform: translateY(92px); }
+    .recovery-strip-grid,
+    .recovery-tech-grid,
+    .recovery-kit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 620px) {
+    .recovery-wrap { width: min(100% - 24px, 1200px); }
+    .recovery-hero { padding: 48px 0; }
+    .recovery-actions,
+    .recovery-actions form,
+    .recovery-btn,
+    .recovery-final form { width: 100%; }
+    .recovery-strip-grid,
+    .recovery-tech-grid,
+    .recovery-kit { grid-template-columns: 1fr; }
+    .recovery-console { display: block; padding-bottom: 0; }
+    .recovery-metric { position: static; width: 100%; margin-top: 12px; transform: none !important; }
+    .recovery-section { padding: 68px 0; }
+    .recovery-step { grid-template-columns: 1fr; }
+    .recovery-image-panel { min-height: 420px; }
+  }
+</style>
+
+<div class="recovery-page">
+  <section class="recovery-hero recovery-grid-bg">
+    <div class="recovery-wrap recovery-hero-layout">
+      <div>
+        <div class="recovery-status"><span class="recovery-pulse"></span> Recovery system online</div>
+        <h1>Engineered cold recovery for the <span>post-workout window.</span></h1>
+        <p class="recovery-hero-copy">1st Plunge turns cold water therapy into a repeatable recovery protocol: consistent 42°F cooling, external filtration, quiet operation, and an XL tub built for serious training days.</p>
+        <div class="recovery-actions">
+          {% if variant %}
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ variant.id }}">
+              <button class="recovery-btn recovery-btn-primary" type="submit">Start Recovery - {{ variant.price | money }}</button>
+            </form>
+          {% endif %}
+          <a class="recovery-btn recovery-btn-secondary" href="#recovery-tech">Explore the System</a>
+        </div>
+        <div class="recovery-price-line">Limited recovery kit offer <s>{{ variant.compare_at_price | money }}</s></div>
+      </div>
+
+      <div class="recovery-console" aria-label="{{ featured_product.title | escape }}">
+        <div class="recovery-device">
+          {% if primary_image %}
+            {{ primary_image | image_url: width: 1040 | image_tag: loading: 'eager', alt: featured_product.title }}
+          {% endif %}
+        </div>
+        <div class="recovery-metric temp"><b>42°F</b><span>Cold target</span></div>
+        <div class="recovery-metric sound"><b>40dB</b><span>Quiet output</span></div>
+        <div class="recovery-metric capacity"><b>148Gal</b><span>XL capacity</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="recovery-strip">
+    <div class="recovery-wrap recovery-strip-grid">
+      <div class="recovery-strip-item"><strong>1/3 HP</strong><span>Active chilling without daily ice runs.</span></div>
+      <div class="recovery-strip-item"><strong>Filter</strong><span>External circulation for cleaner sessions.</span></div>
+      <div class="recovery-strip-item"><strong>Hoses</strong><span>Insulated connections included in the kit.</span></div>
+      <div class="recovery-strip-item"><strong>50</strong><span>Units currently stocked in Shopify inventory.</span></div>
+    </div>
+  </section>
+
+  <section class="recovery-section">
+    <div class="recovery-wrap recovery-protocol">
+      <div class="recovery-image-panel">
+        {% if lifestyle_image %}
+          {{ lifestyle_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: 'Recovery routine' }}
+        {% endif %}
+        <div class="recovery-image-label">
+          <p class="recovery-kicker">Athlete recovery protocol</p>
+          <h3>Train hard. Cool fast. Repeat tomorrow.</h3>
+          <p>Cold exposure after intense movement can become part of a simple recovery rhythm at home.</p>
+        </div>
+      </div>
+      <div class="recovery-steps">
+        <div class="recovery-step"><span class="recovery-step-num">01</span><div><h3>Set the cold target</h3><p>Use the 1/3 HP chiller to reach a consistent plunge temperature without buying bags of ice.</p></div></div>
+        <div class="recovery-step"><span class="recovery-step-num">02</span><div><h3>Circulate and filter</h3><p>The included pump and external filter help keep water moving through the system between sessions.</p></div></div>
+        <div class="recovery-step"><span class="recovery-step-num">03</span><div><h3>Recover in a larger tub</h3><p>The 148-gallon insulated tub gives more space for athletes than compact recovery barrels.</p></div></div>
+        <div class="recovery-step"><span class="recovery-step-num">04</span><div><h3>Build the habit</h3><p>Quiet operation and a complete kit make cold recovery easier to keep in your routine.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="recovery-tech" class="recovery-section light">
+    <div class="recovery-wrap">
+      <div class="recovery-head">
+        <p class="recovery-kicker">Recovery technology</p>
+        <h2>A complete cold therapy system, not a disposable ice bath.</h2>
+        <p>The page is built around the product as a sports recovery tool: cooling performance, water movement, insulation, and day-after-day usability.</p>
+      </div>
+      <div class="recovery-tech-grid">
+        <div class="recovery-tech-card"><span class="tag">C</span><h3>Consistent cold control</h3><p>Down to 42°F for the crisp cold exposure serious users expect after training.</p></div>
+        <div class="recovery-tech-card"><span class="tag">F</span><h3>External filtration loop</h3><p>Pump and filter work together to support cleaner circulation and easier maintenance.</p></div>
+        <div class="recovery-tech-card"><span class="tag">Q</span><h3>Quiet recovery space</h3><p>Around 40dB, made for home gyms, patios, garages, and focused recovery rooms.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="recovery-section recovery-grid-bg">
+    <div class="recovery-wrap recovery-dashboard">
+      <div class="recovery-dashboard-panel">
+        <p class="recovery-kicker">System dashboard</p>
+        <h3>Built for repeat sessions.</h3>
+        <div class="recovery-bars">
+          <div><div class="recovery-bar-label"><span>Cold performance</span><span>42°F target</span></div><div class="recovery-track"><div class="recovery-fill chill"></div></div></div>
+          <div><div class="recovery-bar-label"><span>Sound profile</span><span>40dB</span></div><div class="recovery-track"><div class="recovery-fill noise"></div></div></div>
+          <div><div class="recovery-bar-label"><span>Tub capacity</span><span>148 gal</span></div><div class="recovery-track"><div class="recovery-fill volume"></div></div></div>
+        </div>
+      </div>
+      <div class="recovery-dashboard-panel">
+        <p class="recovery-kicker">Why it matters</p>
+        <h3>Less friction after training.</h3>
+        <div class="recovery-comparison">
+          <div class="recovery-compare-row"><b>No daily ice run</b><span class="yes">Included</span></div>
+          <div class="recovery-compare-row"><b>External pump and filter</b><span class="yes">Included</span></div>
+          <div class="recovery-compare-row"><b>Insulated tub and hoses</b><span class="yes">Included</span></div>
+          <div class="recovery-compare-row"><b>Home-friendly sound level</b><span class="yes">40dB</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="recovery-section">
+    <div class="recovery-wrap">
+      <div class="recovery-head">
+        <p class="recovery-kicker">Inside the kit</p>
+        <h2>Everything you need to launch a home recovery station.</h2>
+      </div>
+      <div class="recovery-kit">
+        <div class="recovery-kit-card"><h3>1/3 HP chiller</h3><p>Active cooling for consistent cold therapy.</p></div>
+        <div class="recovery-kit-card"><h3>148-gal tub</h3><p>Insulated XL cold plunge capacity.</p></div>
+        <div class="recovery-kit-card"><h3>External filter</h3><p>Supports cleaner water circulation.</p></div>
+        <div class="recovery-kit-card"><h3>Insulated hoses</h3><p>Professional connections included.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="recovery-final recovery-grid-bg">
+    <div class="recovery-wrap recovery-final-grid">
+      <div>
+        <p class="recovery-kicker">Build your recovery protocol</p>
+        <h2>Make cold recovery part of every training cycle.</h2>
+        <p>Order the complete 1st Plunge Ice Bath Recovery Kit and turn post-workout recovery into a reliable home system.</p>
+      </div>
+      {% if variant %}
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <button class="recovery-btn recovery-btn-primary" type="submit">Add Recovery Kit - {{ variant.price | money }}</button>
+        </form>
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Recovery Tech Landing",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Recovery Tech Landing"
+    }
+  ]
+}
+{% endschema %}
