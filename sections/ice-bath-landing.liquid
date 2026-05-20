@@ -1,0 +1,272 @@
+{% liquid
+  assign featured_product = all_products['1st-plunge-ice-bath-recovery-kit-premium-cold-therapy-system']
+  assign variant = featured_product.selected_or_first_available_variant
+  assign primary_image = featured_product.featured_image
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --ink: #08111f;
+    --muted: #5b6472;
+    --line: #dbe4ee;
+    --ice: #e9f7ff;
+    --blue: #0f79d8;
+    --green: #12a47f;
+    --amber: #ffb547;
+    --deep: #0a2239;
+    color: var(--ink);
+    background: #ffffff;
+  }
+
+  .ice-page * { box-sizing: border-box; }
+  .ice-page { overflow: hidden; }
+  .ice-wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+  .ice-kicker { color: var(--blue); font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: .08em; }
+  .ice-btn {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 52px;
+    padding: 0 22px; border-radius: 6px; font-weight: 850; text-decoration: none;
+    border: 1px solid transparent; transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .ice-btn:hover { transform: translateY(-1px); }
+  .ice-btn-primary { color: #fff; background: var(--blue); box-shadow: 0 16px 35px rgba(15,121,216,.22); }
+  .ice-btn-secondary { color: var(--deep); background: #fff; border-color: var(--line); }
+  .ice-hero {
+    min-height: 82vh; display: grid; align-items: center; padding: 54px 0 44px;
+    background:
+      linear-gradient(110deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.88) 44%, rgba(233,247,255,.7) 100%),
+      radial-gradient(circle at 75% 20%, rgba(18,164,127,.18), transparent 34%),
+      linear-gradient(135deg, #f8fcff 0%, #e6f5ff 100%);
+  }
+  .ice-hero-grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr); gap: 52px; align-items: center; }
+  .ice-hero h1 { margin: 12px 0 16px; max-width: 760px; font-size: clamp(42px, 6vw, 78px); line-height: .94; letter-spacing: 0; font-weight: 950; }
+  .ice-hero p { margin: 0; color: var(--muted); font-size: clamp(17px, 1.7vw, 21px); line-height: 1.55; max-width: 630px; }
+  .ice-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 26px; }
+  .ice-proof { display: flex; flex-wrap: wrap; gap: 12px; color: #394354; font-weight: 760; font-size: 14px; }
+  .ice-proof span { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.75); }
+  .ice-visual { position: relative; min-height: 540px; display: grid; place-items: center; }
+  .ice-product-shot {
+    width: min(460px, 100%); aspect-ratio: 1 / 1; display: grid; place-items: center;
+    border-radius: 8px; background: #fff; border: 1px solid rgba(8,17,31,.08);
+    box-shadow: 0 32px 80px rgba(10,34,57,.18); padding: 28px;
+  }
+  .ice-product-shot img { width: 100%; height: 100%; object-fit: contain; }
+  .ice-temp-card {
+    position: absolute; left: 0; bottom: 46px; width: 190px; padding: 18px;
+    border-radius: 8px; background: var(--deep); color: #fff; box-shadow: 0 18px 44px rgba(10,34,57,.24);
+  }
+  .ice-temp-card strong { display: block; font-size: 44px; line-height: .95; }
+  .ice-temp-card span { display: block; margin-top: 8px; color: #cde8fb; font-weight: 750; }
+  .ice-price-card {
+    position: absolute; right: 0; top: 38px; width: 204px; padding: 16px;
+    border-radius: 8px; background: #fff; border: 1px solid var(--line); box-shadow: 0 18px 44px rgba(10,34,57,.14);
+  }
+  .ice-price-card .price { font-size: 30px; font-weight: 950; }
+  .ice-price-card .compare { color: #7b8492; text-decoration: line-through; font-weight: 750; }
+
+  .ice-band { padding: 76px 0; }
+  .ice-band-soft { background: #f5fbff; }
+  .ice-section-head { max-width: 760px; margin-bottom: 30px; }
+  .ice-section-head h2 { margin: 10px 0 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.04; font-weight: 950; letter-spacing: 0; }
+  .ice-section-head p { margin: 14px 0 0; color: var(--muted); font-size: 18px; line-height: 1.6; }
+  .ice-feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .ice-feature {
+    min-height: 184px; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: #fff;
+  }
+  .ice-feature b { display: block; font-size: 18px; margin-bottom: 10px; }
+  .ice-feature p { margin: 0; color: var(--muted); line-height: 1.55; }
+  .ice-feature .mark {
+    width: 38px; height: 38px; display: grid; place-items: center; margin-bottom: 16px;
+    border-radius: 8px; background: var(--ice); color: var(--blue); font-weight: 950;
+  }
+
+  .ice-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .ice-compare-panel { padding: 28px; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+  .ice-compare-panel.is-dark { background: var(--deep); color: #fff; border-color: var(--deep); }
+  .ice-compare-panel h3 { margin: 0 0 18px; font-size: 24px; font-weight: 950; }
+  .ice-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+  .ice-list li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.45; color: var(--muted); }
+  .ice-compare-panel.is-dark .ice-list li { color: #d6e8f5; }
+  .ice-dot { flex: 0 0 22px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 950; background: #eaf2f8; color: var(--deep); }
+  .is-dark .ice-dot { background: var(--green); color: #fff; }
+
+  .ice-specs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+  .ice-spec { padding: 24px; min-height: 128px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .ice-spec:nth-child(3n) { border-right: 0; }
+  .ice-spec:nth-last-child(-n+3) { border-bottom: 0; }
+  .ice-spec small { display: block; color: var(--blue); font-weight: 850; text-transform: uppercase; letter-spacing: .06em; }
+  .ice-spec b { display: block; margin-top: 8px; font-size: 20px; }
+
+  .ice-faq { display: grid; gap: 12px; }
+  .ice-faq details { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 18px 20px; }
+  .ice-faq summary { cursor: pointer; font-weight: 900; }
+  .ice-faq p { margin: 12px 0 0; color: var(--muted); line-height: 1.6; }
+  .ice-final { background: var(--deep); color: #fff; padding: 58px 0; }
+  .ice-final-grid { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; }
+  .ice-final h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weight: 950; }
+  .ice-final p { margin: 12px 0 0; color: #cde8fb; font-size: 18px; }
+
+  @media (max-width: 880px) {
+    .ice-hero { min-height: auto; padding-top: 34px; }
+    .ice-hero-grid, .ice-compare, .ice-final-grid { grid-template-columns: 1fr; }
+    .ice-visual { min-height: auto; padding: 20px 0 76px; }
+    .ice-temp-card { left: 8px; bottom: 0; }
+    .ice-price-card { right: 8px; top: 0; }
+    .ice-feature-grid, .ice-specs { grid-template-columns: 1fr; }
+    .ice-spec, .ice-spec:nth-child(3n), .ice-spec:nth-last-child(-n+3) { border-right: 0; border-bottom: 1px solid var(--line); }
+    .ice-spec:last-child { border-bottom: 0; }
+  }
+
+  @media (max-width: 560px) {
+    .ice-wrap { width: min(100% - 24px, 1180px); }
+    .ice-actions .ice-btn { width: 100%; }
+    .ice-temp-card, .ice-price-card { position: static; width: 100%; margin-top: 12px; }
+    .ice-visual { display: block; padding-bottom: 0; }
+  }
+</style>
+
+<div class="ice-page">
+  <section class="ice-hero">
+    <div class="ice-wrap ice-hero-grid">
+      <div>
+        <div class="ice-kicker">1st Plunge Cold Therapy System</div>
+        <h1>No ice runs. Just cold recovery at home.</h1>
+        <p>A complete cold plunge setup built around a 1/3 HP chiller, 148-gallon insulated tub, external filtration, pump, and hoses. Dial in a crisp plunge down to 42°F without bags of ice.</p>
+        <div class="ice-actions">
+          {% if variant %}
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ variant.id }}">
+              <button class="ice-btn ice-btn-primary" type="submit">Add to Cart - {{ variant.price | money }}</button>
+            </form>
+          {% endif %}
+          <a class="ice-btn ice-btn-secondary" href="/products/{{ featured_product.handle }}">View Product Details</a>
+        </div>
+        <div class="ice-proof">
+          <span>1/3 HP chiller</span>
+          <span>148 gal XXL tub</span>
+          <span>External filtration kit</span>
+          <span>Quiet 40 dB operation</span>
+        </div>
+      </div>
+      <div class="ice-visual" aria-label="{{ featured_product.title | escape }}">
+        <div class="ice-price-card">
+          <div class="compare">{{ variant.compare_at_price | money }}</div>
+          <div class="price">{{ variant.price | money }}</div>
+          <div class="ice-kicker">Limited offer</div>
+        </div>
+        <div class="ice-product-shot">
+          {% if primary_image %}
+            {{ primary_image | image_url: width: 920 | image_tag: loading: 'eager', alt: featured_product.title }}
+          {% else %}
+            <div class="ice-kicker">Product image</div>
+          {% endif %}
+        </div>
+        <div class="ice-temp-card">
+          <strong>42°F</strong>
+          <span>Cold plunge target temperature</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ice-band">
+    <div class="ice-wrap">
+      <div class="ice-section-head">
+        <div class="ice-kicker">Built for consistency</div>
+        <h2>Cold water therapy without the daily ice chore.</h2>
+        <p>The system combines cooling, circulation, and filtration so your recovery routine feels repeatable instead of improvised.</p>
+      </div>
+      <div class="ice-feature-grid">
+        <div class="ice-feature"><span class="mark">01</span><b>Chilled on demand</b><p>The 1/3 HP chiller is designed to bring water down to cold plunge temperatures without relying on disposable ice.</p></div>
+        <div class="ice-feature"><span class="mark">02</span><b>Room to breathe</b><p>The 148-gallon tub gives athletes and recovery-focused users a larger plunge footprint than compact barrels.</p></div>
+        <div class="ice-feature"><span class="mark">03</span><b>Cleaner circulation</b><p>An external filter and pump help keep water moving between sessions, reducing the friction of ongoing maintenance.</p></div>
+        <div class="ice-feature"><span class="mark">04</span><b>Quiet setup</b><p>At around 40 dB, the chiller is made for home gyms, garages, patios, and recovery spaces.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ice-band ice-band-soft">
+    <div class="ice-wrap">
+      <div class="ice-section-head">
+        <div class="ice-kicker">Why it converts</div>
+        <h2>The upgrade from bags of ice.</h2>
+      </div>
+      <div class="ice-compare">
+        <div class="ice-compare-panel">
+          <h3>Traditional ice bath</h3>
+          <ul class="ice-list">
+            <li><span class="ice-dot">-</span><span>Buy, carry, and dump ice before each session.</span></li>
+            <li><span class="ice-dot">-</span><span>Temperature swings from session to session.</span></li>
+            <li><span class="ice-dot">-</span><span>More cleanup, more water changes, more skipped plunges.</span></li>
+          </ul>
+        </div>
+        <div class="ice-compare-panel is-dark">
+          <h3>1st Plunge kit</h3>
+          <ul class="ice-list">
+            <li><span class="ice-dot">✓</span><span>Set a cold target temperature and keep your routine ready.</span></li>
+            <li><span class="ice-dot">✓</span><span>Includes chiller, tub, pump, filter, and insulated hoses.</span></li>
+            <li><span class="ice-dot">✓</span><span>Designed for repeat recovery sessions at home.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ice-band">
+    <div class="ice-wrap">
+      <div class="ice-section-head">
+        <div class="ice-kicker">What is included</div>
+        <h2>A complete starter kit for home cold plunging.</h2>
+      </div>
+      <div class="ice-specs">
+        <div class="ice-spec"><small>Cooling power</small><b>1/3 HP chiller</b></div>
+        <div class="ice-spec"><small>Temperature</small><b>Down to 42°F</b></div>
+        <div class="ice-spec"><small>Tub capacity</small><b>148 gallons</b></div>
+        <div class="ice-spec"><small>Circulation</small><b>External pump</b></div>
+        <div class="ice-spec"><small>Maintenance</small><b>External filter</b></div>
+        <div class="ice-spec"><small>Connection</small><b>Insulated hoses</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ice-band ice-band-soft">
+    <div class="ice-wrap">
+      <div class="ice-section-head">
+        <div class="ice-kicker">FAQ</div>
+        <h2>Before you plunge.</h2>
+      </div>
+      <div class="ice-faq">
+        <details open><summary>Does this replace buying ice?</summary><p>Yes. The chiller is designed to cool the water directly, so you can stop relying on bags of ice for each session.</p></details>
+        <details><summary>Is the tub included?</summary><p>Yes. This kit is positioned as a complete setup with a 148-gallon tub, chiller, pump, filter, and hoses.</p></details>
+        <details><summary>Where should I set it up?</summary><p>Most customers use a garage, home gym, covered patio, or recovery room with access to power and a level surface.</p></details>
+        <details><summary>How do I buy it?</summary><p>Use the add-to-cart button on this page. The order connects to the existing Shopify product and checkout.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="ice-final">
+    <div class="ice-wrap ice-final-grid">
+      <div>
+        <h2>Make cold recovery the easy part.</h2>
+        <p>Bring the plunge home with a complete chiller and tub kit.</p>
+      </div>
+      {% if variant %}
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <button class="ice-btn ice-btn-primary" type="submit">Order Now - {{ variant.price | money }}</button>
+        </form>
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Ice Bath Landing Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Ice Bath Landing Page"
+    }
+  ]
+}
+{% endschema %}
