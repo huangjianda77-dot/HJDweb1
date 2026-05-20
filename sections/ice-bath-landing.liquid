@@ -6,253 +6,497 @@
 
 <style>
   #shopify-section-{{ section.id }} {
-    --ink: #08111f;
-    --muted: #5b6472;
-    --line: #dbe4ee;
-    --ice: #e9f7ff;
-    --blue: #0f79d8;
-    --green: #12a47f;
-    --amber: #ffb547;
-    --deep: #0a2239;
+    --midnight: #0f172a;
+    --midnight-2: #111c31;
+    --ice: #38bdf8;
+    --ice-soft: #e0f7ff;
+    --ghost: #f8fafc;
+    --line: rgba(148, 163, 184, .26);
+    --muted: #64748b;
+    --ink: #0b1220;
+    --white: #ffffff;
     color: var(--ink);
-    background: #ffffff;
+    background: var(--ghost);
   }
 
-  .ice-page * { box-sizing: border-box; }
-  .ice-page { overflow: hidden; }
-  .ice-wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
-  .ice-kicker { color: var(--blue); font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: .08em; }
-  .ice-btn {
-    display: inline-flex; align-items: center; justify-content: center; min-height: 52px;
-    padding: 0 22px; border-radius: 6px; font-weight: 850; text-decoration: none;
-    border: 1px solid transparent; transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  .plunge-page * { box-sizing: border-box; }
+  .plunge-page { overflow: hidden; background: var(--ghost); }
+  .plunge-wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+  .plunge-kicker {
+    margin: 0 0 14px;
+    color: var(--ice);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
   }
-  .ice-btn:hover { transform: translateY(-1px); }
-  .ice-btn-primary { color: #fff; background: var(--blue); box-shadow: 0 16px 35px rgba(15,121,216,.22); }
-  .ice-btn-secondary { color: var(--deep); background: #fff; border-color: var(--line); }
-  .ice-hero {
-    min-height: 82vh; display: grid; align-items: center; padding: 54px 0 44px;
+  .plunge-btn {
+    min-height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 22px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .plunge-btn:hover { transform: translateY(-1px); }
+  .plunge-btn-primary {
+    background: var(--ice);
+    color: #03111f;
+    box-shadow: 0 20px 45px rgba(56, 189, 248, .28);
+  }
+  .plunge-btn-secondary {
+    color: var(--white);
+    border-color: rgba(255,255,255,.22);
+    background: rgba(255,255,255,.06);
+  }
+
+  .plunge-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(15, 23, 42, .94);
+    backdrop-filter: blur(12px);
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .plunge-sticky-inner {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .plunge-sticky-price { color: var(--ice); }
+  .plunge-sticky form { margin: 0; }
+  .plunge-sticky .plunge-btn { min-height: 36px; padding: 0 14px; font-size: 12px; }
+
+  .plunge-hero {
+    color: #fff;
+    min-height: 84vh;
+    display: grid;
+    align-items: center;
+    padding: 72px 0 62px;
     background:
-      linear-gradient(110deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.88) 44%, rgba(233,247,255,.7) 100%),
-      radial-gradient(circle at 75% 20%, rgba(18,164,127,.18), transparent 34%),
-      linear-gradient(135deg, #f8fcff 0%, #e6f5ff 100%);
+      linear-gradient(105deg, rgba(15,23,42,.98) 0%, rgba(15,23,42,.92) 42%, rgba(15,23,42,.60) 100%),
+      radial-gradient(circle at 78% 24%, rgba(56,189,248,.28), transparent 34%),
+      linear-gradient(135deg, #0f172a 0%, #132238 100%);
   }
-  .ice-hero-grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr); gap: 52px; align-items: center; }
-  .ice-hero h1 { margin: 12px 0 16px; max-width: 760px; font-size: clamp(42px, 6vw, 78px); line-height: .94; letter-spacing: 0; font-weight: 950; }
-  .ice-hero p { margin: 0; color: var(--muted); font-size: clamp(17px, 1.7vw, 21px); line-height: 1.55; max-width: 630px; }
-  .ice-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 26px; }
-  .ice-proof { display: flex; flex-wrap: wrap; gap: 12px; color: #394354; font-weight: 760; font-size: 14px; }
-  .ice-proof span { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.75); }
-  .ice-visual { position: relative; min-height: 540px; display: grid; place-items: center; }
-  .ice-product-shot {
-    width: min(460px, 100%); aspect-ratio: 1 / 1; display: grid; place-items: center;
-    border-radius: 8px; background: #fff; border: 1px solid rgba(8,17,31,.08);
-    box-shadow: 0 32px 80px rgba(10,34,57,.18); padding: 28px;
+  .plunge-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .96fr) minmax(370px, 1.04fr);
+    gap: 58px;
+    align-items: center;
   }
-  .ice-product-shot img { width: 100%; height: 100%; object-fit: contain; }
-  .ice-temp-card {
-    position: absolute; left: 0; bottom: 46px; width: 190px; padding: 18px;
-    border-radius: 8px; background: var(--deep); color: #fff; box-shadow: 0 18px 44px rgba(10,34,57,.24);
+  .plunge-hero h1 {
+    margin: 0;
+    max-width: 760px;
+    font-size: clamp(44px, 7vw, 86px);
+    line-height: .92;
+    letter-spacing: 0;
+    font-weight: 950;
   }
-  .ice-temp-card strong { display: block; font-size: 44px; line-height: .95; }
-  .ice-temp-card span { display: block; margin-top: 8px; color: #cde8fb; font-weight: 750; }
-  .ice-price-card {
-    position: absolute; right: 0; top: 38px; width: 204px; padding: 16px;
-    border-radius: 8px; background: #fff; border: 1px solid var(--line); box-shadow: 0 18px 44px rgba(10,34,57,.14);
+  .plunge-hero-copy {
+    margin: 22px 0 0;
+    max-width: 650px;
+    color: #cbd5e1;
+    font-size: clamp(17px, 1.8vw, 21px);
+    line-height: 1.58;
   }
-  .ice-price-card .price { font-size: 30px; font-weight: 950; }
-  .ice-price-card .compare { color: #7b8492; text-decoration: line-through; font-weight: 750; }
+  .plunge-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .plunge-actions form { margin: 0; }
+  .plunge-savings {
+    margin-top: 16px;
+    color: #dbeafe;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .plunge-savings s { color: #94a3b8; margin-left: 8px; }
+  .plunge-proof {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 34px;
+    max-width: 720px;
+  }
+  .plunge-proof span {
+    min-height: 74px;
+    display: grid;
+    align-content: center;
+    padding: 14px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.045);
+    border-radius: 4px;
+    color: #dbeafe;
+    font-size: 13px;
+    font-weight: 850;
+  }
+  .plunge-proof b { display: block; color: #fff; font-size: 24px; line-height: 1; margin-bottom: 6px; }
 
-  .ice-band { padding: 76px 0; }
-  .ice-band-soft { background: #f5fbff; }
-  .ice-section-head { max-width: 760px; margin-bottom: 30px; }
-  .ice-section-head h2 { margin: 10px 0 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.04; font-weight: 950; letter-spacing: 0; }
-  .ice-section-head p { margin: 14px 0 0; color: var(--muted); font-size: 18px; line-height: 1.6; }
-  .ice-feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  .ice-feature {
-    min-height: 184px; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: #fff;
+  .plunge-product-stage { position: relative; min-height: 570px; display: grid; place-items: center; }
+  .plunge-product-card {
+    width: min(510px, 100%);
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    padding: 30px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(226,242,251,.96));
+    border: 1px solid rgba(255,255,255,.36);
+    box-shadow: 0 40px 90px rgba(0,0,0,.35);
   }
-  .ice-feature b { display: block; font-size: 18px; margin-bottom: 10px; }
-  .ice-feature p { margin: 0; color: var(--muted); line-height: 1.55; }
-  .ice-feature .mark {
-    width: 38px; height: 38px; display: grid; place-items: center; margin-bottom: 16px;
-    border-radius: 8px; background: var(--ice); color: var(--blue); font-weight: 950;
+  .plunge-product-card img { width: 100%; height: 100%; object-fit: contain; }
+  .plunge-float {
+    position: absolute;
+    padding: 16px;
+    border-radius: 4px;
+    background: rgba(15,23,42,.88);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 22px 54px rgba(0,0,0,.28);
+    color: #fff;
   }
+  .plunge-float strong { display: block; font-size: 34px; line-height: 1; }
+  .plunge-float span { display: block; margin-top: 8px; color: #bae6fd; font-size: 12px; font-weight: 850; text-transform: uppercase; letter-spacing: .06em; }
+  .plunge-float.temp { left: 0; bottom: 64px; width: 174px; }
+  .plunge-float.sound { right: 0; top: 54px; width: 184px; }
 
-  .ice-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .ice-compare-panel { padding: 28px; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
-  .ice-compare-panel.is-dark { background: var(--deep); color: #fff; border-color: var(--deep); }
-  .ice-compare-panel h3 { margin: 0 0 18px; font-size: 24px; font-weight: 950; }
-  .ice-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
-  .ice-list li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.45; color: var(--muted); }
-  .ice-compare-panel.is-dark .ice-list li { color: #d6e8f5; }
-  .ice-dot { flex: 0 0 22px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 950; background: #eaf2f8; color: var(--deep); }
-  .is-dark .ice-dot { background: var(--green); color: #fff; }
+  .plunge-band { padding: 90px 0; }
+  .plunge-band-white { background: #fff; }
+  .plunge-head { max-width: 780px; margin-bottom: 36px; }
+  .plunge-head h2 {
+    margin: 0;
+    color: var(--midnight);
+    font-size: clamp(32px, 4.6vw, 56px);
+    line-height: 1;
+    letter-spacing: 0;
+    font-weight: 950;
+  }
+  .plunge-head p { margin: 18px 0 0; color: var(--muted); font-size: 18px; line-height: 1.65; }
 
-  .ice-specs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
-  .ice-spec { padding: 24px; min-height: 128px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .ice-spec:nth-child(3n) { border-right: 0; }
-  .ice-spec:nth-last-child(-n+3) { border-bottom: 0; }
-  .ice-spec small { display: block; color: var(--blue); font-weight: 850; text-transform: uppercase; letter-spacing: .06em; }
-  .ice-spec b { display: block; margin-top: 8px; font-size: 20px; }
+  .plunge-silent {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .plunge-silent-item { min-height: 160px; padding: 26px; background: #fff; }
+  .plunge-silent-item strong { display: block; color: var(--midnight); font-size: 38px; line-height: 1; }
+  .plunge-silent-item span { display: block; margin-top: 12px; color: var(--muted); font-weight: 800; line-height: 1.45; }
 
-  .ice-faq { display: grid; gap: 12px; }
-  .ice-faq details { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 18px 20px; }
-  .ice-faq summary { cursor: pointer; font-weight: 900; }
-  .ice-faq p { margin: 12px 0 0; color: var(--muted); line-height: 1.6; }
-  .ice-final { background: var(--deep); color: #fff; padding: 58px 0; }
-  .ice-final-grid { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; }
-  .ice-final h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weight: 950; }
-  .ice-final p { margin: 12px 0 0; color: #cde8fb; font-size: 18px; }
+  .plunge-advantage {
+    display: grid;
+    grid-template-columns: .92fr 1.08fr;
+    gap: 42px;
+    align-items: center;
+  }
+  .plunge-lab-card {
+    min-height: 520px;
+    padding: 28px;
+    display: grid;
+    align-content: end;
+    background:
+      linear-gradient(180deg, rgba(15,23,42,.10), rgba(15,23,42,.88)),
+      radial-gradient(circle at 50% 24%, rgba(56,189,248,.32), transparent 28%),
+      #101b2d;
+    color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .plunge-lab-card h3 { margin: 0; font-size: 36px; line-height: 1; font-weight: 950; }
+  .plunge-lab-card p { margin: 14px 0 0; color: #cbd5e1; line-height: 1.6; }
+  .plunge-feature-list { display: grid; gap: 14px; }
+  .plunge-feature-row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .plunge-icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    background: var(--ice-soft);
+    color: #0369a1;
+    border-radius: 4px;
+    font-weight: 950;
+  }
+  .plunge-feature-row h3 { margin: 0; color: var(--midnight); font-size: 21px; font-weight: 950; }
+  .plunge-feature-row p { margin: 7px 0 0; color: var(--muted); line-height: 1.56; }
 
-  @media (max-width: 880px) {
-    .ice-hero { min-height: auto; padding-top: 34px; }
-    .ice-hero-grid, .ice-compare, .ice-final-grid { grid-template-columns: 1fr; }
-    .ice-visual { min-height: auto; padding: 20px 0 76px; }
-    .ice-temp-card { left: 8px; bottom: 0; }
-    .ice-price-card { right: 8px; top: 0; }
-    .ice-feature-grid, .ice-specs { grid-template-columns: 1fr; }
-    .ice-spec, .ice-spec:nth-child(3n), .ice-spec:nth-last-child(-n+3) { border-right: 0; border-bottom: 1px solid var(--line); }
-    .ice-spec:last-child { border-bottom: 0; }
+  .plunge-compare {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .plunge-compare-card {
+    padding: 26px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .plunge-compare-card.is-featured {
+    background: var(--midnight);
+    color: #fff;
+    border-color: var(--midnight);
+    box-shadow: 0 28px 70px rgba(15,23,42,.25);
+  }
+  .plunge-compare-card h3 { margin: 0 0 18px; font-size: 24px; font-weight: 950; }
+  .plunge-compare-card ul { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+  .plunge-compare-card li { color: var(--muted); line-height: 1.48; }
+  .plunge-compare-card.is-featured li { color: #dbeafe; }
+  .plunge-compare-price { margin: 0 0 18px; color: var(--ice); font-size: 30px; font-weight: 950; }
+
+  .plunge-sound {
+    display: grid;
+    grid-template-columns: .88fr 1.12fr;
+    gap: 38px;
+    align-items: center;
+    padding: 34px;
+    background: var(--midnight);
+    color: #fff;
+    border-radius: 6px;
+  }
+  .plunge-sound h2 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.05; font-weight: 950; }
+  .plunge-sound p { margin: 14px 0 0; color: #cbd5e1; line-height: 1.6; }
+  .plunge-meter { display: grid; gap: 18px; }
+  .plunge-meter-row span { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 850; }
+  .plunge-track { height: 12px; background: rgba(255,255,255,.12); border-radius: 999px; overflow: hidden; }
+  .plunge-fill { height: 100%; background: var(--ice); border-radius: 999px; }
+  .plunge-fill.standard { width: 78%; background: #fb7185; }
+  .plunge-fill.quiet { width: 44%; }
+
+  .plunge-kit-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .plunge-kit-card {
+    min-height: 230px;
+    display: grid;
+    align-content: end;
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background:
+      linear-gradient(180deg, rgba(248,250,252,.1), rgba(15,23,42,.9)),
+      radial-gradient(circle at 50% 20%, rgba(56,189,248,.22), transparent 32%),
+      #172033;
+    color: #fff;
+  }
+  .plunge-kit-card h3 { margin: 0; font-size: 20px; font-weight: 950; }
+  .plunge-kit-card p { margin: 8px 0 0; color: #cbd5e1; line-height: 1.45; }
+
+  .plunge-final {
+    padding: 76px 0;
+    background:
+      linear-gradient(90deg, rgba(15,23,42,.97), rgba(15,23,42,.86)),
+      radial-gradient(circle at 76% 40%, rgba(56,189,248,.20), transparent 30%),
+      var(--midnight);
+    color: #fff;
+  }
+  .plunge-final-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: center;
+  }
+  .plunge-final h2 { margin: 0; font-size: clamp(34px, 5vw, 58px); line-height: 1; font-weight: 950; }
+  .plunge-final p { margin: 14px 0 0; color: #cbd5e1; font-size: 18px; }
+  .plunge-final form { margin: 0; }
+
+  @media (max-width: 920px) {
+    .plunge-hero { min-height: auto; padding: 54px 0; }
+    .plunge-hero-grid,
+    .plunge-advantage,
+    .plunge-sound,
+    .plunge-final-grid { grid-template-columns: 1fr; }
+    .plunge-product-stage { min-height: auto; padding: 18px 0 96px; }
+    .plunge-float.temp { left: 8px; bottom: 8px; }
+    .plunge-float.sound { right: 8px; top: 8px; }
+    .plunge-silent,
+    .plunge-compare,
+    .plunge-kit-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 560px) {
-    .ice-wrap { width: min(100% - 24px, 1180px); }
-    .ice-actions .ice-btn { width: 100%; }
-    .ice-temp-card, .ice-price-card { position: static; width: 100%; margin-top: 12px; }
-    .ice-visual { display: block; padding-bottom: 0; }
+    .plunge-wrap { width: min(100% - 24px, 1180px); }
+    .plunge-sticky-inner { align-items: flex-start; flex-direction: column; padding: 10px 0; }
+    .plunge-sticky .plunge-btn { width: 100%; }
+    .plunge-actions .plunge-btn, .plunge-actions form, .plunge-final form, .plunge-final .plunge-btn { width: 100%; }
+    .plunge-proof { grid-template-columns: 1fr; }
+    .plunge-product-stage { display: block; padding-bottom: 0; }
+    .plunge-float { position: static; width: 100%; margin-top: 12px; }
+    .plunge-band { padding: 64px 0; }
+    .plunge-sound { padding: 24px; }
   }
 </style>
 
-<div class="ice-page">
-  <section class="ice-hero">
-    <div class="ice-wrap ice-hero-grid">
+<div class="plunge-page">
+  <div class="plunge-sticky">
+    <div class="plunge-wrap plunge-sticky-inner">
+      <span>1st Plunge Recovery Kit <span class="plunge-sticky-price">{{ variant.price | money }}</span> <s>{{ variant.compare_at_price | money }}</s></span>
+      {% if variant %}
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <button class="plunge-btn plunge-btn-primary" type="submit">Buy Now</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <section class="plunge-hero">
+    <div class="plunge-wrap plunge-hero-grid">
       <div>
-        <div class="ice-kicker">1st Plunge Cold Therapy System</div>
-        <h1>No ice runs. Just cold recovery at home.</h1>
-        <p>A complete cold plunge setup built around a 1/3 HP chiller, 148-gallon insulated tub, external filtration, pump, and hoses. Dial in a crisp plunge down to 42°F without bags of ice.</p>
-        <div class="ice-actions">
+        <p class="plunge-kicker">Elite cold therapy, built for home</p>
+        <h1>The Gold Standard of Cold.</h1>
+        <p class="plunge-hero-copy">Professional recovery without daily ice runs. A complete 1/3 HP chiller and 148-gallon plunge system engineered for consistent cold, cleaner circulation, and quiet home use.</p>
+        <div class="plunge-actions">
           {% if variant %}
             <form method="post" action="/cart/add">
               <input type="hidden" name="id" value="{{ variant.id }}">
-              <button class="ice-btn ice-btn-primary" type="submit">Add to Cart - {{ variant.price | money }}</button>
+              <button class="plunge-btn plunge-btn-primary" type="submit">Secure Yours - {{ variant.price | money }}</button>
             </form>
           {% endif %}
-          <a class="ice-btn ice-btn-secondary" href="/products/{{ featured_product.handle }}">View Product Details</a>
+          <a class="plunge-btn plunge-btn-secondary" href="/products/{{ featured_product.handle }}">View Product Details</a>
         </div>
-        <div class="ice-proof">
-          <span>1/3 HP chiller</span>
-          <span>148 gal XXL tub</span>
-          <span>External filtration kit</span>
-          <span>Quiet 40 dB operation</span>
+        <div class="plunge-savings">Save {{ variant.compare_at_price | minus: variant.price | money }} today <s>{{ variant.compare_at_price | money }}</s></div>
+        <div class="plunge-proof">
+          <span><b>42°F</b>Consistent chill target</span>
+          <span><b>40dB</b>Whisper quiet operation</span>
+          <span><b>148Gal</b>XL insulated tub</span>
         </div>
       </div>
-      <div class="ice-visual" aria-label="{{ featured_product.title | escape }}">
-        <div class="ice-price-card">
-          <div class="compare">{{ variant.compare_at_price | money }}</div>
-          <div class="price">{{ variant.price | money }}</div>
-          <div class="ice-kicker">Limited offer</div>
-        </div>
-        <div class="ice-product-shot">
+      <div class="plunge-product-stage">
+        <div class="plunge-product-card">
           {% if primary_image %}
-            {{ primary_image | image_url: width: 920 | image_tag: loading: 'eager', alt: featured_product.title }}
-          {% else %}
-            <div class="ice-kicker">Product image</div>
+            {{ primary_image | image_url: width: 1000 | image_tag: loading: 'eager', alt: featured_product.title }}
           {% endif %}
         </div>
-        <div class="ice-temp-card">
-          <strong>42°F</strong>
-          <span>Cold plunge target temperature</span>
-        </div>
+        <div class="plunge-float temp"><strong>42°F</strong><span>No ice required</span></div>
+        <div class="plunge-float sound"><strong>40dB</strong><span>Library-level quiet</span></div>
       </div>
     </div>
   </section>
 
-  <section class="ice-band">
-    <div class="ice-wrap">
-      <div class="ice-section-head">
-        <div class="ice-kicker">Built for consistency</div>
-        <h2>Cold water therapy without the daily ice chore.</h2>
-        <p>The system combines cooling, circulation, and filtration so your recovery routine feels repeatable instead of improvised.</p>
-      </div>
-      <div class="ice-feature-grid">
-        <div class="ice-feature"><span class="mark">01</span><b>Chilled on demand</b><p>The 1/3 HP chiller is designed to bring water down to cold plunge temperatures without relying on disposable ice.</p></div>
-        <div class="ice-feature"><span class="mark">02</span><b>Room to breathe</b><p>The 148-gallon tub gives athletes and recovery-focused users a larger plunge footprint than compact barrels.</p></div>
-        <div class="ice-feature"><span class="mark">03</span><b>Cleaner circulation</b><p>An external filter and pump help keep water moving between sessions, reducing the friction of ongoing maintenance.</p></div>
-        <div class="ice-feature"><span class="mark">04</span><b>Quiet setup</b><p>At around 40 dB, the chiller is made for home gyms, garages, patios, and recovery spaces.</p></div>
+  <section class="plunge-band plunge-band-white">
+    <div class="plunge-wrap">
+      <div class="plunge-silent">
+        <div class="plunge-silent-item"><strong>1/3 HP</strong><span>Dedicated chiller for repeat recovery sessions.</span></div>
+        <div class="plunge-silent-item"><strong>XL</strong><span>148-gallon tub gives you more room than compact barrels.</span></div>
+        <div class="plunge-silent-item"><strong>Kit</strong><span>Chiller, tub, pump, filter, and insulated hoses included.</span></div>
       </div>
     </div>
   </section>
 
-  <section class="ice-band ice-band-soft">
-    <div class="ice-wrap">
-      <div class="ice-section-head">
-        <div class="ice-kicker">Why it converts</div>
-        <h2>The upgrade from bags of ice.</h2>
+  <section class="plunge-band">
+    <div class="plunge-wrap plunge-advantage">
+      <div class="plunge-lab-card">
+        <p class="plunge-kicker">The 1st Plunge advantage</p>
+        <h3>Engineering that does not just chill. It transforms the ritual.</h3>
+        <p>Designed around the parts that matter most: cooling, circulation, filtration, insulation, and a setup simple enough for home recovery spaces.</p>
       </div>
-      <div class="ice-compare">
-        <div class="ice-compare-panel">
-          <h3>Traditional ice bath</h3>
-          <ul class="ice-list">
-            <li><span class="ice-dot">-</span><span>Buy, carry, and dump ice before each session.</span></li>
-            <li><span class="ice-dot">-</span><span>Temperature swings from session to session.</span></li>
-            <li><span class="ice-dot">-</span><span>More cleanup, more water changes, more skipped plunges.</span></li>
+      <div class="plunge-feature-list">
+        <div class="plunge-feature-row"><span class="plunge-icon">01</span><div><h3>Plug-and-play cold</h3><p>Set up a reliable cold plunge routine without hauling ice before every session.</p></div></div>
+        <div class="plunge-feature-row"><span class="plunge-icon">02</span><div><h3>External filtration</h3><p>The included filter and pump support cleaner water movement between plunges.</p></div></div>
+        <div class="plunge-feature-row"><span class="plunge-icon">03</span><div><h3>Insulated system</h3><p>The tub and hoses are built to help hold cold temperatures longer.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="plunge-band plunge-band-white">
+    <div class="plunge-wrap">
+      <div class="plunge-head">
+        <p class="plunge-kicker">Why switch</p>
+        <h2>Stop buying ice. Start your ritual.</h2>
+        <p>Positioned between disposable ice baths and expensive luxury plunges, 1st Plunge gives home athletes the core equipment they actually need.</p>
+      </div>
+      <div class="plunge-compare">
+        <div class="plunge-compare-card">
+          <h3>Ice bags</h3>
+          <p class="plunge-compare-price">Daily cost</p>
+          <ul>
+            <li>Requires constant ice runs</li>
+            <li>Inconsistent temperatures</li>
+            <li>More cleanup and more skipped sessions</li>
           </ul>
         </div>
-        <div class="ice-compare-panel is-dark">
-          <h3>1st Plunge kit</h3>
-          <ul class="ice-list">
-            <li><span class="ice-dot">✓</span><span>Set a cold target temperature and keep your routine ready.</span></li>
-            <li><span class="ice-dot">✓</span><span>Includes chiller, tub, pump, filter, and insulated hoses.</span></li>
-            <li><span class="ice-dot">✓</span><span>Designed for repeat recovery sessions at home.</span></li>
+        <div class="plunge-compare-card is-featured">
+          <h3>1st Plunge</h3>
+          <p class="plunge-compare-price">{{ variant.price | money }}</p>
+          <ul>
+            <li>1/3 HP chiller included</li>
+            <li>External pump and filter included</li>
+            <li>148-gallon XL insulated tub included</li>
+          </ul>
+        </div>
+        <div class="plunge-compare-card">
+          <h3>Luxury plunge</h3>
+          <p class="plunge-compare-price">$5k+</p>
+          <ul>
+            <li>Premium price point</li>
+            <li>Often heavier and harder to move</li>
+            <li>More than many home users need</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="ice-band">
-    <div class="ice-wrap">
-      <div class="ice-section-head">
-        <div class="ice-kicker">What is included</div>
-        <h2>A complete starter kit for home cold plunging.</h2>
-      </div>
-      <div class="ice-specs">
-        <div class="ice-spec"><small>Cooling power</small><b>1/3 HP chiller</b></div>
-        <div class="ice-spec"><small>Temperature</small><b>Down to 42°F</b></div>
-        <div class="ice-spec"><small>Tub capacity</small><b>148 gallons</b></div>
-        <div class="ice-spec"><small>Circulation</small><b>External pump</b></div>
-        <div class="ice-spec"><small>Maintenance</small><b>External filter</b></div>
-        <div class="ice-spec"><small>Connection</small><b>Insulated hoses</b></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="ice-band ice-band-soft">
-    <div class="ice-wrap">
-      <div class="ice-section-head">
-        <div class="ice-kicker">FAQ</div>
-        <h2>Before you plunge.</h2>
-      </div>
-      <div class="ice-faq">
-        <details open><summary>Does this replace buying ice?</summary><p>Yes. The chiller is designed to cool the water directly, so you can stop relying on bags of ice for each session.</p></details>
-        <details><summary>Is the tub included?</summary><p>Yes. This kit is positioned as a complete setup with a 148-gallon tub, chiller, pump, filter, and hoses.</p></details>
-        <details><summary>Where should I set it up?</summary><p>Most customers use a garage, home gym, covered patio, or recovery room with access to power and a level surface.</p></details>
-        <details><summary>How do I buy it?</summary><p>Use the add-to-cart button on this page. The order connects to the existing Shopify product and checkout.</p></details>
+  <section class="plunge-band">
+    <div class="plunge-wrap">
+      <div class="plunge-sound">
+        <div>
+          <p class="plunge-kicker">Silent power</p>
+          <h2>Quiet enough for the garage, patio, or recovery room.</h2>
+          <p>At around 40dB, the chiller is designed to keep recovery from becoming background noise.</p>
+        </div>
+        <div class="plunge-meter">
+          <div class="plunge-meter-row"><span><b>1st Plunge</b><b>40dB</b></span><div class="plunge-track"><div class="plunge-fill quiet"></div></div></div>
+          <div class="plunge-meter-row"><span><b>Typical loud appliance</b><b>70dB</b></span><div class="plunge-track"><div class="plunge-fill standard"></div></div></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="ice-final">
-    <div class="ice-wrap ice-final-grid">
+  <section class="plunge-band plunge-band-white">
+    <div class="plunge-wrap">
+      <div class="plunge-head">
+        <p class="plunge-kicker">Inside the kit</p>
+        <h2>Everything needed to begin cold recovery.</h2>
+      </div>
+      <div class="plunge-kit-grid">
+        <div class="plunge-kit-card"><h3>Insulated Tub</h3><p>148-gallon XL plunge capacity.</p></div>
+        <div class="plunge-kit-card"><h3>1/3 HP Chiller</h3><p>Cold water without ice runs.</p></div>
+        <div class="plunge-kit-card"><h3>External Filter</h3><p>Supports cleaner circulation.</p></div>
+        <div class="plunge-kit-card"><h3>Pro Hoses</h3><p>Insulated connections included.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="plunge-final">
+    <div class="plunge-wrap plunge-final-grid">
       <div>
-        <h2>Make cold recovery the easy part.</h2>
-        <p>Bring the plunge home with a complete chiller and tub kit.</p>
+        <p class="plunge-kicker">Limited offer</p>
+        <h2>Professional recovery. Home comfort.</h2>
+        <p>Order the complete 1st Plunge Recovery Kit today and save against the regular price.</p>
       </div>
       {% if variant %}
         <form method="post" action="/cart/add">
           <input type="hidden" name="id" value="{{ variant.id }}">
-          <button class="ice-btn ice-btn-primary" type="submit">Order Now - {{ variant.price | money }}</button>
+          <button class="plunge-btn plunge-btn-primary" type="submit">Shop the Recovery Kit - {{ variant.price | money }}</button>
         </form>
       {% endif %}
     </div>
