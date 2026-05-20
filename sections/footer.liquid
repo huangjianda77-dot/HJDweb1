@@ -5,48 +5,97 @@
 }
 {% endschema %}
 
-<footer class="bg-zinc-950 text-white pt-24 pb-12 border-t border-white/5">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
-      <div class="lg:col-span-2">
-        <h2 class="text-2xl font-black mb-8 tracking-tighter uppercase">
-          ARCTIC<span class="text-blue-500">PLUNGE</span>
-        </h2>
-        <p class="text-zinc-500 text-sm leading-relaxed max-w-sm mb-12">
-          We believe in recovery without limits. Portable, professional-grade cold therapy for every athlete.
-        </p>
-        <div class="flex gap-6">
-          <a href="#" class="text-zinc-400 hover:text-white transition-colors">Instagram</a>
-          <a href="#" class="text-zinc-400 hover:text-white transition-colors">TikTok</a>
-          <a href="#" class="text-zinc-400 hover:text-white transition-colors">YouTube</a>
-        </div>
-      </div>
-      
-      <div>
-        <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-8">Navigation</h3>
-        <ul class="space-y-4 text-xs font-bold text-zinc-400">
-          <li><a href="#" class="hover:text-white transition-colors">Shop All</a></li>
-          <li><a href="#" class="hover:text-white transition-colors">The Lab</a></li>
-          <li><a href="#" class="hover:text-white transition-colors">Reviews</a></li>
-        </ul>
-      </div>
+<style>
+  .rs-footer {
+    background: #030711;
+    color: #f8fbff;
+    border-top: 1px solid rgba(125, 211, 252, .16);
+    padding: 64px 0 34px;
+  }
+  .rs-footer-wrap {
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .rs-footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(150px, .7fr));
+    gap: 34px;
+  }
+  .rs-footer h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 950;
+    letter-spacing: 0;
+  }
+  .rs-footer p {
+    max-width: 420px;
+    margin: 14px 0 0;
+    color: #9fb1c7;
+    line-height: 1.65;
+  }
+  .rs-footer h3 {
+    margin: 0 0 14px;
+    color: #41f0b4;
+    font-size: 12px;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+  }
+  .rs-footer a {
+    display: block;
+    margin-top: 10px;
+    color: #9fb1c7;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 760;
+  }
+  .rs-footer a:hover { color: #21d4fd; }
+  .rs-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 48px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  @media (max-width: 760px) {
+    .rs-footer-grid { grid-template-columns: 1fr; }
+    .rs-footer-bottom { flex-direction: column; }
+  }
+</style>
 
+<footer class="rs-footer">
+  <div class="rs-footer-wrap">
+    <div class="rs-footer-grid">
       <div>
-        <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-8">Support</h3>
-        <ul class="space-y-4 text-xs font-bold text-zinc-400">
-          <li><a href="#" class="hover:text-white transition-colors">Shipping</a></li>
-          <li><a href="#" class="hover:text-white transition-colors">Warranty</a></li>
-          <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
-        </ul>
+        <h2>1st Plunge Recovery</h2>
+        <p>A home cold therapy system for athletes, lifters, runners, and recovery-focused training routines.</p>
+      </div>
+      <div>
+        <h3>System</h3>
+        <a href="/#recovery-tech">Technology</a>
+        <a href="/products/1st-plunge-ice-bath-recovery-kit-premium-cold-therapy-system">Recovery Kit</a>
+        <a href="/cart">Cart</a>
+      </div>
+      <div>
+        <h3>Specs</h3>
+        <a href="/#recovery-tech">42°F Cooling</a>
+        <a href="/#recovery-tech">40dB Quiet</a>
+        <a href="/#recovery-tech">148Gal Tub</a>
+      </div>
+      <div>
+        <h3>Support</h3>
+        <a href="/pages/contact">Contact</a>
+        <a href="/policies/shipping-policy">Shipping</a>
+        <a href="/policies/refund-policy">Returns</a>
       </div>
     </div>
-    
-    <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-      <p class="text-[9px] font-black text-zinc-700 tracking-[0.3em] uppercase">© 2026 ARCTIC PLUNGE TECHNOLOGY</p>
-      <div class="flex space-x-10 text-[9px] font-black text-zinc-700 tracking-[0.3em] uppercase">
-        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-      </div>
+    <div class="rs-footer-bottom">
+      <span>© 2026 1st Plunge Recovery Systems</span>
+      <span>Cold therapy equipment for home recovery.</span>
     </div>
   </div>
 </footer>

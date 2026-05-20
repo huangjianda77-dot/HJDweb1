@@ -5,33 +5,97 @@
 }
 {% endschema %}
 
-<header class="sticky top-0 z-50" style="background:rgba(10,22,40,0.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.05);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <div class="flex items-center gap-2">
-        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#06b6d4 0%,#0891b2 100%);display:flex;align-items:center;justify-content:center;">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-          </svg>
-        </div>
-        <span class="font-bold text-lg tracking-tight text-white">1stplunge</span>
-      </div>
-      
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium" style="color:rgb(209 213 219);">
-        <a href="/" class="hover:text-cyan-400 transition-colors">Home</a>
-        <a href="/pages/1st-plunge-ice-bath-recovery-kit" class="hover:text-cyan-400 transition-colors">Product</a>
-        <a href="/pages/1st-plunge-ice-bath-recovery-kit#features" class="hover:text-cyan-400 transition-colors">Features</a>
-        <a href="/pages/1st-plunge-ice-bath-recovery-kit#reviews" class="hover:text-cyan-400 transition-colors">Reviews</a>
-      </nav>
+<style>
+  .rs-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(6, 11, 20, .88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(125, 211, 252, .16);
+  }
+  .rs-header-wrap {
+    width: min(1200px, calc(100% - 32px));
+    height: 68px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+  }
+  .rs-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #f8fbff;
+    text-decoration: none;
+    font-weight: 950;
+  }
+  .rs-brand-mark {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    color: #06101f;
+    background: linear-gradient(135deg, #41f0b4, #21d4fd);
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .rs-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .rs-nav a {
+    color: #9fb1c7;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 850;
+  }
+  .rs-nav a:hover { color: #21d4fd; }
+  .rs-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .rs-cart {
+    color: #d8e8f8;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 850;
+  }
+  .rs-buy {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 16px;
+    border-radius: 4px;
+    color: #06101f;
+    background: linear-gradient(135deg, #41f0b4, #21d4fd);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 950;
+  }
+  @media (max-width: 760px) {
+    .rs-nav { display: none; }
+    .rs-header-wrap { width: min(100% - 24px, 1200px); }
+  }
+</style>
 
-      <div class="flex items-center gap-4">
-        <a href="/cart" class="p-2 text-gray-400 hover:text-white relative">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        </a>
-        <a href="https://c4ma8z-bc.myshopify.com/products/1st-plunge-ice-bath-recovery-kit-premium-cold-therapy-system" style="background:linear-gradient(135deg,#06b6d4 0%,#0891b2 100%);padding:8px 20px;border-radius:9999px;font-size:14px;font-weight:600;color:white;transition:opacity 0.2s;">
-          Order Now
-        </a>
-      </div>
+<header class="rs-header">
+  <div class="rs-header-wrap">
+    <a class="rs-brand" href="/">
+      <span class="rs-brand-mark">R1</span>
+      <span>1st Plunge Recovery</span>
+    </a>
+    <nav class="rs-nav" aria-label="Primary navigation">
+      <a href="/">System</a>
+      <a href="/#recovery-tech">Technology</a>
+      <a href="/products/1st-plunge-ice-bath-recovery-kit-premium-cold-therapy-system">Product</a>
+    </nav>
+    <div class="rs-header-actions">
+      <a class="rs-cart" href="/cart">Cart</a>
+      <a class="rs-buy" href="/products/1st-plunge-ice-bath-recovery-kit-premium-cold-therapy-system">Buy Kit</a>
     </div>
   </div>
 </header>
