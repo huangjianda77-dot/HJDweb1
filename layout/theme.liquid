@@ -74,7 +74,11 @@
     {% section 'header' %}
 
     <main id="MainContent" class="flex-grow focus:outline-none" role="main" tabindex="-1">
-      {{ content_for_layout }}
+      {% if template.name == 'index' %}
+        {% section 'recovery-tech-home' %}
+      {% else %}
+        {{ content_for_layout }}
+      {% endif %}
     </main>
 
     {% section 'footer' %}
