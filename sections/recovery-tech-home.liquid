@@ -1,277 +1,101 @@
 <style>
-  #shopify-section-{{ section.id }} {
-    --forest: #142018;
-    --forest-2: #233529;
-    --moss: #6f8064;
-    --sage: #d6dccb;
-    --canvas: #f7f1e4;
-    --paper: #fffaf0;
-    --ink: #1f261f;
-    --muted: #687060;
-    --line: rgba(31, 38, 31, .14);
-    --gold: #d9b86f;
-    --clay: #b76e4b;
-    color: var(--ink);
-    background: var(--paper);
-  }
-
-  .trailnest-home * { box-sizing: border-box; }
-  .trailnest-home { overflow: hidden; background: var(--paper); }
+  #shopify-section-{{ section.id }} { --forest: #182418; --paper: #fff8ea; --ink: #20261f; --muted: #6c705f; --line: rgba(32, 38, 31, .14); --gold: #d8b56d; --clay: #a96945; color: var(--ink); background: var(--paper); }
+  .trailnest-tent-home * { box-sizing: border-box; }
+  .trailnest-tent-home { overflow: hidden; background: var(--paper); }
   .tn-wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
-  .tn-kicker {
-    margin: 0 0 14px;
-    color: var(--clay);
-    font-size: 12px;
-    font-weight: 950;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-  }
-  .tn-button {
-    min-height: 54px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 22px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 950;
-    transition: transform .18s ease, background .18s ease, border-color .18s ease;
-  }
+  .tn-kicker { margin: 0 0 14px; color: var(--clay); font-size: 12px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+  .tn-button { min-height: 54px; display: inline-flex; align-items: center; justify-content: center; padding: 0 22px; border: 1px solid transparent; border-radius: 4px; text-decoration: none; font-weight: 950; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
   .tn-button:hover { transform: translateY(-1px); }
   .tn-button-primary { color: var(--forest); background: var(--gold); }
-  .tn-button-secondary { color: var(--paper); border-color: rgba(255,250,240,.34); background: rgba(255,250,240,.08); }
-
-  .tn-hero {
-    position: relative;
-    min-height: 86vh;
-    display: grid;
-    align-items: center;
-    padding: 86px 0 72px;
-    color: var(--paper);
-    background: var(--forest);
-  }
+  .tn-button-secondary { color: var(--paper); border-color: rgba(255,248,234,.34); background: rgba(255,248,234,.08); }
+  .tn-hero { position: relative; min-height: 88vh; display: grid; align-items: center; padding: 88px 0 72px; color: var(--paper); background: var(--forest); }
   .tn-hero-media { position: absolute; inset: 0; }
-  .tn-hero-media img { width: 100%; height: 100%; object-fit: cover; opacity: .54; }
-  .tn-hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(20,32,24,.98), rgba(20,32,24,.74) 48%, rgba(20,32,24,.28));
-  }
+  .tn-hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .72; }
+  .tn-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(24,36,24,.96), rgba(24,36,24,.72) 46%, rgba(24,36,24,.24)); }
   .tn-hero .tn-wrap { position: relative; z-index: 1; }
   .tn-hero-content { max-width: 760px; }
-  .tn-badge {
-    width: max-content;
-    max-width: 100%;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 13px;
-    border: 1px solid rgba(255,250,240,.26);
-    border-radius: 999px;
-    background: rgba(20,32,24,.62);
-    color: #f5ead2;
-    font-size: 13px;
-    font-weight: 850;
-  }
+  .tn-badge { width: max-content; max-width: 100%; display: inline-flex; align-items: center; gap: 10px; padding: 8px 13px; border: 1px solid rgba(255,248,234,.3); border-radius: 999px; background: rgba(24,36,24,.62); color: #f4ead8; font-size: 13px; font-weight: 850; }
   .tn-badge span { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
-  .tn-hero h1 {
-    margin: 22px 0 0;
-    max-width: 760px;
-    font-size: clamp(44px, 7vw, 88px);
-    line-height: .98;
-    font-weight: 950;
-    letter-spacing: 0;
-  }
+  .tn-hero h1 { margin: 22px 0 0; max-width: 780px; font-size: clamp(44px, 7vw, 88px); line-height: .98; font-weight: 950; letter-spacing: 0; }
   .tn-hero h1 em { color: var(--gold); font-style: normal; }
-  .tn-hero-copy {
-    margin: 24px 0 0;
-    max-width: 650px;
-    color: #e5dbc7;
-    font-size: clamp(17px, 1.7vw, 21px);
-    line-height: 1.65;
-  }
+  .tn-hero-copy { margin: 24px 0 0; max-width: 650px; color: #e7ddca; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.65; }
   .tn-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-
-  .tn-strip { background: var(--forest); color: var(--paper); border-top: 1px solid rgba(255,250,240,.16); }
+  .tn-strip { background: var(--forest); color: var(--paper); border-top: 1px solid rgba(255,248,234,.16); }
   .tn-strip-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .tn-strip-item { min-height: 132px; padding: 24px; border-right: 1px solid rgba(255,250,240,.14); display: grid; align-content: center; }
+  .tn-strip-item { min-height: 132px; padding: 24px; border-right: 1px solid rgba(255,248,234,.14); display: grid; align-content: center; }
   .tn-strip-item:last-child { border-right: 0; }
   .tn-strip-item strong { display: block; font-size: 30px; line-height: 1; color: var(--gold); }
-  .tn-strip-item span { display: block; margin-top: 10px; color: #d8d0bd; font-weight: 800; line-height: 1.45; }
-
+  .tn-strip-item span { display: block; margin-top: 10px; color: #dcd2c1; font-weight: 800; line-height: 1.45; }
   .tn-section { padding: 96px 0; }
   .tn-section.green { background: var(--forest); color: var(--paper); }
   .tn-head { max-width: 820px; margin-bottom: 38px; }
   .tn-head h2 { margin: 0; font-size: clamp(32px, 4.8vw, 58px); line-height: 1.04; font-weight: 950; letter-spacing: 0; }
   .tn-head p { margin: 18px 0 0; color: var(--muted); font-size: 18px; line-height: 1.65; }
-  .green .tn-head p { color: #d8d0bd; }
-
-  .tn-living-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .tn-living-card { min-height: 470px; position: relative; overflow: hidden; border-radius: 8px; background: var(--forest); color: var(--paper); }
-  .tn-living-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .72; transition: transform .3s ease; }
-  .tn-living-card:hover img { transform: scale(1.025); }
-  .tn-living-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(20,32,24,.92)); }
-  .tn-living-card-content { position: absolute; left: 24px; right: 24px; bottom: 24px; z-index: 1; }
-  .tn-living-card h3 { margin: 0; font-size: 28px; line-height: 1.08; font-weight: 950; }
-  .tn-living-card p { margin: 12px 0 0; color: #e5dbc7; line-height: 1.58; }
-
+  .green .tn-head p { color: #dcd2c1; }
+  .tn-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .tn-feature-card { min-height: 300px; padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: 0 18px 48px rgba(31,38,31,.06); }
+  .tn-feature-card .tag { width: 48px; height: 48px; display: grid; place-items: center; margin-bottom: 32px; border-radius: 6px; background: #e7dcc6; color: var(--forest); font-weight: 950; }
+  .tn-feature-card h3 { margin: 0; font-size: 25px; line-height: 1.12; font-weight: 950; }
+  .tn-feature-card p { margin: 12px 0 0; color: var(--muted); line-height: 1.65; }
+  .tn-life { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 34px; align-items: center; }
+  .tn-life img { width: 100%; min-height: 560px; object-fit: cover; border-radius: 8px; }
+  .tn-life-copy h2 { margin: 0; font-size: clamp(34px, 4.8vw, 58px); line-height: 1.04; font-weight: 950; }
+  .tn-life-copy p { margin: 18px 0 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
   .tn-promise { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 18px; align-items: stretch; }
-  .tn-promise-panel { padding: 32px; border: 1px solid rgba(255,250,240,.18); border-radius: 8px; background: rgba(255,250,240,.07); }
+  .tn-promise-panel { padding: 32px; border: 1px solid rgba(255,248,234,.18); border-radius: 8px; background: rgba(255,248,234,.07); }
   .tn-promise-panel h3 { margin: 0; font-size: 34px; line-height: 1.08; font-weight: 950; }
-  .tn-promise-panel p { margin: 16px 0 0; color: #d8d0bd; line-height: 1.7; }
+  .tn-promise-panel p { margin: 16px 0 0; color: #dcd2c1; line-height: 1.7; }
   .tn-checks { display: grid; gap: 12px; }
-  .tn-check { padding: 22px; border: 1px solid rgba(255,250,240,.16); border-radius: 8px; background: rgba(255,250,240,.06); }
+  .tn-check { padding: 22px; border: 1px solid rgba(255,248,234,.16); border-radius: 8px; background: rgba(255,248,234,.06); }
   .tn-check b { display: block; color: var(--gold); font-size: 18px; }
-  .tn-check span { display: block; margin-top: 8px; color: #d8d0bd; line-height: 1.55; }
-
-  .tn-gear-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  .tn-gear-card { min-height: 250px; padding: 24px; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: 0 18px 48px rgba(31,38,31,.06); }
-  .tn-gear-card .tag { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 28px; border-radius: 6px; background: var(--sage); color: var(--forest); font-weight: 950; }
-  .tn-gear-card h3 { margin: 0; font-size: 23px; line-height: 1.12; font-weight: 950; }
-  .tn-gear-card p { margin: 12px 0 0; color: var(--muted); line-height: 1.6; }
-
-  .tn-story { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 34px; align-items: center; }
-  .tn-story img { width: 100%; min-height: 520px; object-fit: cover; border-radius: 8px; }
-  .tn-story-copy h2 { margin: 0; font-size: clamp(34px, 4.8vw, 58px); line-height: 1.04; font-weight: 950; }
-  .tn-story-copy p { margin: 18px 0 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
-
+  .tn-check span { display: block; margin-top: 8px; color: #dcd2c1; line-height: 1.55; }
   .tn-final { padding: 88px 0; background: var(--forest); color: var(--paper); }
   .tn-final-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center; }
   .tn-final h2 { margin: 0; max-width: 760px; font-size: clamp(34px, 5vw, 64px); line-height: 1.02; font-weight: 950; }
-  .tn-final p { margin: 16px 0 0; max-width: 660px; color: #d8d0bd; font-size: 18px; line-height: 1.62; }
-
-  @media (max-width: 960px) {
-    .tn-living-grid, .tn-promise, .tn-story, .tn-final-grid { grid-template-columns: 1fr; }
-    .tn-gear-grid, .tn-strip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-  @media (max-width: 620px) {
-    .tn-wrap { width: min(100% - 24px, 1200px); }
-    .tn-hero { min-height: auto; padding: 62px 0; }
-    .tn-actions, .tn-button { width: 100%; }
-    .tn-strip-grid, .tn-gear-grid { grid-template-columns: 1fr; }
-    .tn-section { padding: 68px 0; }
-    .tn-living-card { min-height: 390px; }
-    .tn-story img { min-height: 360px; }
-  }
+  .tn-final p { margin: 16px 0 0; max-width: 660px; color: #dcd2c1; font-size: 18px; line-height: 1.62; }
+  @media (max-width: 960px) { .tn-feature-grid, .tn-life, .tn-promise, .tn-final-grid { grid-template-columns: 1fr; } .tn-strip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .tn-wrap { width: min(100% - 24px, 1200px); } .tn-hero { min-height: auto; padding: 62px 0; } .tn-actions, .tn-button { width: 100%; } .tn-strip-grid { grid-template-columns: 1fr; } .tn-section { padding: 68px 0; } .tn-life img { min-height: 360px; } }
 </style>
 
-<div class="trailnest-home">
+<div class="trailnest-tent-home">
   <section class="tn-hero">
-    <div class="tn-hero-media" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=82" alt="">
-    </div>
-    <div class="tn-wrap">
-      <div class="tn-hero-content">
-        <div class="tn-badge"><span></span> Practical gear for outdoor life</div>
-        <h1>Pack lighter. Camp warmer. Travel with <em>confidence.</em></h1>
-        <p class="tn-hero-copy">TrailNest equips road trips, campouts, and everyday outdoor living with reliable essentials made for comfort, order, and calm in the open air.</p>
-        <div class="tn-actions">
-          <a class="tn-button tn-button-primary" href="/collections/all">Shop Outdoor Gear</a>
-          <a class="tn-button tn-button-secondary" href="/pages/about-trailnest">Our Story</a>
-        </div>
-      </div>
-    </div>
+    <div class="tn-hero-media" aria-hidden="true"><img src="{{ 'trailnest-inflatable-tent-hero.jpg' | asset_url }}" alt=""></div>
+    <div class="tn-wrap"><div class="tn-hero-content">
+      <div class="tn-badge"><span></span> Inflatable tents for comfortable camping</div>
+      <h1>Set up camp faster. Stay longer in <em>comfort.</em></h1>
+      <p class="tn-hero-copy">TrailNest designs spacious inflatable camping tents for families, weekend travelers, and glamping-style outdoor living.</p>
+      <div class="tn-actions"><a class="tn-button tn-button-primary" href="/collections/all">Shop Inflatable Tents</a><a class="tn-button tn-button-secondary" href="/#tent-life">Explore Tent Life</a></div>
+    </div></div>
   </section>
-
-  <section class="tn-strip">
-    <div class="tn-wrap tn-strip-grid">
-      <div class="tn-strip-item"><strong>Travel</strong><span>Essentials that make packing, storing, and moving feel simpler.</span></div>
-      <div class="tn-strip-item"><strong>Camp</strong><span>Comfort-forward gear for nights outside and slow mornings.</span></div>
-      <div class="tn-strip-item"><strong>Live</strong><span>Outdoor pieces that work on the trail, patio, and weekend basecamp.</span></div>
-      <div class="tn-strip-item"><strong>Trust</strong><span>Built around dependable materials and practical details.</span></div>
+  <section class="tn-strip"><div class="tn-wrap tn-strip-grid">
+    <div class="tn-strip-item"><strong>Air</strong><span>Inflatable structure for a smoother setup than pole-heavy tents.</span></div>
+    <div class="tn-strip-item"><strong>Room</strong><span>Cabin-style space for family camping, gear storage, and relaxed stays.</span></div>
+    <div class="tn-strip-item"><strong>Light</strong><span>Large windows and roof details create a brighter, calmer interior.</span></div>
+    <div class="tn-strip-item"><strong>Camp</strong><span>A warm glamping look made for forests, parks, and weekend basecamps.</span></div>
+  </div></section>
+  <section class="tn-section"><div class="tn-wrap">
+    <div class="tn-head"><p class="tn-kicker">Why inflatable</p><h2>A more relaxed way to build your outdoor home.</h2><p>TrailNest inflatable tents are built around real camping comfort: easier setup, livable interior space, breathable openings, and a natural canvas-style look that feels at home in the woods.</p></div>
+    <div class="tn-feature-grid">
+      <div class="tn-feature-card"><span class="tag">01</span><h3>Quick air-beam setup</h3><p>Spend less time sorting poles and more time settling into camp with a structure designed for fast inflation.</p></div>
+      <div class="tn-feature-card"><span class="tag">02</span><h3>Family-size interior</h3><p>A cabin-inspired profile gives you room for sleeping, bags, seating, and the small comforts that make camping easier.</p></div>
+      <div class="tn-feature-card"><span class="tag">03</span><h3>Glamping-ready comfort</h3><p>Soft neutral fabric, large window panels, and a warm campsite presence create a premium outdoor living feel.</p></div>
     </div>
-  </section>
-
-  <section id="trailnest-living" class="tn-section">
-    <div class="tn-wrap">
-      <div class="tn-head">
-        <p class="tn-kicker">Outdoor living, made easier</p>
-        <h2>Gear for the moments between leaving home and settling in.</h2>
-        <p>TrailNest focuses on the real needs of American travelers: organized packing, comfortable camp setups, durable utility, and products that feel natural in the places you actually go.</p>
-      </div>
-      <div class="tn-living-grid">
-        <article class="tn-living-card">
-          <img src="https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=900&q=82" alt="Packed vehicle ready for an outdoor road trip">
-          <div class="tn-living-card-content"><h3>Road trip ready</h3><p>Keep the essentials close, the cabin organized, and the day moving smoothly.</p></div>
-        </article>
-        <article class="tn-living-card">
-          <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=900&q=82" alt="Warm campsite at dusk">
-          <div class="tn-living-card-content"><h3>Camp comfort</h3><p>Reliable pieces for setting up, winding down, and sleeping better outdoors.</p></div>
-        </article>
-        <article class="tn-living-card">
-          <img src="https://images.unsplash.com/photo-1445307806294-bff7f67ff225?auto=format&fit=crop&w=900&q=82" alt="Outdoor table with gear and warm light">
-          <div class="tn-living-card-content"><h3>Open-air living</h3><p>Simple, capable gear that earns a place in everyday outdoor routines.</p></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="tn-section green">
-    <div class="tn-wrap tn-promise">
-      <div class="tn-promise-panel">
-        <p class="tn-kicker">The TrailNest promise</p>
-        <h3>Natural, reliable, and warm by design.</h3>
-        <p>We build around a simple idea: outdoor gear should reduce friction. It should help you pack smarter, stay comfortable, and feel ready without adding bulk, noise, or fuss.</p>
-        <p>From weekend camping to long highway miles, TrailNest is made for people who want dependable tools with a quieter, more refined point of view.</p>
-      </div>
-      <div class="tn-checks">
-        <div class="tn-check"><b>Useful first</b><span>Every feature needs a job, from storage details to weather-aware materials.</span></div>
-        <div class="tn-check"><b>Built for repeat trips</b><span>Durability matters because the best gear keeps showing up season after season.</span></div>
-        <div class="tn-check"><b>Warm, not loud</b><span>A grounded palette and clean design help the gear feel at home outdoors.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="tn-section">
-    <div class="tn-wrap">
-      <div class="tn-head">
-        <p class="tn-kicker">Shop by need</p>
-        <h2>Practical essentials for travel, camping, and outdoor life.</h2>
-      </div>
-      <div class="tn-gear-grid">
-        <div class="tn-gear-card"><span class="tag">01</span><h3>Packing and storage</h3><p>Keep gear visible, reachable, and ready for the next stop.</p></div>
-        <div class="tn-gear-card"><span class="tag">02</span><h3>Camp setup</h3><p>Make basecamp calmer with pieces that support comfort and order.</p></div>
-        <div class="tn-gear-card"><span class="tag">03</span><h3>Travel utility</h3><p>Reliable tools for long drives, quick stops, and changing weather.</p></div>
-        <div class="tn-gear-card"><span class="tag">04</span><h3>Outdoor comfort</h3><p>Small upgrades that make more time outside feel easier to enjoy.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="tn-section">
-    <div class="tn-wrap tn-story">
-      <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1100&q=82" alt="Tent and campsite surrounded by trees">
-      <div class="tn-story-copy">
-        <p class="tn-kicker">About TrailNest</p>
-        <h2>Made for the way people really get outside.</h2>
-        <p>Not every adventure is extreme. Some are a family weekend, a sunrise drive, a better organized trunk, or a quiet night at camp. TrailNest creates gear for those real outdoor moments.</p>
-        <p>Our products are selected for practical value, dependable construction, and a warm outdoor aesthetic that fits naturally into American travel and camping culture.</p>
-        <div class="tn-actions"><a class="tn-button tn-button-primary" href="/pages/about-trailnest">Read the Brand Story</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="tn-final">
-    <div class="tn-wrap tn-final-grid">
-      <div>
-        <p class="tn-kicker">Start your next outdoor routine</p>
-        <h2>Build a kit that makes leaving home feel easy.</h2>
-        <p>Explore TrailNest gear for travel, camping, and the comfortable outdoor life you want to keep returning to.</p>
-      </div>
-      <a class="tn-button tn-button-primary" href="/collections/all">Shop TrailNest</a>
-    </div>
-  </section>
+  </div></section>
+  <section id="tent-life" class="tn-section"><div class="tn-wrap tn-life">
+    <img src="{{ 'trailnest-inflatable-tent-hero.jpg' | asset_url }}" alt="TrailNest inflatable tent at a forest campsite">
+    <div class="tn-life-copy"><p class="tn-kicker">Camping life</p><h2>From forest weekends to backyard basecamps.</h2><p>Your tent should make the trip feel easier from the first unpacking moment. TrailNest focuses on a comfortable layout, stable shelter, and practical details for families and outdoor travelers.</p><p>The result is a tent that feels less like a temporary cover and more like a calm outdoor room.</p><div class="tn-actions"><a class="tn-button tn-button-primary" href="/collections/all">Find Your Tent</a></div></div>
+  </div></section>
+  <section class="tn-section green"><div class="tn-wrap tn-promise">
+    <div class="tn-promise-panel"><p class="tn-kicker">TrailNest promise</p><h3>Reliable shelter with a warmer way to camp.</h3><p>We believe outdoor gear should reduce friction. A great inflatable tent should be quick to pitch, easy to enjoy, and strong enough to become part of your repeat camping routine.</p><p>TrailNest brings together practical construction and a refined natural style for campers who want comfort without losing the feeling of being outside.</p></div>
+    <div class="tn-checks"><div class="tn-check"><b>Easy arrival</b><span>Designed to help you move from packed vehicle to livable camp with less hassle.</span></div><div class="tn-check"><b>Comfortable stays</b><span>Roomy proportions support real sleeping, sitting, organizing, and relaxing.</span></div><div class="tn-check"><b>Natural presence</b><span>Warm neutral colors pair well with forests, campsites, and glamping setups.</span></div></div>
+  </div></section>
+  <section class="tn-final"><div class="tn-wrap tn-final-grid"><div><p class="tn-kicker">Build your next camp</p><h2>Choose the inflatable tent that makes outdoors feel like home.</h2><p>Explore TrailNest tents for family trips, weekend escapes, and comfortable outdoor living.</p></div><a class="tn-button tn-button-primary" href="/collections/all">Shop Inflatable Tents</a></div></section>
 </div>
 
 {% schema %}
 {
-  "name": "TrailNest Homepage",
+  "name": "Inflatable Tents",
   "settings": [],
-  "presets": [
-    {
-      "name": "TrailNest Homepage"
-    }
-  ]
+  "presets": [{ "name": "Inflatable Tents" }]
 }
 {% endschema %}
