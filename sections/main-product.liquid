@@ -6,53 +6,153 @@
 }
 {% endschema %}
 
-<section class="py-24 bg-white overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="lg:grid lg:grid-cols-2 lg:gap-20 items-center">
-      <!-- Media -->
-      <div class="relative order-2 lg:order-1">
-        <div class="relative z-10 aspect-square rounded-[3rem] overflow-hidden shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover">
+<style>
+  #shopify-section-{{ section.id }} { --tn-forest:#182418; --tn-paper:#fff8ea; --tn-ink:#20261f; --tn-muted:#6c705f; --tn-line:rgba(32,38,31,.14); --tn-gold:#d8b56d; --tn-clay:#a96945; background: var(--tn-paper); color: var(--tn-ink); }
+  .tn-product * { box-sizing: border-box; }
+  .tn-product { background: var(--tn-paper); }
+  .tn-product-wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
+  .tn-product-hero { display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(360px, .94fr); gap: 48px; align-items: start; padding: 72px 0 64px; }
+  .tn-product-gallery { display: grid; gap: 14px; }
+  .tn-product-main-image { overflow: hidden; border-radius: 8px; background: #fff; border: 1px solid rgba(32,38,31,.08); box-shadow: 0 22px 54px rgba(31,38,31,.08); }
+  .tn-product-main-image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .tn-product-thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .tn-product-thumb { overflow: hidden; border-radius: 6px; background: #fff; border: 1px solid rgba(32,38,31,.1); }
+  .tn-product-thumb img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+  .tn-product-info { position: sticky; top: 92px; padding: 34px; border: 1px solid rgba(32,38,31,.12); border-radius: 8px; background: rgba(255,255,255,.72); box-shadow: 0 18px 48px rgba(31,38,31,.06); }
+  .tn-product-kicker { margin: 0 0 12px; color: var(--tn-clay); font-size: 12px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+  .tn-product-title { margin: 0; font-size: 46px; line-height: 1.04; font-weight: 950; letter-spacing: 0; }
+  .tn-product-summary { margin: 18px 0 0; color: var(--tn-muted); font-size: 17px; line-height: 1.65; }
+  .tn-product-points { display: grid; gap: 12px; margin: 28px 0; padding: 0; list-style: none; }
+  .tn-product-points li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; color: var(--tn-ink); font-weight: 850; line-height: 1.45; }
+  .tn-product-points li::before { content: ""; width: 22px; height: 22px; border-radius: 50%; background: var(--tn-gold); box-shadow: inset 0 0 0 7px rgba(24,36,24,.12); }
+  .tn-product-price { margin: 28px 0 0; padding-top: 24px; border-top: 1px solid var(--tn-line); }
+  .tn-product-price-label { display: block; margin-bottom: 4px; color: var(--tn-muted); font-size: 11px; font-weight: 950; letter-spacing: .12em; text-transform: uppercase; }
+  .tn-product-price-value { font-size: 34px; line-height: 1; font-weight: 950; }
+  .tn-product-form { display: grid; gap: 14px; margin-top: 22px; }
+  .tn-product-select, .tn-product-qty { width: 100%; min-height: 48px; border: 1px solid var(--tn-line); border-radius: 4px; background: #fff; color: var(--tn-ink); padding: 0 12px; font-size: 15px; font-weight: 800; }
+  .tn-product-row { display: grid; grid-template-columns: 1fr 110px; gap: 10px; }
+  .tn-product-add { min-height: 54px; border: 0; border-radius: 4px; background: var(--tn-forest); color: var(--tn-paper); font-size: 14px; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+  .tn-product-add[disabled] { opacity: .45; cursor: not-allowed; }
+  .tn-product-stock { margin: 10px 0 0; color: var(--tn-muted); font-size: 13px; font-weight: 850; }
+  .tn-product-body { padding: 10px 0 86px; }
+  .tn-product-body-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 32px; align-items: start; }
+  .tn-product-panel { padding: 28px; border: 1px solid var(--tn-line); border-radius: 8px; background: #fff; }
+  .tn-product-panel h2, .tn-product-panel h3 { margin: 0 0 14px; font-size: 28px; line-height: 1.12; font-weight: 950; }
+  .tn-product-description { color: var(--tn-muted); font-size: 16px; line-height: 1.72; }
+  .tn-product-description h3 { color: var(--tn-ink); font-size: 22px; }
+  .tn-product-description ul { padding-left: 20px; }
+  .tn-product-specs { display: grid; gap: 12px; }
+  .tn-product-spec { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(32,38,31,.1); }
+  .tn-product-spec:last-child { border-bottom: 0; }
+  .tn-product-spec span { color: var(--tn-muted); font-weight: 800; }
+  .tn-product-spec b { text-align: right; }
+  @media (max-width: 960px) {
+    .tn-product-hero, .tn-product-body-grid { grid-template-columns: 1fr; }
+    .tn-product-info { position: static; }
+    .tn-product-title { font-size: 38px; }
+  }
+  @media (max-width: 620px) {
+    .tn-product-wrap { width: min(100% - 24px, 1200px); }
+    .tn-product-hero { padding: 38px 0 46px; gap: 24px; }
+    .tn-product-info { padding: 22px; }
+    .tn-product-title { font-size: 31px; }
+    .tn-product-summary { font-size: 15px; }
+    .tn-product-thumbs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tn-product-row { grid-template-columns: 1fr; }
+    .tn-product-price-value { font-size: 30px; }
+    .tn-product-panel { padding: 22px; }
+    .tn-product-body { padding-bottom: 58px; }
+  }
+</style>
+
+<section class="tn-product">
+  <div class="tn-product-wrap">
+    <div class="tn-product-hero">
+      <div class="tn-product-gallery">
+        <div class="tn-product-main-image">
+          {% if product.featured_media %}
+            {{ product.featured_media | image_url: width: 1400 | image_tag: loading: 'eager', alt: product.featured_media.alt | default: product.title }}
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {% endif %}
         </div>
-        <div class="absolute -top-10 -left-10 w-40 h-40 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
-        <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
+        {% if product.media.size > 1 %}
+          <div class="tn-product-thumbs" aria-label="Product images">
+            {% for media in product.media limit: 8 %}
+              {% if media.media_type == 'image' %}
+                <div class="tn-product-thumb">
+                  {{ media | image_url: width: 360 | image_tag: loading: 'lazy', alt: media.alt | default: product.title }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
 
-      <!-- Content -->
-      <div class="order-1 lg:order-2 mt-16 lg:mt-0">
-        <h2 class="text-[11px] font-black tracking-[0.4em] text-blue-600 uppercase mb-4">The Flagship</h2>
-        <h1 class="text-4xl md:text-5xl font-black text-zinc-900 mb-8 tracking-tighter leading-tight">ArcticPlunge Pro V2</h1>
-        
-        <div class="space-y-8 mb-12">
-          <div class="flex items-start">
-            <div class="mt-1 flex-shrink-0 w-6 h-6 bg-blue-600 text-white flex items-center justify-center rounded-full">
-               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </div>
-            <div class="ml-4">
-              <h4 class="text-base font-bold text-zinc-900 uppercase tracking-tighter">400L XL Capacity</h4>
-              <p class="text-zinc-500 text-sm">Spacious enough for athletes up to 6'7" to fully submerge for optimal results.</p>
-            </div>
-          </div>
-          
-          <div class="flex items-start">
-            <div class="mt-1 flex-shrink-0 w-6 h-6 bg-blue-600 text-white flex items-center justify-center rounded-full">
-               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </div>
-            <div class="ml-4">
-              <h4 class="text-base font-bold text-zinc-900 uppercase tracking-tighter">Military Rip-Stop Fabric</h4>
-              <p class="text-zinc-500 text-sm">Industrial grade PVC that is puncture proof and built for outdoor longevity.</p>
-            </div>
-          </div>
+      <div class="tn-product-info">
+        <p class="tn-product-kicker">TrailNest Inflatable Tent</p>
+        <h1 class="tn-product-title">{{ product.title }}</h1>
+        <p class="tn-product-summary">Spacious inflatable comfort for family camping, weekend travel, and glamping-style outdoor living.</p>
+        <ul class="tn-product-points">
+          <li>Inflatable structure for faster campsite setup</li>
+          <li>Cabin-style room for longer, more comfortable stays</li>
+          <li>Large window panels for natural light and airflow</li>
+        </ul>
+
+        <div class="tn-product-price">
+          <span class="tn-product-price-label">Price</span>
+          <span class="tn-product-price-value">{{ product.selected_or_first_available_variant.price | money }}</span>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-4 pt-8 border-t border-zinc-100">
-           <div class="flex-1">
-             <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1 italic">Price</p>
-             <p class="text-3xl font-black text-zinc-900">$299.00 USD</p>
-           </div>
-           <button class="px-12 py-5 bg-zinc-900 text-white font-bold uppercase tracking-[0.2em] text-xs hover:bg-blue-600 transition-all flex h-14 items-center justify-center">
-             Add to Cart
-           </button>
+        {% form 'product', product, class: 'tn-product-form' %}
+          {% unless product.has_only_default_variant %}
+            <select class="tn-product-select" name="id" aria-label="Variant">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
+                </option>
+              {% endfor %}
+            </select>
+          {% else %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {% endunless %}
+          <div class="tn-product-row">
+            <input class="tn-product-qty" type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+            <button class="tn-product-add" type="submit" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+              {% if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif %}
+            </button>
+          </div>
+        {% endform %}
+        <p class="tn-product-stock">
+          {% if product.selected_or_first_available_variant.available %}
+            In stock{% if product.selected_or_first_available_variant.inventory_management %}: {{ product.selected_or_first_available_variant.inventory_quantity }} available{% endif %}
+          {% else %}
+            Currently unavailable
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <div class="tn-product-body">
+      <div class="tn-product-body-grid">
+        <div class="tn-product-panel">
+          <h2>Built for easier camp days</h2>
+          <div class="tn-product-description">
+            {% if product.description != blank %}
+              {{ product.description }}
+            {% else %}
+              <p>TrailNest gear is made for practical outdoor living: easier setup, more usable space, and a warmer camp experience from arrival to morning coffee.</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="tn-product-panel">
+          <h3>Product snapshot</h3>
+          <div class="tn-product-specs">
+            <div class="tn-product-spec"><span>Brand</span><b>{{ product.vendor | default: 'TrailNest' }}</b></div>
+            <div class="tn-product-spec"><span>Type</span><b>{{ product.type | default: 'Inflatable Tent' }}</b></div>
+            <div class="tn-product-spec"><span>SKU</span><b>{{ product.selected_or_first_available_variant.sku | default: 'TrailNest Tent' }}</b></div>
+            <div class="tn-product-spec"><span>Availability</span><b>{% if product.selected_or_first_available_variant.available %}In stock{% else %}Sold out{% endif %}</b></div>
+          </div>
         </div>
       </div>
     </div>
