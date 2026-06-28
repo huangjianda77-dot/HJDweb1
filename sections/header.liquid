@@ -6,30 +6,53 @@
 {% endschema %}
 
 <style>
-  .rs-header { position: sticky; top: 0; z-index: 50; background: rgba(24, 31, 23, .92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(232, 220, 193, .2); }
-  .rs-header-wrap { width: min(1200px, calc(100% - 32px)); height: 68px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
-  .rs-brand { display: inline-flex; align-items: center; gap: 10px; color: #fffaf0; text-decoration: none; font-weight: 950; }
-  .rs-brand-mark { width: 34px; height: 34px; display: grid; place-items: center; color: #1b241b; background: #d8b56d; border-radius: 6px; font-size: 13px; }
+  .rs-header { position: sticky; top: 0; z-index: 50; background: rgba(24, 31, 23, .94); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(232, 220, 193, .2); }
+  .rs-header-wrap { width: min(1200px, calc(100% - 32px)); min-height: 68px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+  .rs-brand { display: inline-flex; align-items: center; gap: 10px; color: #fffaf0; text-decoration: none; font-weight: 950; white-space: nowrap; }
+  .rs-brand-mark { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; color: #1b241b; background: #d8b56d; border-radius: 6px; font-size: 13px; }
   .rs-nav { display: flex; align-items: center; gap: 24px; }
-  .rs-nav a { color: #d8d0bd; text-decoration: none; font-size: 13px; font-weight: 850; }
+  .rs-nav a { color: #d8d0bd; text-decoration: none; font-size: 13px; font-weight: 850; white-space: nowrap; }
   .rs-nav a:hover { color: #fffaf0; }
   .rs-header-actions { display: flex; align-items: center; gap: 10px; }
-  .rs-cart { color: #fffaf0; text-decoration: none; font-size: 13px; font-weight: 850; }
-  .rs-buy { min-height: 38px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 4px; color: #1b241b; background: #d8b56d; text-decoration: none; font-size: 13px; font-weight: 950; }
-  @media (max-width: 760px) { .rs-nav { display: none; } .rs-header-wrap { width: min(100% - 24px, 1200px); } }
+  .rs-cart { color: #fffaf0; text-decoration: none; font-size: 13px; font-weight: 850; white-space: nowrap; }
+  .rs-buy { min-height: 38px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 4px; color: #1b241b; background: #d8b56d; text-decoration: none; font-size: 13px; font-weight: 950; white-space: nowrap; }
+  .rs-locale-form { margin: 0; }
+  .rs-locale-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .rs-locale-select { min-height: 38px; max-width: 120px; border: 1px solid rgba(255,248,234,.24); border-radius: 4px; background: rgba(255,248,234,.08); color: #fffaf0; font-size: 12px; font-weight: 850; padding: 0 8px; }
+  .rs-locale-select option { color: #1b241b; }
+  @media (max-width: 900px) { .rs-nav { gap: 14px; } .rs-header-wrap { gap: 12px; } }
+  @media (max-width: 760px) {
+    .rs-header-wrap { width: min(100% - 24px, 1200px); min-height: 64px; flex-wrap: wrap; padding: 10px 0; }
+    .rs-nav { order: 3; width: 100%; display: flex; overflow-x: auto; gap: 18px; padding: 2px 0 4px; scrollbar-width: none; }
+    .rs-nav::-webkit-scrollbar { display: none; }
+    .rs-header-actions { gap: 8px; }
+    .rs-cart { display: none; }
+    .rs-buy { min-height: 34px; padding: 0 12px; font-size: 12px; }
+    .rs-locale-select { min-height: 34px; max-width: 92px; }
+  }
 </style>
 
 <header class="rs-header">
   <div class="rs-header-wrap">
-    <a class="rs-brand" href="/"><span class="rs-brand-mark">TN</span><span>TrailNest</span></a>
+    <a class="rs-brand" href="/"><span class="rs-brand-mark">TN</span><span>{{ 'trailnest.brand.name' | t }}</span></a>
     <nav class="rs-nav" aria-label="Primary navigation">
-      <a href="/collections/all">Inflatable Tents</a>
-      <a href="/#tent-life">Camping Life</a>
-      <a href="/pages/about-trailnest">About</a>
+      <a href="/collections/all">{{ 'trailnest.nav.inflatable_tents' | t }}</a>
+      <a href="/#tent-life">{{ 'trailnest.nav.camping_life' | t }}</a>
+      <a href="/pages/about-trailnest">{{ 'trailnest.nav.about' | t }}</a>
     </nav>
     <div class="rs-header-actions">
-      <a class="rs-cart" href="/cart">Cart</a>
-      <a class="rs-buy" href="/collections/all">Shop Tents</a>
+      {% form 'localization', class: 'rs-locale-form' %}
+        {% if localization.available_languages.size > 1 %}
+          <label class="rs-locale-label" for="HeaderLanguage-{{ section.id }}">{{ 'trailnest.language.label' | t }}</label>
+          <select id="HeaderLanguage-{{ section.id }}" class="rs-locale-select" name="locale_code" onchange="this.form.submit()">
+            {% for language in localization.available_languages %}
+              <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>{{ language.endonym_name | capitalize }}</option>
+            {% endfor %}
+          </select>
+        {% endif %}
+      {% endform %}
+      <a class="rs-cart" href="/cart">{{ 'trailnest.actions.cart' | t }}</a>
+      <a class="rs-buy" href="/collections/all">{{ 'trailnest.actions.shop_tents' | t }}</a>
     </div>
   </div>
 </header>

@@ -15,12 +15,12 @@
   .rs-footer a { display: block; margin-top: 10px; color: #dcd2c1; text-decoration: none; font-size: 14px; font-weight: 760; }
   .rs-footer a:hover { color: #fff8ea; }
   .rs-footer-bottom { display: flex; justify-content: space-between; gap: 20px; margin-top: 48px; padding-top: 22px; border-top: 1px solid rgba(255,248,234,.1); color: #aa9f89; font-size: 12px; font-weight: 800; }
-  @media (max-width: 760px) { .rs-footer-grid { grid-template-columns: 1fr; } .rs-footer-bottom { flex-direction: column; } }
+  @media (max-width: 760px) { .rs-footer { padding: 48px 0 28px; } .rs-footer-wrap { width: min(100% - 24px, 1200px); } .rs-footer-grid { grid-template-columns: 1fr; gap: 26px; } .rs-footer-bottom { flex-direction: column; margin-top: 34px; } }
 </style>
 
 <footer class="rs-footer"><div class="rs-footer-wrap"><div class="rs-footer-grid">
-  <div><h2>TrailNest</h2><p>Inflatable camping tents made for easier setup, roomier stays, and warmer outdoor living.</p></div>
-  <div><h3>Shop</h3><a href="/collections/all">Inflatable Tents</a><a href="/#tent-life">Camping Life</a><a href="/cart">Cart</a></div>
-  <div><h3>Brand</h3><a href="/pages/about-trailnest">About TrailNest</a><a href="/pages/contact">Contact</a><a href="/policies/shipping-policy">Shipping</a></div>
-  <div><h3>Support</h3><a href="/policies/refund-policy">Returns</a><a href="/policies/privacy-policy">Privacy</a><a href="/policies/terms-of-service">Terms</a></div>
-</div><div class="rs-footer-bottom"><span>© 2026 TrailNest</span><span>Comfortable inflatable tents for forest camps and family weekends.</span></div></div></footer>
+  <div><h2>{{ 'trailnest.brand.name' | t }}</h2><p>{{ 'trailnest.footer.tagline' | t }}</p></div>
+  <div><h3>{{ 'trailnest.footer.shop' | t }}</h3><a href="/collections/all">{{ 'trailnest.footer.all_tents' | t }}</a><a href="/#tent-life">{{ 'trailnest.footer.camping_life' | t }}</a><a href="/cart">{{ 'trailnest.actions.cart' | t }}</a></div>
+  <div><h3>{{ 'trailnest.footer.brand' | t }}</h3><a href="/pages/about-trailnest">{{ 'trailnest.footer.about' | t }}</a><a href="/pages/contact">{{ 'trailnest.footer.contact' | t }}</a><a href="/policies/shipping-policy">{{ 'trailnest.footer.shipping' | t }}</a></div>
+  <div><h3>{{ 'trailnest.footer.support' | t }}</h3><a href="/policies/refund-policy">{{ 'trailnest.footer.returns' | t }}</a><a href="/policies/privacy-policy">{{ 'trailnest.footer.privacy' | t }}</a><a href="/policies/terms-of-service">{{ 'trailnest.footer.terms' | t }}</a></div>
+</div><div class="rs-footer-bottom"><span>{{ 'trailnest.footer.copyright' | t }}</span><span>{{ 'trailnest.footer.bottom_note' | t }}</span></div></div></footer>

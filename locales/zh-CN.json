@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "输入密码进入店铺"
+    }
+  },
+  "accessibility": {
+    "refresh_page": "刷新页面",
+    "link_messages": {
+      "new_window": "在新窗口中打开"
+    }
+  },
+  "cart": {
+    "label": "购物车",
+    "view": "查看购物车",
+    "checkout": "结账"
+  },
+  "trailnest": {
+    "brand": {
+      "name": "TrailNest"
+    },
+    "language": {
+      "label": "语言"
+    },
+    "schema": {
+      "description": "TrailNest 提供舒适的充气露营帐篷，适合家庭露营、周末旅行和轻奢户外生活。"
+    },
+    "nav": {
+      "inflatable_tents": "充气帐篷",
+      "camping_life": "露营生活",
+      "about": "关于我们"
+    },
+    "actions": {
+      "cart": "购物车",
+      "shop_tents": "选购帐篷",
+      "shop_inflatable_tents": "选购充气帐篷",
+      "explore_tent_life": "探索露营生活",
+      "find_your_tent": "找到你的帐篷"
+    },
+    "home": {
+      "badge": "为舒适露营而生的充气帐篷",
+      "hero_title_before": "更快搭建营地，更久享受",
+      "hero_title_em": "舒适。",
+      "hero_copy": "TrailNest 打造宽敞的充气露营帐篷，适合家庭露营、周末出行和轻奢户外生活。",
+      "strip_air_title": "充气",
+      "strip_air_copy": "充气结构让搭建过程比传统杆式帐篷更轻松。",
+      "strip_room_title": "空间",
+      "strip_room_copy": "屋脊式宽敞空间，适合家庭睡眠、装备收纳和放松停留。",
+      "strip_light_title": "采光",
+      "strip_light_copy": "大面积窗户与顶部设计，让帐篷内部更明亮、更舒适。",
+      "strip_camp_title": "露营",
+      "strip_camp_copy": "温暖的轻奢露营风格，适合森林、公园和周末营地。",
+      "why_kicker": "为什么选择充气帐篷",
+      "why_title": "用更轻松的方式搭建你的户外之家。",
+      "why_copy": "TrailNest 充气帐篷围绕真实露营体验打造：更轻松的搭建、更舒适的内部空间、更好的通风采光，以及自然融入森林环境的帆布风格。",
+      "feature_1_title": "快速气柱搭建",
+      "feature_1_copy": "减少整理支架的时间，把更多时间留给真正的营地生活。",
+      "feature_2_title": "家庭级宽敞空间",
+      "feature_2_copy": "屋脊式轮廓带来睡眠、行李、座椅和日常用品的舒适空间。",
+      "feature_3_title": "轻奢露营舒适感",
+      "feature_3_copy": "柔和中性色、大窗面板和温暖营地氛围，带来更高级的户外体验。",
+      "life_kicker": "露营生活",
+      "life_title": "从森林周末到后院营地。",
+      "life_copy_1": "一顶好帐篷应该从开箱搭建开始就让旅程更轻松。TrailNest 关注舒适布局、稳定庇护和适合家庭旅行的实用细节。",
+      "life_copy_2": "它不只是临时遮蔽物，更像是一间安静舒适的户外房间。",
+      "promise_kicker": "TrailNest 承诺",
+      "promise_title": "可靠庇护，让露营更温暖。",
+      "promise_copy_1": "我们相信户外装备应该减少麻烦。一顶好的充气帐篷应该快速搭建、轻松使用，并足够可靠，可以陪伴一次又一次露营。",
+      "promise_copy_2": "TrailNest 将实用结构和自然高级的风格结合起来，为想要舒适又不失户外感的露营者而设计。",
+      "check_1_title": "轻松抵达",
+      "check_1_copy": "帮助你从车辆卸装更顺畅地进入可居住的营地状态。",
+      "check_2_title": "舒适停留",
+      "check_2_copy": "宽敞比例支持真实睡眠、休息、收纳和放松。",
+      "check_3_title": "自然融入",
+      "check_3_copy": "温暖中性色适合森林、营地和轻奢露营场景。",
+      "final_kicker": "搭建下一次营地",
+      "final_title": "选择一顶让户外像家一样舒适的充气帐篷。",
+      "final_copy": "探索 TrailNest 帐篷，为家庭旅行、周末逃离和舒适户外生活做好准备。",
+      "hero_alt": "森林营地中的 TrailNest 充气帐篷"
+    },
+    "footer": {
+      "tagline": "充气露营帐篷，让搭建更轻松、空间更宽敞、户外生活更温暖。",
+      "shop": "选购",
+      "brand": "品牌",
+      "support": "支持",
+      "all_tents": "充气帐篷",
+      "camping_life": "露营生活",
+      "about": "关于 TrailNest",
+      "contact": "联系我们",
+      "shipping": "配送政策",
+      "returns": "退换政策",
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "copyright": "© 2026 TrailNest",
+      "bottom_note": "为森林营地和家庭周末打造的舒适充气帐篷。"
+    }
+  }
+}

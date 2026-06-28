@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -14,5 +23,85 @@
     "label": "Cart",
     "view": "View my cart",
     "checkout": "Check out"
+  },
+  "trailnest": {
+    "brand": {
+      "name": "TrailNest"
+    },
+    "language": {
+      "label": "Language"
+    },
+    "schema": {
+      "description": "TrailNest offers inflatable camping tents for comfortable family camping, weekend travel, and glamping-style outdoor living."
+    },
+    "nav": {
+      "inflatable_tents": "Inflatable Tents",
+      "camping_life": "Camping Life",
+      "about": "About"
+    },
+    "actions": {
+      "cart": "Cart",
+      "shop_tents": "Shop Tents",
+      "shop_inflatable_tents": "Shop Inflatable Tents",
+      "explore_tent_life": "Explore Tent Life",
+      "find_your_tent": "Find Your Tent"
+    },
+    "home": {
+      "badge": "Inflatable tents for comfortable camping",
+      "hero_title_before": "Set up camp faster. Stay longer in",
+      "hero_title_em": "comfort.",
+      "hero_copy": "TrailNest designs spacious inflatable camping tents for families, weekend travelers, and glamping-style outdoor living.",
+      "strip_air_title": "Air",
+      "strip_air_copy": "Inflatable structure for a smoother setup than pole-heavy tents.",
+      "strip_room_title": "Room",
+      "strip_room_copy": "Cabin-style space for family camping, gear storage, and relaxed stays.",
+      "strip_light_title": "Light",
+      "strip_light_copy": "Large windows and roof details create a brighter, calmer interior.",
+      "strip_camp_title": "Camp",
+      "strip_camp_copy": "A warm glamping look made for forests, parks, and weekend basecamps.",
+      "why_kicker": "Why inflatable",
+      "why_title": "A more relaxed way to build your outdoor home.",
+      "why_copy": "TrailNest inflatable tents are built around real camping comfort: easier setup, livable interior space, breathable openings, and a natural canvas-style look that feels at home in the woods.",
+      "feature_1_title": "Quick air-beam setup",
+      "feature_1_copy": "Spend less time sorting poles and more time settling into camp with a structure designed for fast inflation.",
+      "feature_2_title": "Family-size interior",
+      "feature_2_copy": "A cabin-inspired profile gives you room for sleeping, bags, seating, and the small comforts that make camping easier.",
+      "feature_3_title": "Glamping-ready comfort",
+      "feature_3_copy": "Soft neutral fabric, large window panels, and a warm campsite presence create a premium outdoor living feel.",
+      "life_kicker": "Camping life",
+      "life_title": "From forest weekends to backyard basecamps.",
+      "life_copy_1": "Your tent should make the trip feel easier from the first unpacking moment. TrailNest focuses on a comfortable layout, stable shelter, and practical details for families and outdoor travelers.",
+      "life_copy_2": "The result is a tent that feels less like a temporary cover and more like a calm outdoor room.",
+      "promise_kicker": "TrailNest promise",
+      "promise_title": "Reliable shelter with a warmer way to camp.",
+      "promise_copy_1": "We believe outdoor gear should reduce friction. A great inflatable tent should be quick to pitch, easy to enjoy, and strong enough to become part of your repeat camping routine.",
+      "promise_copy_2": "TrailNest brings together practical construction and a refined natural style for campers who want comfort without losing the feeling of being outside.",
+      "check_1_title": "Easy arrival",
+      "check_1_copy": "Designed to help you move from packed vehicle to livable camp with less hassle.",
+      "check_2_title": "Comfortable stays",
+      "check_2_copy": "Roomy proportions support real sleeping, sitting, organizing, and relaxing.",
+      "check_3_title": "Natural presence",
+      "check_3_copy": "Warm neutral colors pair well with forests, campsites, and glamping setups.",
+      "final_kicker": "Build your next camp",
+      "final_title": "Choose the inflatable tent that makes outdoors feel like home.",
+      "final_copy": "Explore TrailNest tents for family trips, weekend escapes, and comfortable outdoor living.",
+      "hero_alt": "TrailNest inflatable tent at a forest campsite"
+    },
+    "footer": {
+      "tagline": "Inflatable camping tents made for easier setup, roomier stays, and warmer outdoor living.",
+      "shop": "Shop",
+      "brand": "Brand",
+      "support": "Support",
+      "all_tents": "Inflatable Tents",
+      "camping_life": "Camping Life",
+      "about": "About TrailNest",
+      "contact": "Contact",
+      "shipping": "Shipping",
+      "returns": "Returns",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "copyright": "© 2026 TrailNest",
+      "bottom_note": "Comfortable inflatable tents for forest camps and family weekends."
+    }
   }
 }
