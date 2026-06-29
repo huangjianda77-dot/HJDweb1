@@ -49,7 +49,23 @@
   .tn-product-price-label { display: block; margin-bottom: 4px; color: var(--tn-muted); font-size: 11px; font-weight: 950; letter-spacing: .12em; text-transform: uppercase; }
   .tn-product-price-value { font-size: 34px; line-height: 1; font-weight: 950; }
   .tn-product-form { display: grid; gap: 14px; margin-top: 22px; }
-  .tn-product-select, .tn-product-qty { width: 100%; min-height: 48px; border: 1px solid var(--tn-line); border-radius: 4px; background: #fff; color: var(--tn-ink); padding: 0 12px; font-size: 15px; font-weight: 800; }
+  .tn-product-select { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .tn-product-qty { width: 100%; min-height: 48px; border: 1px solid var(--tn-line); border-radius: 4px; background: #fff; color: var(--tn-ink); padding: 0 12px; font-size: 15px; font-weight: 800; }
+  .tn-variant-fieldset { margin: 0; padding: 0; border: 0; }
+  .tn-variant-label { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; color: var(--tn-muted); font-size: 11px; font-weight: 950; letter-spacing: .12em; text-transform: uppercase; }
+  .tn-variant-label strong { color: var(--tn-ink); font-size: 13px; letter-spacing: 0; text-transform: none; }
+  .tn-variant-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tn-variant-card { position: relative; min-height: 94px; padding: 14px; border: 1px solid var(--tn-line); border-radius: 8px; background: #fff; color: var(--tn-ink); text-align: left; cursor: pointer; box-shadow: 0 10px 24px rgba(31,38,31,.04); transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
+  .tn-variant-card:hover { border-color: rgba(216,181,109,.75); box-shadow: 0 14px 30px rgba(31,38,31,.08); transform: translateY(-1px); }
+  .tn-variant-card[aria-pressed="true"] { border-color: var(--tn-gold); box-shadow: 0 0 0 2px rgba(216,181,109,.28), 0 14px 30px rgba(31,38,31,.08); }
+  .tn-variant-card[disabled] { opacity: .48; cursor: not-allowed; transform: none; }
+  .tn-variant-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .tn-variant-name { font-size: 15px; font-weight: 950; line-height: 1.2; }
+  .tn-variant-dot { width: 18px; height: 18px; flex: 0 0 18px; border: 1px solid rgba(32,38,31,.18); border-radius: 50%; background: var(--variant-color, #e8d8bf); box-shadow: inset 0 0 0 3px #fff; }
+  .tn-variant-meta { display: grid; gap: 4px; margin-top: 12px; color: var(--tn-muted); font-size: 12px; font-weight: 800; line-height: 1.35; }
+  .tn-variant-meta b { color: var(--tn-ink); font-weight: 950; }
+  .tn-variant-status { color: #446044; }
+  .tn-variant-card[disabled] .tn-variant-status { color: #9a3e2c; }
   .tn-product-row { display: grid; grid-template-columns: 1fr 110px; gap: 10px; }
   .tn-product-add { min-height: 54px; border: 0; border-radius: 4px; background: var(--tn-forest); color: var(--tn-paper); font-size: 14px; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
   .tn-product-add[disabled] { opacity: .45; cursor: not-allowed; }
@@ -68,7 +84,7 @@
   .tn-product-spec b { text-align: right; }
   @media (max-width: 960px) { .tn-product-hero, .tn-product-body-grid { grid-template-columns: 1fr; } .tn-product-info { position: static; } .tn-product-title { font-size: 38px; } }
   @media (max-width: 720px) { .tn-product-gallery { display: grid; grid-template-columns: 1fr; padding-left: 0; } .tn-product-stage { order: 1; } .tn-product-thumbs { position: static; order: 2; width: auto; max-height: none; display: flex; overflow-x: auto; overflow-y: hidden; padding: 2px 0 8px; } .tn-product-thumb-button { width: 78px; flex: 0 0 78px; } }
-  @media (max-width: 620px) { .tn-product-wrap { width: min(100% - 24px, 1200px); } .tn-product-hero { padding: 38px 0 46px; gap: 24px; } .tn-product-info { padding: 22px; } .tn-product-title { font-size: 31px; } .tn-product-summary { font-size: 15px; } .tn-product-row { grid-template-columns: 1fr; } .tn-product-price-value { font-size: 30px; } .tn-product-panel { padding: 22px; } .tn-product-body { padding-bottom: 58px; } .tn-gallery-nav { width: 38px; height: 38px; } .tn-product-zoom { padding: 16px; } .tn-zoom-nav { width: 42px; height: 42px; } }
+  @media (max-width: 620px) { .tn-product-wrap { width: min(100% - 24px, 1200px); } .tn-product-hero { padding: 38px 0 46px; gap: 24px; } .tn-product-info { padding: 22px; } .tn-product-title { font-size: 31px; } .tn-product-summary { font-size: 15px; } .tn-variant-grid { grid-template-columns: 1fr; } .tn-product-row { grid-template-columns: 1fr; } .tn-product-price-value { font-size: 30px; } .tn-product-panel { padding: 22px; } .tn-product-body { padding-bottom: 58px; } .tn-gallery-nav { width: 38px; height: 38px; } .tn-product-zoom { padding: 16px; } .tn-zoom-nav { width: 42px; height: 42px; } }
 </style>
 
 <section class="tn-product" data-tn-gallery-root>
@@ -79,7 +95,7 @@
           {% for media in product.media limit: 8 %}
             {% if media.media_type == 'image' %}
               {% assign thumb_image = media.preview_image %}
-              <button class="tn-product-thumb-button" type="button" aria-label="View image {{ forloop.index }}" aria-current="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" data-tn-thumb data-index="{{ forloop.index0 }}" data-full-src="{{ thumb_image | image_url: width: 1400 }}" data-zoom-src="{{ thumb_image | image_url: width: 2400 }}" data-alt="{{ media.alt | default: product.title | escape }}">
+              <button class="tn-product-thumb-button" type="button" aria-label="View image {{ forloop.index }}" aria-current="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" data-tn-thumb data-index="{{ forloop.index0 }}" data-media-id="{{ media.id }}" data-full-src="{{ thumb_image | image_url: width: 1400 }}" data-zoom-src="{{ thumb_image | image_url: width: 2400 }}" data-alt="{{ media.alt | default: product.title | escape }}">
                 <img src="{{ thumb_image | image_url: width: 360 }}" loading="lazy" alt="{{ media.alt | default: product.title | escape }}" width="{{ thumb_image.width }}" height="{{ thumb_image.height }}">
               </button>
             {% endif %}
@@ -110,19 +126,50 @@
         <h1 class="tn-product-title">{{ product.title }}</h1>
         <p class="tn-product-summary">Spacious inflatable comfort for family camping, weekend travel, and glamping-style outdoor living.</p>
         <ul class="tn-product-points"><li>Inflatable structure for faster campsite setup</li><li>Cabin-style room for longer, more comfortable stays</li><li>Large window panels for natural light and airflow</li></ul>
-        <div class="tn-product-price"><span class="tn-product-price-label">Price</span><span class="tn-product-price-value">{{ product.selected_or_first_available_variant.price | money }}</span></div>
+        <div class="tn-product-price"><span class="tn-product-price-label">Price</span><span class="tn-product-price-value" data-tn-price>{{ product.selected_or_first_available_variant.price | money }}</span></div>
         {% form 'product', product, class: 'tn-product-form' %}
           {% unless product.has_only_default_variant %}
-            <select class="tn-product-select" name="id" aria-label="Variant">{% for variant in product.variants %}<option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}</option>{% endfor %}</select>
+            <fieldset class="tn-variant-fieldset" aria-label="Choose color">
+              <div class="tn-variant-label">Color <strong data-tn-selected-option>{{ product.selected_or_first_available_variant.title }}</strong></div>
+              <div class="tn-variant-grid">
+                {% for variant in product.variants %}
+                  {% assign variant_color = '#e8d8bf' %}
+                  {% assign variant_title_downcase = variant.title | downcase %}
+                  {% if variant_title_downcase contains 'olive' %}{% assign variant_color = '#808769' %}{% endif %}
+                  <button class="tn-variant-card" type="button" data-tn-variant-card data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}" {% unless variant.available %}disabled{% endunless %}>
+                    <span class="tn-variant-top"><span class="tn-variant-name">{{ variant.title }}</span><span class="tn-variant-dot" style="--variant-color: {{ variant_color }}"></span></span>
+                    <span class="tn-variant-meta"><span>SKU <b>{{ variant.sku | default: 'TrailNest' }}</b></span><span>{{ variant.price | money }}</span><span class="tn-variant-status">{% if variant.available %}In stock{% if variant.inventory_management %}: {{ variant.inventory_quantity }}{% endif %}{% else %}Sold out{% endif %}</span></span>
+                  </button>
+                {% endfor %}
+              </div>
+            </fieldset>
+            <select class="tn-product-select" name="id" aria-label="Variant" data-tn-variant-select>{% for variant in product.variants %}<option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}</option>{% endfor %}</select>
           {% else %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">{% endunless %}
-          <div class="tn-product-row"><input class="tn-product-qty" type="number" name="quantity" value="1" min="1" aria-label="Quantity"><button class="tn-product-add" type="submit" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>{% if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif %}</button></div>
+          <div class="tn-product-row"><input class="tn-product-qty" type="number" name="quantity" value="1" min="1" aria-label="Quantity"><button class="tn-product-add" type="submit" data-tn-add {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>{% if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif %}</button></div>
         {% endform %}
-        <p class="tn-product-stock">{% if product.selected_or_first_available_variant.available %}In stock{% if product.selected_or_first_available_variant.inventory_management %}: {{ product.selected_or_first_available_variant.inventory_quantity }} available{% endif %}{% else %}Currently unavailable{% endif %}</p>
+        <p class="tn-product-stock" data-tn-stock>{% if product.selected_or_first_available_variant.available %}In stock{% if product.selected_or_first_available_variant.inventory_management %}: {{ product.selected_or_first_available_variant.inventory_quantity }} available{% endif %}{% else %}Currently unavailable{% endif %}</p>
       </div>
     </div>
-    <div class="tn-product-body"><div class="tn-product-body-grid"><div class="tn-product-panel"><h2>Built for easier camp days</h2><div class="tn-product-description">{% if product.description != blank %}{{ product.description }}{% else %}<p>TrailNest gear is made for practical outdoor living: easier setup, more usable space, and a warmer camp experience from arrival to morning coffee.</p>{% endif %}</div></div><div class="tn-product-panel"><h3>Product snapshot</h3><div class="tn-product-specs"><div class="tn-product-spec"><span>Brand</span><b>{{ product.vendor | default: 'TrailNest' }}</b></div><div class="tn-product-spec"><span>Type</span><b>{{ product.type | default: 'Inflatable Tent' }}</b></div><div class="tn-product-spec"><span>SKU</span><b>{{ product.selected_or_first_available_variant.sku | default: 'TrailNest Tent' }}</b></div><div class="tn-product-spec"><span>Availability</span><b>{% if product.selected_or_first_available_variant.available %}In stock{% else %}Sold out{% endif %}</b></div></div></div></div></div>
+    <div class="tn-product-body"><div class="tn-product-body-grid"><div class="tn-product-panel"><h2>Built for easier camp days</h2><div class="tn-product-description">{% if product.description != blank %}{{ product.description }}{% else %}<p>TrailNest gear is made for practical outdoor living: easier setup, more usable space, and a warmer camp experience from arrival to morning coffee.</p>{% endif %}</div></div><div class="tn-product-panel"><h3>Product snapshot</h3><div class="tn-product-specs"><div class="tn-product-spec"><span>Brand</span><b>{{ product.vendor | default: 'TrailNest' }}</b></div><div class="tn-product-spec"><span>Type</span><b>{{ product.type | default: 'Inflatable Tent' }}</b></div><div class="tn-product-spec"><span>SKU</span><b data-tn-sku>{{ product.selected_or_first_available_variant.sku | default: 'TrailNest Tent' }}</b></div><div class="tn-product-spec"><span>Availability</span><b data-tn-availability>{% if product.selected_or_first_available_variant.available %}In stock{% else %}Sold out{% endif %}</b></div></div></div></div></div>
   </div>
 </section>
+
+<script type="application/json" data-tn-variants-json>
+[
+  {% for variant in product.variants %}
+    {
+      "id": {{ variant.id | json }},
+      "title": {{ variant.title | json }},
+      "sku": {{ variant.sku | json }},
+      "price": {{ variant.price | money | json }},
+      "available": {{ variant.available | json }},
+      "inventoryQuantity": {{ variant.inventory_quantity | json }},
+      "inventoryManaged": {{ variant.inventory_management | json }},
+      "featuredMediaId": {% if variant.featured_media %}{{ variant.featured_media.id | json }}{% else %}null{% endif %}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
+</script>
 
 <div class="tn-product-zoom" data-tn-zoom aria-hidden="true">
   <button class="tn-product-zoom-close" type="button" data-tn-zoom-close aria-label="Close enlarged image">&times;</button>
@@ -144,6 +191,17 @@
     var zoomClose = document.querySelector('[data-tn-zoom-close]');
     var zoomPrev = document.querySelector('[data-tn-zoom-prev]');
     var zoomNext = document.querySelector('[data-tn-zoom-next]');
+    var variantSelect = root.querySelector('[data-tn-variant-select]');
+    var variantCards = Array.prototype.slice.call(root.querySelectorAll('[data-tn-variant-card]'));
+    var variantJson = document.querySelector('[data-tn-variants-json]');
+    var variants = [];
+    try { variants = variantJson ? JSON.parse(variantJson.textContent) : []; } catch (error) { variants = []; }
+    var selectedOption = root.querySelector('[data-tn-selected-option]');
+    var price = root.querySelector('[data-tn-price]');
+    var stock = root.querySelector('[data-tn-stock]');
+    var sku = root.querySelector('[data-tn-sku]');
+    var availability = root.querySelector('[data-tn-availability]');
+    var addButton = root.querySelector('[data-tn-add]');
     var activeIndex = Math.max(0, thumbs.findIndex(function(thumb) { return thumb.getAttribute('aria-current') === 'true'; }));
     if (!mainButton || !mainImg || !thumbs.length || !zoom || !zoomImg || !zoomClose) return;
     function show(index) {
@@ -160,6 +218,30 @@
     thumbs.forEach(function(thumb, index) { thumb.addEventListener('click', function() { show(index); }); });
     if (prev) prev.addEventListener('click', function() { show(activeIndex - 1); });
     if (next) next.addEventListener('click', function() { show(activeIndex + 1); });
+    function stockText(variant) {
+      if (!variant || !variant.available) return 'Currently unavailable';
+      return variant.inventoryManaged ? 'In stock: ' + variant.inventoryQuantity + ' available' : 'In stock';
+    }
+    function chooseVariant(variantId) {
+      var variant = variants.find(function(item) { return String(item.id) === String(variantId); });
+      if (!variant) return;
+      if (variantSelect) variantSelect.value = variant.id;
+      variantCards.forEach(function(card) { card.setAttribute('aria-pressed', String(card.dataset.variantId) === String(variant.id) ? 'true' : 'false'); });
+      if (selectedOption) selectedOption.textContent = variant.title || '';
+      if (price) price.textContent = variant.price || '';
+      if (stock) stock.textContent = stockText(variant);
+      if (sku) sku.textContent = variant.sku || 'TrailNest Tent';
+      if (availability) availability.textContent = variant.available ? 'In stock' : 'Sold out';
+      if (addButton) { addButton.disabled = !variant.available; addButton.textContent = variant.available ? 'Add to cart' : 'Sold out'; }
+      if (variant.featuredMediaId) {
+        var mediaIndex = thumbs.findIndex(function(thumb) { return String(thumb.dataset.mediaId) === String(variant.featuredMediaId); });
+        if (mediaIndex >= 0) show(mediaIndex);
+      } else if (/beige/i.test(variant.title || '')) {
+        show(0);
+      }
+    }
+    variantCards.forEach(function(card) { card.addEventListener('click', function() { chooseVariant(card.dataset.variantId); }); });
+    if (variantSelect) variantSelect.addEventListener('change', function() { chooseVariant(variantSelect.value); });
     function openZoom() { var thumb = thumbs[activeIndex]; zoomImg.src = thumb.dataset.zoomSrc || mainImg.src; zoomImg.alt = mainImg.alt || ''; zoom.classList.add('is-open'); zoom.setAttribute('aria-hidden','false'); document.documentElement.style.overflow = 'hidden'; zoomClose.focus(); }
     function closeZoom() { zoom.classList.remove('is-open'); zoom.setAttribute('aria-hidden','true'); zoomImg.src = ''; document.documentElement.style.overflow = ''; mainButton.focus(); }
     mainButton.addEventListener('click', openZoom);
