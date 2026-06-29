@@ -12,12 +12,32 @@
   .tn-product { background: var(--tn-paper); }
   .tn-product-wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
   .tn-product-hero { display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(360px, .94fr); gap: 48px; align-items: start; padding: 72px 0 64px; }
-  .tn-product-gallery { display: grid; gap: 14px; }
-  .tn-product-main-image { overflow: hidden; border-radius: 8px; background: #fff; border: 1px solid rgba(32,38,31,.08); box-shadow: 0 22px 54px rgba(31,38,31,.08); }
+  .tn-product-gallery { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; align-items: start; }
+  .tn-product-thumbs { max-height: 640px; display: grid; gap: 10px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
+  .tn-product-thumb-button { overflow: hidden; display: block; width: 100%; padding: 0; border: 2px solid transparent; border-radius: 6px; background: #fff; cursor: pointer; }
+  .tn-product-thumb-button[aria-current="true"] { border-color: var(--tn-gold); }
+  .tn-product-thumb-button:focus-visible { outline: 3px solid var(--tn-forest); outline-offset: 2px; }
+  .tn-product-thumb-button img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+  .tn-product-stage { display: grid; gap: 12px; }
+  .tn-product-main-wrap { position: relative; }
+  .tn-product-main-image { position: relative; overflow: hidden; display: block; width: 100%; padding: 0; border: 1px solid rgba(32,38,31,.08); border-radius: 8px; background: #fff; box-shadow: 0 22px 54px rgba(31,38,31,.08); cursor: zoom-in; }
   .tn-product-main-image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-  .tn-product-thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
-  .tn-product-thumb { overflow: hidden; border-radius: 6px; background: #fff; border: 1px solid rgba(32,38,31,.1); }
-  .tn-product-thumb img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+  .tn-product-main-image:focus-visible { outline: 3px solid var(--tn-gold); outline-offset: 3px; }
+  .tn-product-zoom-hint { position: absolute; right: 12px; bottom: 12px; min-height: 34px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: rgba(24,36,24,.82); color: var(--tn-paper); font-size: 12px; font-weight: 900; pointer-events: none; }
+  .tn-gallery-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid rgba(32,38,31,.14); border-radius: 999px; background: rgba(255,255,255,.88); color: var(--tn-forest); font-size: 26px; line-height: 1; cursor: pointer; box-shadow: 0 10px 28px rgba(31,38,31,.14); }
+  .tn-gallery-nav:hover { background: #fff; }
+  .tn-gallery-nav:focus-visible { outline: 3px solid var(--tn-gold); outline-offset: 2px; }
+  .tn-gallery-prev { left: 12px; }
+  .tn-gallery-next { right: 12px; }
+  .tn-gallery-count { justify-self: center; min-height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: rgba(24,36,24,.08); color: var(--tn-muted); font-size: 12px; font-weight: 900; }
+  .tn-product-zoom { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 28px; background: rgba(15,20,15,.9); }
+  .tn-product-zoom.is-open { display: flex; }
+  .tn-product-zoom img { display: block; max-width: min(1180px, 94vw); max-height: 88vh; object-fit: contain; border-radius: 8px; background: #fff; box-shadow: 0 24px 80px rgba(0,0,0,.38); }
+  .tn-product-zoom-close, .tn-zoom-nav { position: absolute; border: 1px solid rgba(255,248,234,.32); border-radius: 999px; background: rgba(255,248,234,.12); color: #fff8ea; cursor: pointer; }
+  .tn-product-zoom-close { top: 18px; right: 18px; width: 44px; height: 44px; font-size: 28px; line-height: 1; }
+  .tn-zoom-nav { top: 50%; transform: translateY(-50%); width: 48px; height: 48px; display: grid; place-items: center; font-size: 30px; }
+  .tn-zoom-prev { left: 18px; }
+  .tn-zoom-next { right: 18px; }
   .tn-product-info { position: sticky; top: 92px; padding: 34px; border: 1px solid rgba(32,38,31,.12); border-radius: 8px; background: rgba(255,255,255,.72); box-shadow: 0 18px 48px rgba(31,38,31,.06); }
   .tn-product-kicker { margin: 0 0 12px; color: var(--tn-clay); font-size: 12px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
   .tn-product-title { margin: 0; font-size: 46px; line-height: 1.04; font-weight: 950; letter-spacing: 0; }
@@ -46,115 +66,109 @@
   .tn-product-spec:last-child { border-bottom: 0; }
   .tn-product-spec span { color: var(--tn-muted); font-weight: 800; }
   .tn-product-spec b { text-align: right; }
-  @media (max-width: 960px) {
-    .tn-product-hero, .tn-product-body-grid { grid-template-columns: 1fr; }
-    .tn-product-info { position: static; }
-    .tn-product-title { font-size: 38px; }
-  }
-  @media (max-width: 620px) {
-    .tn-product-wrap { width: min(100% - 24px, 1200px); }
-    .tn-product-hero { padding: 38px 0 46px; gap: 24px; }
-    .tn-product-info { padding: 22px; }
-    .tn-product-title { font-size: 31px; }
-    .tn-product-summary { font-size: 15px; }
-    .tn-product-thumbs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .tn-product-row { grid-template-columns: 1fr; }
-    .tn-product-price-value { font-size: 30px; }
-    .tn-product-panel { padding: 22px; }
-    .tn-product-body { padding-bottom: 58px; }
-  }
+  @media (max-width: 960px) { .tn-product-hero, .tn-product-body-grid { grid-template-columns: 1fr; } .tn-product-info { position: static; } .tn-product-title { font-size: 38px; } }
+  @media (max-width: 720px) { .tn-product-gallery { grid-template-columns: 1fr; } .tn-product-thumbs { order: 2; max-height: none; display: flex; overflow-x: auto; padding: 2px 0 8px; } .tn-product-thumb-button { width: 78px; flex: 0 0 78px; } }
+  @media (max-width: 620px) { .tn-product-wrap { width: min(100% - 24px, 1200px); } .tn-product-hero { padding: 38px 0 46px; gap: 24px; } .tn-product-info { padding: 22px; } .tn-product-title { font-size: 31px; } .tn-product-summary { font-size: 15px; } .tn-product-row { grid-template-columns: 1fr; } .tn-product-price-value { font-size: 30px; } .tn-product-panel { padding: 22px; } .tn-product-body { padding-bottom: 58px; } .tn-gallery-nav { width: 38px; height: 38px; } .tn-product-zoom { padding: 16px; } .tn-zoom-nav { width: 42px; height: 42px; } }
 </style>
 
-<section class="tn-product">
+<section class="tn-product" data-tn-gallery-root>
   <div class="tn-product-wrap">
     <div class="tn-product-hero">
       <div class="tn-product-gallery">
-        <div class="tn-product-main-image">
-          {% if product.featured_media %}
-            {{ product.featured_media | image_url: width: 1400 | image_tag: loading: 'eager', alt: product.featured_media.alt | default: product.title }}
-          {% else %}
-            {{ 'product-1' | placeholder_svg_tag }}
-          {% endif %}
+        <div class="tn-product-thumbs" aria-label="Product images">
+          {% for media in product.media limit: 8 %}
+            {% if media.media_type == 'image' %}
+              {% assign thumb_image = media.preview_image %}
+              <button class="tn-product-thumb-button" type="button" aria-label="View image {{ forloop.index }}" aria-current="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" data-tn-thumb data-index="{{ forloop.index0 }}" data-full-src="{{ thumb_image | image_url: width: 1400 }}" data-zoom-src="{{ thumb_image | image_url: width: 2400 }}" data-alt="{{ media.alt | default: product.title | escape }}">
+                <img src="{{ thumb_image | image_url: width: 360 }}" loading="lazy" alt="{{ media.alt | default: product.title | escape }}" width="{{ thumb_image.width }}" height="{{ thumb_image.height }}">
+              </button>
+            {% endif %}
+          {% endfor %}
         </div>
-        {% if product.media.size > 1 %}
-          <div class="tn-product-thumbs" aria-label="Product images">
-            {% for media in product.media limit: 8 %}
-              {% if media.media_type == 'image' %}
-                <div class="tn-product-thumb">
-                  {{ media | image_url: width: 360 | image_tag: loading: 'lazy', alt: media.alt | default: product.title }}
-                </div>
+        <div class="tn-product-stage">
+          {% assign featured_image = product.featured_media.preview_image %}
+          <div class="tn-product-main-wrap">
+            <button class="tn-product-main-image" type="button" data-tn-main-image aria-label="Open product image">
+              {% if featured_image %}
+                <img src="{{ featured_image | image_url: width: 1400 }}" alt="{{ product.featured_media.alt | default: product.title | escape }}" width="{{ featured_image.width }}" height="{{ featured_image.height }}" loading="eager" data-tn-main-img data-zoom-src="{{ featured_image | image_url: width: 2400 }}">
+                <span class="tn-product-zoom-hint">Click to enlarge</span>
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag }}
               {% endif %}
-            {% endfor %}
+            </button>
+            {% if product.media.size > 1 %}
+              <button class="tn-gallery-nav tn-gallery-prev" type="button" data-tn-prev aria-label="Previous image">‹</button>
+              <button class="tn-gallery-nav tn-gallery-next" type="button" data-tn-next aria-label="Next image">›</button>
+            {% endif %}
           </div>
-        {% endif %}
+          {% if product.media.size > 1 %}<span class="tn-gallery-count" data-tn-count>1 / {{ product.media.size }}</span>{% endif %}
+        </div>
       </div>
 
       <div class="tn-product-info">
         <p class="tn-product-kicker">TrailNest Inflatable Tent</p>
         <h1 class="tn-product-title">{{ product.title }}</h1>
         <p class="tn-product-summary">Spacious inflatable comfort for family camping, weekend travel, and glamping-style outdoor living.</p>
-        <ul class="tn-product-points">
-          <li>Inflatable structure for faster campsite setup</li>
-          <li>Cabin-style room for longer, more comfortable stays</li>
-          <li>Large window panels for natural light and airflow</li>
-        </ul>
-
-        <div class="tn-product-price">
-          <span class="tn-product-price-label">Price</span>
-          <span class="tn-product-price-value">{{ product.selected_or_first_available_variant.price | money }}</span>
-        </div>
-
+        <ul class="tn-product-points"><li>Inflatable structure for faster campsite setup</li><li>Cabin-style room for longer, more comfortable stays</li><li>Large window panels for natural light and airflow</li></ul>
+        <div class="tn-product-price"><span class="tn-product-price-label">Price</span><span class="tn-product-price-value">{{ product.selected_or_first_available_variant.price | money }}</span></div>
         {% form 'product', product, class: 'tn-product-form' %}
           {% unless product.has_only_default_variant %}
-            <select class="tn-product-select" name="id" aria-label="Variant">
-              {% for variant in product.variants %}
-                <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
-                  {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
-                </option>
-              {% endfor %}
-            </select>
-          {% else %}
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-          {% endunless %}
-          <div class="tn-product-row">
-            <input class="tn-product-qty" type="number" name="quantity" value="1" min="1" aria-label="Quantity">
-            <button class="tn-product-add" type="submit" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
-              {% if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif %}
-            </button>
-          </div>
+            <select class="tn-product-select" name="id" aria-label="Variant">{% for variant in product.variants %}<option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}</option>{% endfor %}</select>
+          {% else %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">{% endunless %}
+          <div class="tn-product-row"><input class="tn-product-qty" type="number" name="quantity" value="1" min="1" aria-label="Quantity"><button class="tn-product-add" type="submit" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>{% if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif %}</button></div>
         {% endform %}
-        <p class="tn-product-stock">
-          {% if product.selected_or_first_available_variant.available %}
-            In stock{% if product.selected_or_first_available_variant.inventory_management %}: {{ product.selected_or_first_available_variant.inventory_quantity }} available{% endif %}
-          {% else %}
-            Currently unavailable
-          {% endif %}
-        </p>
+        <p class="tn-product-stock">{% if product.selected_or_first_available_variant.available %}In stock{% if product.selected_or_first_available_variant.inventory_management %}: {{ product.selected_or_first_available_variant.inventory_quantity }} available{% endif %}{% else %}Currently unavailable{% endif %}</p>
       </div>
     </div>
-
-    <div class="tn-product-body">
-      <div class="tn-product-body-grid">
-        <div class="tn-product-panel">
-          <h2>Built for easier camp days</h2>
-          <div class="tn-product-description">
-            {% if product.description != blank %}
-              {{ product.description }}
-            {% else %}
-              <p>TrailNest gear is made for practical outdoor living: easier setup, more usable space, and a warmer camp experience from arrival to morning coffee.</p>
-            {% endif %}
-          </div>
-        </div>
-        <div class="tn-product-panel">
-          <h3>Product snapshot</h3>
-          <div class="tn-product-specs">
-            <div class="tn-product-spec"><span>Brand</span><b>{{ product.vendor | default: 'TrailNest' }}</b></div>
-            <div class="tn-product-spec"><span>Type</span><b>{{ product.type | default: 'Inflatable Tent' }}</b></div>
-            <div class="tn-product-spec"><span>SKU</span><b>{{ product.selected_or_first_available_variant.sku | default: 'TrailNest Tent' }}</b></div>
-            <div class="tn-product-spec"><span>Availability</span><b>{% if product.selected_or_first_available_variant.available %}In stock{% else %}Sold out{% endif %}</b></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="tn-product-body"><div class="tn-product-body-grid"><div class="tn-product-panel"><h2>Built for easier camp days</h2><div class="tn-product-description">{% if product.description != blank %}{{ product.description }}{% else %}<p>TrailNest gear is made for practical outdoor living: easier setup, more usable space, and a warmer camp experience from arrival to morning coffee.</p>{% endif %}</div></div><div class="tn-product-panel"><h3>Product snapshot</h3><div class="tn-product-specs"><div class="tn-product-spec"><span>Brand</span><b>{{ product.vendor | default: 'TrailNest' }}</b></div><div class="tn-product-spec"><span>Type</span><b>{{ product.type | default: 'Inflatable Tent' }}</b></div><div class="tn-product-spec"><span>SKU</span><b>{{ product.selected_or_first_available_variant.sku | default: 'TrailNest Tent' }}</b></div><div class="tn-product-spec"><span>Availability</span><b>{% if product.selected_or_first_available_variant.available %}In stock{% else %}Sold out{% endif %}</b></div></div></div></div></div>
   </div>
 </section>
+
+<div class="tn-product-zoom" data-tn-zoom aria-hidden="true">
+  <button class="tn-product-zoom-close" type="button" data-tn-zoom-close aria-label="Close enlarged image">&times;</button>
+  <button class="tn-zoom-nav tn-zoom-prev" type="button" data-tn-zoom-prev aria-label="Previous enlarged image">‹</button>
+  <img src="" alt="" data-tn-zoom-img>
+  <button class="tn-zoom-nav tn-zoom-next" type="button" data-tn-zoom-next aria-label="Next enlarged image">›</button>
+</div>
+
+<script>
+  window.trailnestProductGallery = window.trailnestProductGallery || function(root) {
+    var mainButton = root.querySelector('[data-tn-main-image]');
+    var mainImg = root.querySelector('[data-tn-main-img]');
+    var thumbs = Array.prototype.slice.call(root.querySelectorAll('[data-tn-thumb]'));
+    var prev = root.querySelector('[data-tn-prev]');
+    var next = root.querySelector('[data-tn-next]');
+    var count = root.querySelector('[data-tn-count]');
+    var zoom = document.querySelector('[data-tn-zoom]');
+    var zoomImg = document.querySelector('[data-tn-zoom-img]');
+    var zoomClose = document.querySelector('[data-tn-zoom-close]');
+    var zoomPrev = document.querySelector('[data-tn-zoom-prev]');
+    var zoomNext = document.querySelector('[data-tn-zoom-next]');
+    var activeIndex = Math.max(0, thumbs.findIndex(function(thumb) { return thumb.getAttribute('aria-current') === 'true'; }));
+    if (!mainButton || !mainImg || !thumbs.length || !zoom || !zoomImg || !zoomClose) return;
+    function show(index) {
+      activeIndex = (index + thumbs.length) % thumbs.length;
+      var thumb = thumbs[activeIndex];
+      mainImg.src = thumb.dataset.fullSrc;
+      mainImg.dataset.zoomSrc = thumb.dataset.zoomSrc;
+      mainImg.alt = thumb.dataset.alt || '';
+      mainButton.setAttribute('aria-label', 'Open ' + (thumb.dataset.alt || 'product image'));
+      thumbs.forEach(function(t, i) { t.setAttribute('aria-current', i === activeIndex ? 'true' : 'false'); });
+      if (count) count.textContent = (activeIndex + 1) + ' / ' + thumbs.length;
+      if (zoom.classList.contains('is-open')) { zoomImg.src = thumb.dataset.zoomSrc || thumb.dataset.fullSrc; zoomImg.alt = thumb.dataset.alt || ''; }
+    }
+    thumbs.forEach(function(thumb, index) { thumb.addEventListener('click', function() { show(index); }); });
+    if (prev) prev.addEventListener('click', function() { show(activeIndex - 1); });
+    if (next) next.addEventListener('click', function() { show(activeIndex + 1); });
+    function openZoom() { var thumb = thumbs[activeIndex]; zoomImg.src = thumb.dataset.zoomSrc || mainImg.src; zoomImg.alt = mainImg.alt || ''; zoom.classList.add('is-open'); zoom.setAttribute('aria-hidden','false'); document.documentElement.style.overflow = 'hidden'; zoomClose.focus(); }
+    function closeZoom() { zoom.classList.remove('is-open'); zoom.setAttribute('aria-hidden','true'); zoomImg.src = ''; document.documentElement.style.overflow = ''; mainButton.focus(); }
+    mainButton.addEventListener('click', openZoom);
+    zoomClose.addEventListener('click', closeZoom);
+    if (zoomPrev) zoomPrev.addEventListener('click', function(e) { e.stopPropagation(); show(activeIndex - 1); });
+    if (zoomNext) zoomNext.addEventListener('click', function(e) { e.stopPropagation(); show(activeIndex + 1); });
+    zoom.addEventListener('click', function(event) { if (event.target === zoom) closeZoom(); });
+    document.addEventListener('keydown', function(event) { if (event.key === 'Escape' && zoom.classList.contains('is-open')) closeZoom(); if (event.key === 'ArrowLeft' && zoom.classList.contains('is-open')) show(activeIndex - 1); if (event.key === 'ArrowRight' && zoom.classList.contains('is-open')) show(activeIndex + 1); });
+    show(activeIndex);
+  };
+  document.querySelectorAll('[data-tn-gallery-root]').forEach(window.trailnestProductGallery);
+</script>
