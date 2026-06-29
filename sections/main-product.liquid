@@ -13,12 +13,12 @@
   .tn-product-wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
   .tn-product-hero { display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(360px, .94fr); gap: 48px; align-items: start; padding: 72px 0 64px; }
   .tn-product-gallery { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; align-items: start; }
-  .tn-product-thumbs { max-height: 640px; display: grid; gap: 10px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
+  .tn-product-thumbs { max-height: clamp(430px, 37vw, 540px); display: grid; align-content: start; gap: 10px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
   .tn-product-thumb-button { overflow: hidden; display: block; width: 100%; padding: 0; border: 2px solid transparent; border-radius: 6px; background: #fff; cursor: pointer; }
   .tn-product-thumb-button[aria-current="true"] { border-color: var(--tn-gold); }
   .tn-product-thumb-button:focus-visible { outline: 3px solid var(--tn-forest); outline-offset: 2px; }
   .tn-product-thumb-button img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
-  .tn-product-stage { display: grid; gap: 12px; }
+  .tn-product-stage { position: relative; display: block; align-self: start; }
   .tn-product-main-wrap { position: relative; }
   .tn-product-main-image { position: relative; overflow: hidden; display: block; width: 100%; padding: 0; border: 1px solid rgba(32,38,31,.08); border-radius: 8px; background: #fff; box-shadow: 0 22px 54px rgba(31,38,31,.08); cursor: zoom-in; }
   .tn-product-main-image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -29,7 +29,7 @@
   .tn-gallery-nav:focus-visible { outline: 3px solid var(--tn-gold); outline-offset: 2px; }
   .tn-gallery-prev { left: 12px; }
   .tn-gallery-next { right: 12px; }
-  .tn-gallery-count { justify-self: center; min-height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: rgba(24,36,24,.08); color: var(--tn-muted); font-size: 12px; font-weight: 900; }
+  .tn-gallery-count { position: absolute; top: 12px; left: 50%; z-index: 3; min-height: 28px; display: inline-flex; align-items: center; transform: translateX(-50%); padding: 0 10px; border-radius: 999px; background: rgba(255,255,255,.86); color: var(--tn-forest); font-size: 12px; font-weight: 900; box-shadow: 0 8px 20px rgba(31,38,31,.12); pointer-events: none; }
   .tn-product-zoom { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 28px; background: rgba(15,20,15,.9); }
   .tn-product-zoom.is-open { display: flex; }
   .tn-product-zoom img { display: block; max-width: min(1180px, 94vw); max-height: 88vh; object-fit: contain; border-radius: 8px; background: #fff; box-shadow: 0 24px 80px rgba(0,0,0,.38); }
@@ -67,7 +67,7 @@
   .tn-product-spec span { color: var(--tn-muted); font-weight: 800; }
   .tn-product-spec b { text-align: right; }
   @media (max-width: 960px) { .tn-product-hero, .tn-product-body-grid { grid-template-columns: 1fr; } .tn-product-info { position: static; } .tn-product-title { font-size: 38px; } }
-  @media (max-width: 720px) { .tn-product-gallery { grid-template-columns: 1fr; } .tn-product-thumbs { order: 2; max-height: none; display: flex; overflow-x: auto; padding: 2px 0 8px; } .tn-product-thumb-button { width: 78px; flex: 0 0 78px; } }
+  @media (max-width: 720px) { .tn-product-gallery { grid-template-columns: 1fr; } .tn-product-stage { order: 1; } .tn-product-thumbs { order: 2; max-height: none; display: flex; overflow-x: auto; overflow-y: hidden; padding: 2px 0 8px; } .tn-product-thumb-button { width: 78px; flex: 0 0 78px; } }
   @media (max-width: 620px) { .tn-product-wrap { width: min(100% - 24px, 1200px); } .tn-product-hero { padding: 38px 0 46px; gap: 24px; } .tn-product-info { padding: 22px; } .tn-product-title { font-size: 31px; } .tn-product-summary { font-size: 15px; } .tn-product-row { grid-template-columns: 1fr; } .tn-product-price-value { font-size: 30px; } .tn-product-panel { padding: 22px; } .tn-product-body { padding-bottom: 58px; } .tn-gallery-nav { width: 38px; height: 38px; } .tn-product-zoom { padding: 16px; } .tn-zoom-nav { width: 42px; height: 42px; } }
 </style>
 
