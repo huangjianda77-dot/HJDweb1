@@ -239,12 +239,15 @@
         }, []);
       }
       if (!indexes.length && /olive/i.test(variant.title || '')) {
-        indexes = thumbs.reduce(function(acc, thumb, index) { if (isOliveMedia(thumb)) acc.push(index); return acc; }, []);
+        var firstOliveIndex = thumbs.findIndex(isOliveMedia);
+        if (firstOliveIndex >= 0) indexes = [firstOliveIndex];
       }
       if (!indexes.length && /beige/i.test(variant.title || '')) {
-        indexes = thumbs.reduce(function(acc, thumb, index) { if (!isOliveMedia(thumb)) acc.push(index); return acc; }, []);
+        var firstBeigeIndex = thumbs.findIndex(function(thumb) { return !isOliveMedia(thumb); });
+        if (firstBeigeIndex >= 0) indexes = [firstBeigeIndex];
       }
-      return indexes.length ? indexes : thumbs.map(function(_, index) { return index; });
+      if (!indexes.length) indexes = thumbs.map(function(_, index) { return index; });
+      return indexes.slice(0, 1);
     }
     function syncVariantThumbs() {
       var indexes = variantImageIndexes(activeVariant);
