@@ -16,6 +16,7 @@
   .tn-product-thumbs { position: absolute; left: 0; top: 0; bottom: 0; width: 92px; display: grid; align-content: start; gap: 10px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
   .tn-product-thumb-button { overflow: hidden; display: block; width: 100%; padding: 0; border: 2px solid transparent; border-radius: 6px; background: #fff; cursor: pointer; }
   .tn-product-thumb-button[aria-current="true"] { border-color: var(--tn-gold); }
+  .tn-product-thumb-button[hidden] { display: none; }
   .tn-product-thumb-button:focus-visible { outline: 3px solid var(--tn-forest); outline-offset: 2px; }
   .tn-product-thumb-button img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
   .tn-product-stage { position: relative; display: block; align-self: start; }
@@ -245,6 +246,18 @@
       }
       return indexes.length ? indexes : thumbs.map(function(_, index) { return index; });
     }
+    function syncVariantThumbs() {
+      var indexes = variantImageIndexes(activeVariant);
+      thumbs.forEach(function(thumb, index) {
+        if (activeVariant && indexes.indexOf(index) < 0) {
+          thumb.hidden = true;
+          thumb.setAttribute('aria-hidden', 'true');
+        } else {
+          thumb.hidden = false;
+          thumb.removeAttribute('aria-hidden');
+        }
+      });
+    }
     function scopedShow(direction) {
       var indexes = variantImageIndexes(activeVariant);
       var currentPosition = indexes.indexOf(activeIndex);
@@ -258,6 +271,7 @@
       mainImg.dataset.zoomSrc = thumb.dataset.zoomSrc;
       mainImg.alt = thumb.dataset.alt || '';
       mainButton.setAttribute('aria-label', 'Open ' + (thumb.dataset.alt || 'product image'));
+      syncVariantThumbs();
       thumbs.forEach(function(t, i) { t.setAttribute('aria-current', i === activeIndex ? 'true' : 'false'); });
       if (thumb.scrollIntoView) thumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
       if (count) count.textContent = (activeIndex + 1) + ' / ' + thumbs.length;
@@ -312,6 +326,7 @@
       if (availability) availability.textContent = variant.available ? 'In stock' : 'Sold out';
       if (addButton) { addButton.disabled = !variant.available; addButton.textContent = variant.available ? 'Add to cart' : 'Sold out'; }
       activeVariant = variant;
+      syncVariantThumbs();
       var indexes = variantImageIndexes(variant);
       show(indexes[0]);
     }
