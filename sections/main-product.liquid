@@ -52,16 +52,18 @@
   .tn-product-select { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .tn-product-qty { width: 100%; min-height: 48px; border: 1px solid var(--tn-line); border-radius: 4px; background: #fff; color: var(--tn-ink); padding: 0 12px; font-size: 15px; font-weight: 800; }
   .tn-variant-fieldset { margin: 0; padding: 0; border: 0; }
-  .tn-variant-label { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; color: var(--tn-muted); font-size: 11px; font-weight: 950; letter-spacing: .12em; text-transform: uppercase; }
-  .tn-variant-label strong { color: var(--tn-ink); font-size: 13px; letter-spacing: 0; text-transform: none; }
+  .tn-variant-label { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: var(--tn-muted); font-size: 13px; font-weight: 900; letter-spacing: 0; text-transform: none; }
+  .tn-variant-label span { color: var(--tn-ink); font-size: 18px; font-weight: 950; }
+  .tn-variant-label strong { color: var(--tn-muted); font-size: 13px; letter-spacing: 0; text-transform: none; }
   .tn-variant-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .tn-variant-card { position: relative; min-height: 94px; padding: 14px; border: 1px solid var(--tn-line); border-radius: 8px; background: #fff; color: var(--tn-ink); text-align: left; cursor: pointer; box-shadow: 0 10px 24px rgba(31,38,31,.04); transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
-  .tn-variant-card:hover { border-color: rgba(216,181,109,.75); box-shadow: 0 14px 30px rgba(31,38,31,.08); transform: translateY(-1px); }
-  .tn-variant-card[aria-pressed="true"] { border-color: var(--tn-gold); box-shadow: 0 0 0 2px rgba(216,181,109,.28), 0 14px 30px rgba(31,38,31,.08); }
+  .tn-variant-card { position: relative; min-height: 104px; padding: 16px; border: 2px solid rgba(32,38,31,.18); border-radius: 10px; background: #fff; color: var(--tn-ink); text-align: left; cursor: pointer; box-shadow: 0 10px 24px rgba(31,38,31,.04); transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
+  .tn-variant-card:hover { border-color: rgba(216,181,109,.9); box-shadow: 0 14px 30px rgba(31,38,31,.08); transform: translateY(-1px); }
+  .tn-variant-card[aria-pressed="true"] { border-color: var(--tn-forest); box-shadow: 0 0 0 3px rgba(216,181,109,.42), 0 14px 30px rgba(31,38,31,.08); }
+  .tn-variant-card[aria-pressed="true"]::after { content: "Selected"; position: absolute; top: 12px; right: 14px; color: var(--tn-forest); font-size: 11px; font-weight: 950; }
   .tn-variant-card[disabled] { opacity: .48; cursor: not-allowed; transform: none; }
   .tn-variant-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .tn-variant-name { font-size: 15px; font-weight: 950; line-height: 1.2; }
-  .tn-variant-dot { width: 18px; height: 18px; flex: 0 0 18px; border: 1px solid rgba(32,38,31,.18); border-radius: 50%; background: var(--variant-color, #e8d8bf); box-shadow: inset 0 0 0 3px #fff; }
+  .tn-variant-dot { width: 24px; height: 24px; flex: 0 0 24px; border: 1px solid rgba(32,38,31,.18); border-radius: 50%; background: var(--variant-color, #e8d8bf); box-shadow: inset 0 0 0 4px #fff; }
   .tn-variant-meta { display: grid; gap: 4px; margin-top: 12px; color: var(--tn-muted); font-size: 12px; font-weight: 800; line-height: 1.35; }
   .tn-variant-meta b { color: var(--tn-ink); font-weight: 950; }
   .tn-variant-status { color: #446044; }
@@ -84,7 +86,7 @@
   .tn-product-spec b { text-align: right; }
   @media (max-width: 960px) { .tn-product-hero, .tn-product-body-grid { grid-template-columns: 1fr; } .tn-product-info { position: static; } .tn-product-title { font-size: 38px; } }
   @media (max-width: 720px) { .tn-product-gallery { display: grid; grid-template-columns: 1fr; padding-left: 0; } .tn-product-stage { order: 1; } .tn-product-thumbs { position: static; order: 2; width: auto; max-height: none; display: flex; gap: 12px; overflow-x: auto; overflow-y: hidden; padding: 2px 0 8px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; } .tn-product-thumb-button { width: 78px; flex: 0 0 78px; scroll-snap-align: start; } }
-  @media (max-width: 620px) { .tn-product-wrap { width: min(100% - 24px, 1200px); } .tn-product-hero { padding: 38px 0 46px; gap: 24px; } .tn-product-info { display: flex; flex-direction: column; padding: 22px; } .tn-product-kicker { order: 1; } .tn-product-title { order: 2; font-size: 31px; } .tn-product-summary { order: 3; font-size: 15px; } .tn-product-price { order: 4; margin-top: 18px; padding-top: 18px; } .tn-product-form { order: 5; } .tn-product-stock { order: 6; } .tn-product-points { order: 7; margin: 18px 0 0; padding-top: 18px; border-top: 1px solid var(--tn-line); } .tn-variant-grid { grid-template-columns: 1fr; } .tn-product-row { grid-template-columns: 1fr; } .tn-product-price-value { font-size: 30px; } .tn-product-panel { padding: 22px; } .tn-product-body { padding-bottom: 58px; } .tn-gallery-nav { width: 38px; height: 38px; } .tn-product-zoom { padding: 16px; } .tn-zoom-nav { width: 42px; height: 42px; } }
+  @media (max-width: 620px) { .tn-product-wrap { width: min(100% - 24px, 1200px); } .tn-product-hero { padding: 38px 0 46px; gap: 24px; } .tn-product-info { display: flex; flex-direction: column; padding: 22px; } .tn-product-kicker { order: 1; } .tn-product-title { order: 2; font-size: 31px; } .tn-product-summary { order: 3; font-size: 15px; } .tn-product-price { order: 4; margin-top: 18px; padding-top: 18px; } .tn-product-form { order: 5; } .tn-product-stock { order: 6; } .tn-product-points { order: 7; margin: 18px 0 0; padding-top: 18px; border-top: 1px solid var(--tn-line); } .tn-variant-fieldset { margin-top: 4px; } .tn-variant-label { display: grid; gap: 3px; margin-bottom: 14px; } .tn-variant-label span { font-size: 22px; line-height: 1.15; } .tn-variant-grid { grid-template-columns: 1fr; gap: 12px; } .tn-variant-card { min-height: 112px; border-radius: 12px; } .tn-product-row { grid-template-columns: 1fr; } .tn-product-price-value { font-size: 30px; } .tn-product-panel { padding: 22px; } .tn-product-body { padding-bottom: 58px; } .tn-gallery-nav { width: 38px; height: 38px; } .tn-product-zoom { padding: 16px; } .tn-zoom-nav { width: 42px; height: 42px; } }
 </style>
 
 <section class="tn-product" data-tn-gallery-root>
@@ -130,7 +132,7 @@
         {% form 'product', product, class: 'tn-product-form' %}
           {% unless product.has_only_default_variant %}
             <fieldset class="tn-variant-fieldset" aria-label="Choose color">
-              <div class="tn-variant-label">Color <strong data-tn-selected-option>{{ product.selected_or_first_available_variant.title }}</strong></div>
+              <div class="tn-variant-label"><span>Color. Pick your favorite.</span><strong>Selected: <b data-tn-selected-option>{{ product.selected_or_first_available_variant.title }}</b></strong></div>
               <div class="tn-variant-grid">
                 {% for variant in product.variants %}
                   {% assign variant_color = '#e8d8bf' %}
@@ -274,8 +276,18 @@
     function chooseVariant(variantId) {
       var variant = variants.find(function(item) { return String(item.id) === String(variantId); });
       if (!variant) return;
-      if (variantSelect) variantSelect.value = variant.id;
+      if (variantSelect) {
+        variantSelect.value = variant.id;
+        variantSelect.dispatchEvent(new Event('input', { bubbles: true }));
+      }
       variantCards.forEach(function(card) { card.setAttribute('aria-pressed', String(card.dataset.variantId) === String(variant.id) ? 'true' : 'false'); });
+      var selectedCard = variantCards.find(function(card) { return String(card.dataset.variantId) === String(variant.id); });
+      if (selectedCard && selectedCard.scrollIntoView) selectedCard.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+      if (window.history && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('variant', variant.id);
+        window.history.replaceState({}, '', url.toString());
+      }
       if (selectedOption) selectedOption.textContent = variant.title || '';
       if (price) price.textContent = variant.price || '';
       if (stock) stock.textContent = stockText(variant);
@@ -301,6 +313,7 @@
   };
   document.querySelectorAll('[data-tn-gallery-root]').forEach(window.trailnestProductGallery);
 </script>
+
 
 
 
