@@ -152,7 +152,7 @@
                   {% if variant_title_downcase contains 'olive' %}{% assign variant_color = '#808769' %}{% endif %}
                   <button class="tn-variant-card" type="button" data-tn-variant-card data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}" {% unless variant.available %}disabled{% endunless %}>
                     <span class="tn-variant-top"><span class="tn-variant-name">{{ variant.title }}</span><span class="tn-variant-dot" style="--variant-color: {{ variant_color }}"></span></span>
-                    <span class="tn-variant-meta"><span>SKU <b>{{ variant.sku | default: 'TrailNest' }}</b></span><span>{{ variant.price | money }}</span><span class="tn-variant-status">{% if variant.available %}In stock{% if variant.inventory_management %}: {{ variant.inventory_quantity }}{% endif %}{% else %}Sold out{% endif %}</span></span>
+                    <span class="tn-variant-meta"><span>SKU <b>{{ variant.sku | default: 'TrailNest' }}</b></span><span>{{ variant.price | money }}</span></span>
                   </button>
                 {% endfor %}
               </div>
