@@ -165,6 +165,7 @@
       "available": {{ variant.available | json }},
       "inventoryQuantity": {{ variant.inventory_quantity | json }},
       "inventoryManaged": {{ variant.inventory_management | json }},
+      "mediaIds": [{% for media in variant.media %}{{ media.id | json }}{% unless forloop.last %},{% endunless %}{% endfor %}],
       "featuredMediaId": {% if variant.featured_media %}{{ variant.featured_media.id | json }}{% else %}null{% endif %}
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
@@ -203,7 +204,35 @@
     var availability = root.querySelector('[data-tn-availability]');
     var addButton = root.querySelector('[data-tn-add]');
     var activeIndex = Math.max(0, thumbs.findIndex(function(thumb) { return thumb.getAttribute('aria-current') === 'true'; }));
+    var activeVariant = null;
     if (!mainButton || !mainImg || !thumbs.length || !zoom || !zoomImg || !zoomClose) return;
+    function isOliveMedia(thumb) {
+      return /olive/i.test(thumb.dataset.alt || '');
+    }
+    function variantImageIndexes(variant) {
+      if (!variant) return thumbs.map(function(_, index) { return index; });
+      var mediaIds = Array.isArray(variant.mediaIds) ? variant.mediaIds.map(String) : [];
+      var indexes = [];
+      if (mediaIds.length) {
+        indexes = thumbs.reduce(function(acc, thumb, index) {
+          if (mediaIds.indexOf(String(thumb.dataset.mediaId)) >= 0) acc.push(index);
+          return acc;
+        }, []);
+      }
+      if (!indexes.length && /olive/i.test(variant.title || '')) {
+        indexes = thumbs.reduce(function(acc, thumb, index) { if (isOliveMedia(thumb)) acc.push(index); return acc; }, []);
+      }
+      if (!indexes.length && /beige/i.test(variant.title || '')) {
+        indexes = thumbs.reduce(function(acc, thumb, index) { if (!isOliveMedia(thumb)) acc.push(index); return acc; }, []);
+      }
+      return indexes.length ? indexes : thumbs.map(function(_, index) { return index; });
+    }
+    function scopedShow(direction) {
+      var indexes = variantImageIndexes(activeVariant);
+      var currentPosition = indexes.indexOf(activeIndex);
+      if (currentPosition < 0) currentPosition = 0;
+      show(indexes[(currentPosition + direction + indexes.length) % indexes.length]);
+    }
     function show(index) {
       activeIndex = (index + thumbs.length) % thumbs.length;
       var thumb = thumbs[activeIndex];
@@ -217,8 +246,8 @@
       if (zoom.classList.contains('is-open')) { zoomImg.src = thumb.dataset.zoomSrc || thumb.dataset.fullSrc; zoomImg.alt = thumb.dataset.alt || ''; }
     }
     thumbs.forEach(function(thumb, index) { thumb.addEventListener('click', function() { show(index); }); });
-    if (prev) prev.addEventListener('click', function() { show(activeIndex - 1); });
-    if (next) next.addEventListener('click', function() { show(activeIndex + 1); });
+    if (prev) prev.addEventListener('click', function() { scopedShow(-1); });
+    if (next) next.addEventListener('click', function() { scopedShow(1); });
     var touchStartX = 0;
     var touchStartY = 0;
     var touchStartedAt = 0;
@@ -236,7 +265,7 @@
       if (!isHorizontalSwipe) return;
       if (Date.now() - touchStartedAt > 900) return;
       event.preventDefault();
-      show(dx < 0 ? activeIndex + 1 : activeIndex - 1);
+      scopedShow(dx < 0 ? 1 : -1);
     }, { passive: false });
     function stockText(variant) {
       if (!variant || !variant.available) return 'Currently unavailable';
@@ -253,26 +282,25 @@
       if (sku) sku.textContent = variant.sku || 'TrailNest Tent';
       if (availability) availability.textContent = variant.available ? 'In stock' : 'Sold out';
       if (addButton) { addButton.disabled = !variant.available; addButton.textContent = variant.available ? 'Add to cart' : 'Sold out'; }
-      if (variant.featuredMediaId) {
-        var mediaIndex = thumbs.findIndex(function(thumb) { return String(thumb.dataset.mediaId) === String(variant.featuredMediaId); });
-        if (mediaIndex >= 0) show(mediaIndex);
-      } else if (/beige/i.test(variant.title || '')) {
-        show(0);
-      }
+      activeVariant = variant;
+      var indexes = variantImageIndexes(variant);
+      show(indexes[0]);
     }
     variantCards.forEach(function(card) { card.addEventListener('click', function() { chooseVariant(card.dataset.variantId); }); });
     if (variantSelect) variantSelect.addEventListener('change', function() { chooseVariant(variantSelect.value); });
+    if (variantSelect && variantSelect.value) chooseVariant(variantSelect.value);
     function openZoom() { var thumb = thumbs[activeIndex]; zoomImg.src = thumb.dataset.zoomSrc || mainImg.src; zoomImg.alt = mainImg.alt || ''; zoom.classList.add('is-open'); zoom.setAttribute('aria-hidden','false'); document.documentElement.style.overflow = 'hidden'; zoomClose.focus(); }
     function closeZoom() { zoom.classList.remove('is-open'); zoom.setAttribute('aria-hidden','true'); zoomImg.src = ''; document.documentElement.style.overflow = ''; mainButton.focus(); }
     mainButton.addEventListener('click', openZoom);
     zoomClose.addEventListener('click', closeZoom);
-    if (zoomPrev) zoomPrev.addEventListener('click', function(e) { e.stopPropagation(); show(activeIndex - 1); });
-    if (zoomNext) zoomNext.addEventListener('click', function(e) { e.stopPropagation(); show(activeIndex + 1); });
+    if (zoomPrev) zoomPrev.addEventListener('click', function(e) { e.stopPropagation(); scopedShow(-1); });
+    if (zoomNext) zoomNext.addEventListener('click', function(e) { e.stopPropagation(); scopedShow(1); });
     zoom.addEventListener('click', function(event) { if (event.target === zoom) closeZoom(); });
-    document.addEventListener('keydown', function(event) { if (event.key === 'Escape' && zoom.classList.contains('is-open')) closeZoom(); if (event.key === 'ArrowLeft' && zoom.classList.contains('is-open')) show(activeIndex - 1); if (event.key === 'ArrowRight' && zoom.classList.contains('is-open')) show(activeIndex + 1); });
+    document.addEventListener('keydown', function(event) { if (event.key === 'Escape' && zoom.classList.contains('is-open')) closeZoom(); if (event.key === 'ArrowLeft' && zoom.classList.contains('is-open')) scopedShow(-1); if (event.key === 'ArrowRight' && zoom.classList.contains('is-open')) scopedShow(1); });
     show(activeIndex);
   };
   document.querySelectorAll('[data-tn-gallery-root]').forEach(window.trailnestProductGallery);
 </script>
+
 
 
