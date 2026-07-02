@@ -48,10 +48,7 @@
   .tn-buy-back:focus-visible { outline: 3px solid var(--tn-gold); outline-offset: 3px; }
   .tn-buy-mobile-header { display: none; }
   .tn-buy-mobile-title { margin: 0; font-size: 28px; line-height: 1.08; font-weight: 950; letter-spacing: 0; }
-  .tn-buy-mobile-price { margin: 8px 0 0; color: var(--tn-muted); font-size: 15px; line-height: 1.35; font-weight: 850; }
-  .tn-buy-service-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 18px; border-top: 1px solid var(--tn-line); border-bottom: 1px solid var(--tn-line); background: rgba(255,255,255,.82); }
-  .tn-buy-service-strip span { min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--tn-ink); font-size: 13px; font-weight: 850; text-align: center; }
-  .tn-buy-service-strip span + span { border-left: 1px solid var(--tn-line); }
+  .tn-buy-mobile-price, .tn-buy-service-strip { display: none; }
   .tn-product-points { display: grid; gap: 12px; margin: 28px 0; padding: 0; list-style: none; }
   .tn-product-points li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; color: var(--tn-ink); font-weight: 850; line-height: 1.45; }
   .tn-product-points li::before { content: ""; width: 22px; height: 22px; border-radius: 50%; background: var(--tn-gold); box-shadow: inset 0 0 0 7px rgba(24,36,24,.12); }
@@ -104,8 +101,6 @@
     <div class="tn-product-hero">
       <div class="tn-buy-mobile-header" data-tn-buy-screen-header>
         <h2 class="tn-buy-mobile-title">{{ product.title }}</h2>
-        <p class="tn-buy-mobile-price">From <span data-tn-buy-header-price>{{ product.selected_or_first_available_variant.price | money }}</span></p>
-        <div class="tn-buy-service-strip" aria-label="Shopping benefits"><span>Fast order setup</span><span>Free shipping</span></div>
       </div>
       <div class="tn-product-gallery">
         <div class="tn-product-thumbs" aria-label="Product images">
