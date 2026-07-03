@@ -250,11 +250,21 @@
       if (!indexes.length) indexes = thumbs.map(function(_, index) { return index; });
       return indexes.slice(0, 1);
     }
+    function allImageIndexes() {
+      return thumbs.map(function(_, index) { return index; });
+    }
+    function isBuyMode() {
+      return root.classList.contains('tn-buy-mode');
+    }
+    function activeGalleryIndexes() {
+      return isBuyMode() && activeVariant ? variantImageIndexes(activeVariant) : allImageIndexes();
+    }
     function syncVariantThumbs() {
-      var indexes = variantImageIndexes(activeVariant);
-      root.classList.toggle('tn-single-sku-image', activeVariant && indexes.length <= 1);
+      var indexes = activeGalleryIndexes();
+      var shouldFilter = isBuyMode() && activeVariant;
+      root.classList.toggle('tn-single-sku-image', shouldFilter && indexes.length <= 1);
       thumbs.forEach(function(thumb, index) {
-        var shouldHide = activeVariant && indexes.indexOf(index) < 0;
+        var shouldHide = shouldFilter && indexes.indexOf(index) < 0;
         thumb.hidden = shouldHide;
         thumb.classList.toggle('is-hidden', shouldHide);
         if (shouldHide) {
@@ -265,7 +275,7 @@
       });
     }
     function scopedShow(direction) {
-      var indexes = variantImageIndexes(activeVariant);
+      var indexes = activeGalleryIndexes();
       var currentPosition = indexes.indexOf(activeIndex);
       if (currentPosition < 0) currentPosition = 0;
       show(indexes[(currentPosition + direction + indexes.length) % indexes.length]);
@@ -333,14 +343,24 @@
       if (addButton) { addButton.disabled = !variant.available; addButton.textContent = variant.available ? 'Add to cart' : 'Sold out'; }
       activeVariant = variant;
       syncVariantThumbs();
-      var indexes = variantImageIndexes(variant);
-      show(indexes[0]);
+      var indexes = activeGalleryIndexes();
+      if (isBuyMode()) {
+        show(indexes[0]);
+      } else {
+        show(activeIndex);
+      }
     }
     variantCards.forEach(function(card) { card.addEventListener('click', function() { chooseVariant(card.dataset.variantId); }); });
     if (variantSelect) variantSelect.addEventListener('change', function() { chooseVariant(variantSelect.value); });
     if (variantSelect && variantSelect.value) chooseVariant(variantSelect.value);
     function setBuyMode(enabled, shouldScroll) {
       root.classList.toggle('tn-buy-mode', enabled);
+      var indexes = activeGalleryIndexes();
+      if (enabled && indexes.indexOf(activeIndex) < 0) {
+        show(indexes[0]);
+      } else {
+        show(activeIndex);
+      }
       if (shouldScroll) {
         var target = root;
         if (target && target.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -378,7 +398,6 @@
   };
   document.querySelectorAll('[data-tn-gallery-root]').forEach(window.trailnestProductGallery);
 </script>
-
 
 
 
