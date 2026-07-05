@@ -84,6 +84,13 @@
   .tn-product-trust { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
   .tn-product-trust span { min-height: 34px; display: inline-flex; align-items: center; gap: 8px; padding: 0 10px; border: 1px solid rgba(32,38,31,.1); border-radius: 999px; background: rgba(255,255,255,.72); color: var(--tn-muted); font-size: 12px; font-weight: 900; }
   .tn-product-trust span::before { content: ""; width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: var(--tn-gold); box-shadow: 0 0 0 4px rgba(216,181,109,.18); }
+  .tn-buy-clarity { display: grid; gap: 10px; margin-top: 14px; padding: 16px; border: 1px solid rgba(32,38,31,.12); border-radius: 8px; background: rgba(255,248,234,.62); }
+  .tn-buy-clarity-title { margin: 0; color: var(--tn-ink); font-size: 13px; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; }
+  .tn-buy-clarity-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; margin: 0; padding: 0; list-style: none; }
+  .tn-buy-clarity-grid li { display: grid; gap: 2px; min-width: 0; }
+  .tn-buy-clarity-grid span { color: var(--tn-muted); font-size: 11px; font-weight: 900; text-transform: uppercase; }
+  .tn-buy-clarity-grid b { color: var(--tn-ink); font-size: 13px; line-height: 1.32; font-weight: 950; }
+  .tn-sticky-buy { display: none; }
   .tn-product-body { padding: 10px 0 86px; }
   .tn-product-body-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 24px; align-items: start; }
   .tn-product-panel { padding: 28px; border: 1px solid var(--tn-line); border-radius: 8px; background: #fff; }
@@ -117,7 +124,7 @@
   @media (max-width: 960px) { .tn-product-hero, .tn-product-body-grid { grid-template-columns: 1fr; } .tn-product-info { position: static; } .tn-product-title { font-size: 38px; } }
   @media (max-width: 760px) { .tn-product-proof-grid { grid-template-columns: 1fr; } .tn-product-section-title { font-size: 30px; } }
   @media (max-width: 720px) { .tn-product-gallery { display: grid; grid-template-columns: 1fr; padding-left: 0; } .tn-product-stage { order: 1; } .tn-product-thumbs { position: static; order: 2; width: auto; max-height: none; display: flex; gap: 12px; overflow-x: auto; overflow-y: hidden; padding: 2px 0 8px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; } .tn-product-thumb-button { width: 78px; flex: 0 0 78px; scroll-snap-align: start; } }
-  @media (max-width: 620px) { .tn-product-wrap { width: min(100% - 24px, 1200px); } .tn-product-hero { padding: 30px 0 42px; gap: 22px; } .tn-product-info { display: flex; flex-direction: column; padding: 22px; } .tn-product-kicker { order: 1; } .tn-product-title { order: 2; font-size: 31px; } .tn-product-summary { order: 3; font-size: 15px; } .tn-product-buy-link { order: 4; display: inline-flex; } .tn-product-price { order: 5; margin-top: 18px; padding-top: 18px; } .tn-product-form { order: 6; } .tn-product-stock { order: 7; } .tn-product-trust { order: 8; grid-template-columns: 1fr; } .tn-product-points { order: 9; margin: 18px 0 0; padding-top: 18px; border-top: 1px solid var(--tn-line); } .tn-product:not(.tn-buy-mode) .tn-product-price, .tn-product:not(.tn-buy-mode) .tn-product-form, .tn-product:not(.tn-buy-mode) .tn-product-stock, .tn-product:not(.tn-buy-mode) .tn-product-trust { display: none; } .tn-product.tn-buy-mode { background: #fff; } .tn-product.tn-buy-mode .tn-product-wrap { width: 100%; } .tn-product.tn-buy-mode .tn-product-hero { display: flex; flex-direction: column; gap: 0; padding: 0 0 34px; } .tn-product.tn-buy-mode .tn-buy-mobile-header { order: 1; display: block; padding: 24px 20px 0; background: #fff; } .tn-product.tn-buy-mode .tn-product-gallery { order: 2; padding: 14px 16px 12px; background: #fff; } .tn-product.tn-buy-mode .tn-product-info { order: 3; width: calc(100% - 32px); margin: 0 auto; border: 0; border-radius: 0; background: #fff; box-shadow: none; padding: 6px 0 24px; } .tn-product.tn-buy-mode .tn-product-body { display: none; } .tn-product.tn-buy-mode .tn-buy-back { display: inline-flex; order: 0; margin: 0 0 16px; } .tn-product.tn-buy-mode .tn-product-kicker, .tn-product.tn-buy-mode .tn-product-title, .tn-product.tn-buy-mode .tn-product-summary, .tn-product.tn-buy-mode .tn-product-buy-link, .tn-product.tn-buy-mode .tn-product-points, .tn-product.tn-buy-mode .tn-product-price { display: none; } .tn-product.tn-buy-mode .tn-product-form, .tn-product.tn-buy-mode .tn-product-stock, .tn-product.tn-buy-mode .tn-product-trust { display: grid; } .tn-product.tn-buy-mode .tn-product-form { margin-top: 0; } .tn-product.tn-buy-mode .tn-product-main-image { border-radius: 20px; background: #f7f7f6; box-shadow: none; } .tn-product.tn-buy-mode .tn-product-main-image img { aspect-ratio: 4 / 3; object-fit: contain; padding: 4px; transform: scale(1.08); transform-origin: center; } .tn-product.tn-buy-mode .tn-product-thumbs { justify-content: center; padding-top: 10px; padding-bottom: 0; } .tn-product.tn-buy-mode.tn-single-sku-image .tn-product-thumbs { display: none; } .tn-product.tn-buy-mode .tn-product-thumb-button { width: 9px; height: 9px; flex-basis: 9px; border-radius: 999px; border: 0; background: rgba(32,38,31,.34); } .tn-product.tn-buy-mode .tn-product-thumb-button[aria-current="true"] { background: var(--tn-ink); } .tn-product.tn-buy-mode .tn-product-thumb-button img { display: none; } .tn-product.tn-buy-mode .tn-product-zoom-hint { display: none; } .tn-product.tn-buy-mode .tn-gallery-nav { display: none; } .tn-product.tn-buy-mode .tn-gallery-count { display: none; } .tn-variant-fieldset { margin-top: 4px; } .tn-variant-label { display: grid; gap: 3px; margin-bottom: 12px; } .tn-variant-label span { font-size: 22px; line-height: 1.15; } .tn-variant-grid { grid-template-columns: 1fr; gap: 12px; } .tn-variant-card { min-height: 104px; border-radius: 18px; padding: 18px 20px; display: grid; grid-template-columns: minmax(118px, 1fr) minmax(154px, auto); align-items: center; column-gap: 14px; } .tn-variant-card[aria-pressed="true"]::after { content: ""; top: 14px; right: 14px; width: 10px; height: 10px; border-radius: 999px; background: var(--tn-forest); } .tn-variant-top { align-self: center; display: grid; grid-template-columns: minmax(0, 1fr) 32px; align-items: center; gap: 10px; } .tn-variant-name { font-size: 22px; line-height: 1.12; overflow-wrap: anywhere; } .tn-variant-dot { align-self: center; justify-self: end; width: 28px; height: 28px; flex-basis: 28px; } .tn-variant-meta { margin-top: 0; justify-self: end; max-width: 162px; text-align: right; font-size: 13px; line-height: 1.28; padding-right: 0; } .tn-variant-meta span { display: block; } .tn-variant-meta span:first-child { font-size: 11px; color: var(--tn-muted); overflow-wrap: anywhere; word-break: break-word; } .tn-variant-meta span:nth-child(2) { color: var(--tn-ink); font-size: 17px; font-weight: 950; } .tn-variant-status { font-size: 12px; } .tn-product-row { grid-template-columns: 1fr; } .tn-product-price-value { font-size: 30px; } .tn-product-panel { padding: 22px; } .tn-product-body { padding-bottom: 58px; } .tn-gallery-nav { width: 38px; height: 38px; } .tn-product-zoom { padding: 16px; } .tn-zoom-nav { width: 42px; height: 42px; } }
+  @media (max-width: 620px) { .tn-product-wrap { width: min(100% - 24px, 1200px); } .tn-product-hero { padding: 30px 0 42px; gap: 22px; } .tn-product-info { display: flex; flex-direction: column; padding: 22px; } .tn-product-kicker { order: 1; } .tn-product-title { order: 2; font-size: 31px; } .tn-product-summary { order: 3; font-size: 15px; } .tn-product-buy-link { order: 4; display: inline-flex; } .tn-product-price { order: 5; margin-top: 18px; padding-top: 18px; } .tn-product-form { order: 6; } .tn-product-stock { order: 7; } .tn-product-trust { order: 8; grid-template-columns: 1fr; } .tn-buy-clarity { order: 9; } .tn-product-points { order: 10; margin: 18px 0 0; padding-top: 18px; border-top: 1px solid var(--tn-line); } .tn-product:not(.tn-buy-mode) .tn-product-price, .tn-product:not(.tn-buy-mode) .tn-product-form, .tn-product:not(.tn-buy-mode) .tn-product-stock, .tn-product:not(.tn-buy-mode) .tn-product-trust, .tn-product:not(.tn-buy-mode) .tn-buy-clarity { display: none; } .tn-product.tn-buy-mode { background: #fff; } .tn-product.tn-buy-mode .tn-product-wrap { width: 100%; } .tn-product.tn-buy-mode .tn-product-hero { display: flex; flex-direction: column; gap: 0; padding: 0 0 34px; } .tn-product.tn-buy-mode .tn-buy-mobile-header { order: 1; display: block; padding: 24px 20px 0; background: #fff; } .tn-product.tn-buy-mode .tn-product-gallery { order: 2; padding: 14px 16px 12px; background: #fff; } .tn-product.tn-buy-mode .tn-product-info { order: 3; width: calc(100% - 32px); margin: 0 auto; border: 0; border-radius: 0; background: #fff; box-shadow: none; padding: 6px 0 24px; } .tn-product.tn-buy-mode .tn-product-body { display: none; } .tn-product.tn-buy-mode .tn-buy-back { display: inline-flex; order: 0; margin: 0 0 16px; } .tn-product.tn-buy-mode .tn-product-kicker, .tn-product.tn-buy-mode .tn-product-title, .tn-product.tn-buy-mode .tn-product-summary, .tn-product.tn-buy-mode .tn-product-buy-link, .tn-product.tn-buy-mode .tn-product-points, .tn-product.tn-buy-mode .tn-product-price { display: none; } .tn-product.tn-buy-mode .tn-product-form, .tn-product.tn-buy-mode .tn-product-stock, .tn-product.tn-buy-mode .tn-product-trust, .tn-product.tn-buy-mode .tn-buy-clarity { display: grid; } .tn-product.tn-buy-mode .tn-product-form { margin-top: 0; } .tn-product.tn-buy-mode .tn-product-main-image { border-radius: 20px; background: #f7f7f6; box-shadow: none; } .tn-product.tn-buy-mode .tn-product-main-image img { aspect-ratio: 4 / 3; object-fit: contain; padding: 4px; transform: scale(1.08); transform-origin: center; } .tn-product.tn-buy-mode .tn-product-thumbs { justify-content: center; padding-top: 10px; padding-bottom: 0; } .tn-product.tn-buy-mode.tn-single-sku-image .tn-product-thumbs { display: none; } .tn-product.tn-buy-mode .tn-product-thumb-button { width: 9px; height: 9px; flex-basis: 9px; border-radius: 999px; border: 0; background: rgba(32,38,31,.34); } .tn-product.tn-buy-mode .tn-product-thumb-button[aria-current="true"] { background: var(--tn-ink); } .tn-product.tn-buy-mode .tn-product-thumb-button img { display: none; } .tn-product.tn-buy-mode .tn-product-zoom-hint { display: none; } .tn-product.tn-buy-mode .tn-gallery-nav { display: none; } .tn-product.tn-buy-mode .tn-gallery-count { display: none; } .tn-variant-fieldset { margin-top: 4px; } .tn-variant-label { display: grid; gap: 3px; margin-bottom: 12px; } .tn-variant-label span { font-size: 22px; line-height: 1.15; } .tn-variant-grid { grid-template-columns: 1fr; gap: 12px; } .tn-variant-card { min-height: 104px; border-radius: 18px; padding: 18px 20px; display: grid; grid-template-columns: minmax(118px, 1fr) minmax(154px, auto); align-items: center; column-gap: 14px; } .tn-variant-card[aria-pressed="true"]::after { content: ""; top: 14px; right: 14px; width: 10px; height: 10px; border-radius: 999px; background: var(--tn-forest); } .tn-variant-top { align-self: center; display: grid; grid-template-columns: minmax(0, 1fr) 32px; align-items: center; gap: 10px; } .tn-variant-name { font-size: 22px; line-height: 1.12; overflow-wrap: anywhere; } .tn-variant-dot { align-self: center; justify-self: end; width: 28px; height: 28px; flex-basis: 28px; } .tn-variant-meta { margin-top: 0; justify-self: end; max-width: 162px; text-align: right; font-size: 13px; line-height: 1.28; padding-right: 0; } .tn-variant-meta span { display: block; } .tn-variant-meta span:first-child { font-size: 11px; color: var(--tn-muted); overflow-wrap: anywhere; word-break: break-word; } .tn-variant-meta span:nth-child(2) { color: var(--tn-ink); font-size: 17px; font-weight: 950; } .tn-variant-status { font-size: 12px; } .tn-product-row { grid-template-columns: 1fr; } .tn-product-price-value { font-size: 30px; } .tn-product-panel { padding: 22px; } .tn-product-body { padding-bottom: 88px; } .tn-sticky-buy { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50; min-height: 54px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px; padding: 8px 10px 8px 16px; border: 1px solid rgba(255,248,234,.28); border-radius: 999px; background: rgba(24,36,24,.96); color: var(--tn-paper); text-decoration: none; box-shadow: 0 14px 38px rgba(15,20,15,.28); } .tn-sticky-buy b { color: var(--tn-paper); font-size: 15px; font-weight: 950; } .tn-sticky-buy span { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: var(--tn-gold); color: var(--tn-forest); font-size: 13px; font-weight: 950; text-transform: uppercase; } .tn-product.tn-buy-mode .tn-sticky-buy { display: none; } .tn-gallery-nav { width: 38px; height: 38px; } .tn-product-zoom { padding: 16px; } .tn-zoom-nav { width: 42px; height: 42px; } }
 </style>
 
 <section class="tn-product" id="product-overview" data-tn-gallery-root>
@@ -161,9 +168,9 @@
         <a class="tn-buy-back" href="#product-overview" data-tn-close-buy>‹ Back to product</a>
         <p class="tn-product-kicker">TrailNest Inflatable Tent</p>
         <h1 class="tn-product-title">{{ product.title }}</h1>
-        <p class="tn-product-summary">A roomy inflatable cabin tent for family weekends, road trips, and relaxed glamping-style camping.</p>
+        <p class="tn-product-summary">A roomy inflatable cabin tent for family camping, faster setup, and weekend comfort. Pump, stakes, guy lines, and storage bag included.</p>
         <a class="tn-product-buy-link" href="#trailnest-buy" data-tn-open-buy>Buy</a>
-        <ul class="tn-product-points"><li>Spacious cabin-style interior for sleeping, gear, and longer stays</li><li>Inflatable air-beam structure designed for faster setup</li><li>Large window panels for airflow, daylight, and a more open feel</li><li>Includes pump, stakes, guy lines, and storage bag</li></ul>
+        <ul class="tn-product-points"><li>Fast inflatable setup</li><li>Roomy cabin-style interior</li><li>Pump and storage bag included</li><li>Built for family weekends and car camping</li></ul>
         <div class="tn-product-price"><span class="tn-product-price-label">Price</span><span class="tn-product-price-value" data-tn-price>{{ product.selected_or_first_available_variant.price | money }}</span></div>
         {% form 'product', product, class: 'tn-product-form' %}
           {% unless product.has_only_default_variant %}
@@ -188,9 +195,18 @@
         <p class="tn-product-stock" data-tn-stock>{% if product.selected_or_first_available_variant.available %}In stock{% if product.selected_or_first_available_variant.inventory_management %}: {{ product.selected_or_first_available_variant.inventory_quantity }} available{% endif %}{% else %}Currently unavailable{% endif %}</p>
         <div class="tn-product-trust" aria-label="Purchase confidence">
           <span>Secure checkout</span>
-          <span>USD pricing</span>
-          <span>Order reviewed before payment</span>
-          <span>In stock</span>
+          <span>Pump included</span>
+          <span>Shipping calculated at checkout</span>
+          <span>PayPal accepted at checkout</span>
+        </div>
+        <div class="tn-buy-clarity" aria-label="Key buying details">
+          <p class="tn-buy-clarity-title">Before you buy</p>
+          <ul class="tn-buy-clarity-grid">
+            <li><span>Setup</span><b>Inflatable air-beam structure</b></li>
+            <li><span>Included</span><b>Pump, stakes, guy lines, storage bag</b></li>
+            <li><span>Use case</span><b>Family weekends and car camping</b></li>
+            <li><span>Color pricing</span><b>Shown by selected variant</b></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -221,9 +237,12 @@
           <div class="tn-product-specs">
             <div class="tn-product-spec"><span>Brand</span><b>{{ product.vendor | default: 'TrailNest' }}</b></div>
             <div class="tn-product-spec"><span>Type</span><b>{{ product.type | default: 'Inflatable Tent' }}</b></div>
-            <div class="tn-product-spec"><span>Capacity</span><b>Family / group camping</b></div>
+            <div class="tn-product-spec"><span>Capacity</span><b>6-person camping tent</b></div>
             <div class="tn-product-spec"><span>Structure</span><b>Inflatable air-beam cabin tent</b></div>
             <div class="tn-product-spec"><span>Best for</span><b>Car camping, weekends, road trips</b></div>
+            <div class="tn-product-spec"><span>Setup</span><b>Inflatable setup with included pump</b></div>
+            <div class="tn-product-spec"><span>Interior feel</span><b>Cabin-style shape with more usable standing and gear space</b></div>
+            <div class="tn-product-spec"><span>Weather note</span><b>Designed for normal camping conditions; stake and guy out properly</b></div>
             <div class="tn-product-spec"><span>SKU</span><b data-tn-sku>{{ product.selected_or_first_available_variant.sku | default: 'TrailNest Tent' }}</b></div>
             <div class="tn-product-spec"><span>Availability</span><b data-tn-availability>{% if product.selected_or_first_available_variant.available %}In stock{% else %}Sold out{% endif %}</b></div>
           </div>
@@ -253,16 +272,19 @@
       <div class="tn-product-panel">
         <h2 class="tn-product-section-title">Questions before you check out?</h2>
         <div class="tn-product-faq">
+          <details><summary>How many people does it fit?</summary><p>TrailNest is a 6-person camping tent, best for family camping, weekend trips, and group car-camping setups.</p></details>
           <details><summary>How long does setup take?</summary><p>The inflatable air-beam structure is designed to make setup easier than traditional pole tents. Actual setup time depends on campsite conditions and how many people are helping.</p></details>
-          <details><summary>What is included?</summary><p>The tent setup includes the tent body, pump, stakes, guy lines, and a storage bag.</p></details>
+          <details><summary>Is the pump included?</summary><p>Yes. The tent setup includes the tent body, pump, stakes, guy lines, and a storage bag.</p></details>
           <details><summary>Is this best for backpacking or car camping?</summary><p>TrailNest is best for car camping, family weekends, road trips, backyard guest space, and glamping-style outdoor stays.</p></details>
           <details><summary>How roomy is it inside?</summary><p>The cabin-style shape is designed to provide more usable interior space for sleeping, gear, and longer campsite stays.</p></details>
-          <details><summary>Can it be used in rain?</summary><p>It is designed for normal outdoor camping conditions, but customers should always stake and guy out the tent properly and avoid severe weather.</p></details>
-          <details><summary>Can I review my order before payment?</summary><p>Yes. Cart and checkout show the selected color, quantity, subtotal, shipping, taxes, and payment details before final payment.</p></details>
+          <details><summary>Is it waterproof?</summary><p>TrailNest is designed for normal outdoor camping conditions. Always stake and guy out the tent properly, and avoid using any tent in severe weather.</p></details>
+          <details><summary>What are the packed dimensions?</summary><p>The tent includes a storage bag and is best suited for car camping, road trips, and campsite use rather than backpacking. For exact packed-size fit, check the latest product details before ordering.</p></details>
+          <details><summary>When will it ship?</summary><p>Shipping options, cost, and delivery timing are shown at checkout based on the selected destination.</p></details>
         </div>
       </div>
     </div>
   </div>
+  <a class="tn-sticky-buy" href="#trailnest-buy" data-tn-open-buy><b data-tn-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</b><span>Add to cart</span></a>
 </section>
 
 <script type="application/json" data-tn-variants-json>
@@ -311,6 +333,7 @@
     var selectedOption = root.querySelector('[data-tn-selected-option]');
     var price = root.querySelector('[data-tn-price]');
     var headerPrice = root.querySelector('[data-tn-buy-header-price]');
+    var stickyPrice = root.querySelector('[data-tn-sticky-price]');
     var stock = root.querySelector('[data-tn-stock]');
     var sku = root.querySelector('[data-tn-sku]');
     var availability = root.querySelector('[data-tn-availability]');
@@ -432,6 +455,7 @@
       if (selectedOption) selectedOption.textContent = variant.title || '';
       if (price) price.textContent = variant.price || '';
       if (headerPrice) headerPrice.textContent = variant.price || '';
+      if (stickyPrice) stickyPrice.textContent = variant.price || '';
       if (stock) stock.textContent = stockText(variant);
       if (sku) sku.textContent = variant.sku || 'TrailNest Tent';
       if (availability) availability.textContent = variant.available ? 'In stock' : 'Sold out';
@@ -493,4 +517,3 @@
   };
   document.querySelectorAll('[data-tn-gallery-root]').forEach(window.trailnestProductGallery);
 </script>
-
