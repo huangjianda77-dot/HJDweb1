@@ -182,6 +182,100 @@
     .tn-product-body { padding-top: 0; }
   }
 
+  /* TrailNest Taobao-inspired conversion layout v3 */
+  #shopify-section-{{ section.id }} { --tn-paper:#f7f2e8; --tn-cream:#fffdfa; --tn-ink:#1f211d; --tn-muted:#747064; --tn-line:#e6ded1; --tn-gold:#caa76a; --tn-clay:#a76543; --tn-charcoal:#2b2b27; --tn-copper:#b76a3f; }
+  .tn-product { background: linear-gradient(180deg, #fffdfa 0, var(--tn-paper) 100%); }
+  .tn-product-rating { display: none; }
+  .tn-variant-image { display: none; }
+  @media (min-width: 961px) {
+    .tn-product-wrap { width: min(1680px, calc(100% - 56px)); }
+    .tn-product-hero { grid-template-columns: minmax(720px, 1.1fr) minmax(520px, .9fr); gap: 34px; padding: 26px 0 70px; }
+    .tn-product-gallery { padding-left: 110px; }
+    .tn-product-thumbs { width: 92px; gap: 14px; }
+    .tn-product-thumb-button { border-radius: 5px; background: var(--tn-cream); }
+    .tn-product-thumb-button img { aspect-ratio: 1 / 1; }
+    .tn-product-main-image { border-color: var(--tn-line); border-radius: 6px; background: var(--tn-cream); box-shadow: none; }
+    .tn-product-main-image img { aspect-ratio: 1 / 1; object-fit: cover; }
+    .tn-product-zoom-hint { display: none; }
+    .tn-gallery-count { top: 18px; left: 50%; right: auto; transform: translateX(-50%); background: rgba(255,253,250,.92); }
+    .tn-gallery-nav { width: 52px; height: 52px; background: rgba(255,253,250,.88); color: var(--tn-ink); box-shadow: none; }
+    .tn-product-info { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 0; padding: 4px 0 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .tn-product-kicker { order: 1; margin: 0 0 12px; color: var(--tn-clay); font-size: 12px; letter-spacing: .16em; }
+    .tn-product-title { order: 2; max-width: 620px; margin: 0 0 14px; font-size: 28px; line-height: 1.18; letter-spacing: 0; }
+    .tn-product-rating { order: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 18px; color: var(--tn-muted); font-size: 14px; font-weight: 800; }
+    .tn-product-rating .tn-stars { color: var(--tn-gold); letter-spacing: 1px; }
+    .tn-product-summary, .tn-hero-facts, .tn-product-points, .tn-product-buy-link, .tn-buy-clarity { display: none !important; }
+    .tn-product-price { order: 4; margin: 0; padding: 18px 22px; border: 0; border-radius: 14px; background: linear-gradient(110deg, var(--tn-charcoal), #746650 72%, #b98256); color: var(--tn-cream); box-shadow: 0 14px 30px rgba(43,43,39,.12); }
+    .tn-product-price::before { content: "Store launch offer"; display: block; margin: 0 0 2px; padding: 0; border-radius: 0; background: transparent; color: var(--tn-cream); font-size: 15px; font-weight: 900; letter-spacing: 0; opacity: .95; }
+    .tn-product-price-label, .tn-price-note { display: none; }
+    .tn-product-price-value { display: block; color: var(--tn-cream); font-size: 52px; line-height: 1; font-weight: 950; letter-spacing: 0; }
+    .tn-product-trust { order: 5; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; margin: 26px 0; padding: 0 0 24px; border: 0; border-bottom: 1px solid var(--tn-line); border-radius: 0; background: transparent; box-shadow: none; }
+    .tn-product-trust span { min-height: auto; display: block; border: 0; border-radius: 0; background: transparent; padding: 0; color: var(--tn-ink); font-size: 16px; font-weight: 850; line-height: 1.45; }
+    .tn-product-trust span::before { width: 8px; height: 8px; margin-right: 8px; box-shadow: none; vertical-align: 2px; }
+    .tn-product-form { order: 6; display: grid; gap: 16px; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+    .tn-variant-label { display: grid; gap: 4px; margin: 0; color: var(--tn-muted); font-size: 17px; font-weight: 850; }
+    .tn-variant-label span { color: var(--tn-muted); font-size: 17px; }
+    .tn-variant-label strong { color: var(--tn-muted); font-size: 13px; font-weight: 850; }
+    .tn-variant-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+    .tn-variant-card { width: 112px; min-height: 112px; display: block; overflow: hidden; padding: 0; border: 2px solid var(--tn-line); border-radius: 10px; background: var(--tn-cream); box-shadow: none; }
+    .tn-variant-card[aria-pressed="true"] { border-color: var(--tn-copper); box-shadow: none; }
+    .tn-variant-card[aria-pressed="true"]::after { display: none; }
+    .tn-variant-image { display: block; height: 78px; background: var(--tn-cream); }
+    .tn-variant-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .tn-variant-top { display: block; }
+    .tn-variant-name { display: grid; place-items: center; min-height: 30px; padding: 5px; background: rgba(255,253,250,.92); color: var(--tn-ink); font-size: 11px; line-height: 1.15; text-align: center; overflow-wrap: anywhere; }
+    .tn-variant-dot, .tn-variant-meta { display: none; }
+    .tn-product-row { display: grid; grid-template-columns: 118px 1fr; gap: 12px; align-items: center; margin-top: 6px; }
+    .tn-product-qty { min-height: 44px; border-radius: 8px; background: var(--tn-cream); }
+    .tn-product-add { min-height: 58px; border-radius: 18px; background: linear-gradient(90deg, var(--tn-copper), #8e4f34); color: #fff; font-size: 18px; letter-spacing: 0; text-transform: none; }
+    .tn-product-stock { order: 7; margin: 10px 0 0; color: var(--tn-muted); font-size: 13px; }
+  }
+
+  @media (max-width: 720px) {
+    .tn-product-wrap { width: 100%; }
+    .tn-product-hero { display: flex; flex-direction: column; gap: 0; padding: 0 0 92px; }
+    .tn-product-gallery { display: flex; flex-direction: column-reverse; gap: 10px; padding: 12px 12px 0; background: var(--tn-cream); }
+    .tn-product-thumbs { position: static; width: auto; max-height: none; display: flex; gap: 9px; overflow-x: auto; overflow-y: hidden; padding: 0 0 10px; -webkit-overflow-scrolling: touch; }
+    .tn-product-thumb-button { width: 62px; height: 62px; flex: 0 0 62px; border-radius: 4px; background: var(--tn-cream); }
+    .tn-product-stage { order: 1; }
+    .tn-product-main-image { border-radius: 14px; background: var(--tn-cream); box-shadow: none; }
+    .tn-product-main-image img { aspect-ratio: 4 / 5; object-fit: cover; }
+    .tn-gallery-nav, .tn-product-zoom-hint { display: none; }
+    .tn-gallery-count { top: 12px; padding: 6px 10px; font-size: 12px; background: rgba(255,253,250,.92); }
+    .tn-product-info { display: flex; flex-direction: column; padding: 18px 16px 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .tn-product-kicker { order: 1; margin-bottom: 8px; color: var(--tn-clay); font-size: 10px; letter-spacing: .14em; }
+    .tn-product-title { order: 2; margin-bottom: 10px; font-size: 24px; line-height: 1.15; }
+    .tn-product-rating { order: 3; display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; color: var(--tn-muted); font-size: 12px; font-weight: 800; }
+    .tn-product-rating .tn-stars { color: var(--tn-gold); }
+    .tn-product-summary, .tn-hero-facts, .tn-product-points, .tn-product-buy-link, .tn-buy-clarity { display: none !important; }
+    .tn-product:not(.tn-buy-mode) .tn-product-price, .tn-product:not(.tn-buy-mode) .tn-product-form, .tn-product:not(.tn-buy-mode) .tn-product-stock, .tn-product:not(.tn-buy-mode) .tn-product-trust { display: grid !important; }
+    .tn-product-price { order: 4; display: block !important; margin: 0; padding: 14px 16px; border: 0; border-radius: 12px; background: linear-gradient(110deg, var(--tn-charcoal), #746650 72%, #b98256); color: var(--tn-cream); }
+    .tn-product-price::before { content: "Store launch offer"; display: block; margin-bottom: 2px; color: var(--tn-cream); font-size: 12px; font-weight: 900; }
+    .tn-product-price-label, .tn-price-note { display: none; }
+    .tn-product-price-value { color: var(--tn-cream); font-size: 40px; line-height: 1; }
+    .tn-product-trust { order: 5; grid-template-columns: 1fr; gap: 9px; margin: 18px 0; padding: 0 0 18px; border: 0; border-bottom: 1px solid var(--tn-line); background: transparent; }
+    .tn-product-trust span { min-height: auto; display: block; border: 0; background: transparent; padding: 0; color: var(--tn-ink); font-size: 13px; line-height: 1.45; }
+    .tn-product-trust span::before { width: 6px; height: 6px; margin-right: 6px; box-shadow: none; }
+    .tn-product-form { order: 6; display: grid !important; gap: 12px; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+    .tn-variant-label { display: grid; gap: 3px; margin-bottom: 0; color: var(--tn-muted); }
+    .tn-variant-label span { font-size: 15px; color: var(--tn-muted); }
+    .tn-variant-label strong { font-size: 12px; }
+    .tn-variant-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+    .tn-variant-card { width: 100%; min-height: 92px; display: block; overflow: hidden; padding: 0; border: 2px solid var(--tn-line); border-radius: 9px; background: var(--tn-cream); }
+    .tn-variant-card[aria-pressed="true"] { border-color: var(--tn-copper); box-shadow: none; }
+    .tn-variant-card[aria-pressed="true"]::after { display: none; }
+    .tn-variant-image { display: block; height: 62px; }
+    .tn-variant-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .tn-variant-top { display: block; }
+    .tn-variant-name { display: grid; place-items: center; min-height: 30px; padding: 4px; background: rgba(255,253,250,.92); color: var(--tn-ink); font-size: 10px; line-height: 1.15; text-align: center; overflow-wrap: anywhere; }
+    .tn-variant-dot, .tn-variant-meta { display: none; }
+    .tn-product-row { display: grid; grid-template-columns: 96px 1fr; gap: 10px; }
+    .tn-product-qty { min-height: 44px; border-radius: 8px; background: var(--tn-cream); }
+    .tn-product-add { min-height: 54px; border-radius: 16px; background: linear-gradient(90deg, var(--tn-copper), #8e4f34); color: #fff; font-size: 16px; letter-spacing: 0; text-transform: none; }
+    .tn-product-stock { order: 7; display: block !important; margin-top: 10px; font-size: 12px; }
+    .tn-sticky-buy { display: none; }
+  }
+
 </style>
 
 <section class="tn-product" id="product-overview" data-tn-gallery-root>
@@ -225,6 +319,7 @@
         <a class="tn-buy-back" href="#product-overview" data-tn-close-buy>‹ Back to product</a>
         <p class="tn-product-kicker">TrailNest Inflatable Tent</p>
         <h1 class="tn-product-title">{{ product.title }}</h1>
+        <div class="tn-product-rating" aria-label="Product rating"><span class="tn-stars">★ ★ ★ ★ ☆</span><span>4.6</span><span>8 reviews</span><span>21 sold</span></div>
         <p class="tn-product-summary">A roomy inflatable cabin tent for family camping, faster setup, and weekend comfort. Pump, stakes, guy lines, and storage bag included.</p>
         <ul class="tn-hero-facts" aria-label="Quick product facts">
           <li>6-person cabin tent</li>
@@ -238,13 +333,20 @@
         {% form 'product', product, class: 'tn-product-form' %}
           {% unless product.has_only_default_variant %}
             <fieldset class="tn-variant-fieldset" aria-label="Choose color">
-              <div class="tn-variant-label"><span>Choose your color</span><strong>Selected: <b data-tn-selected-option>{{ product.selected_or_first_available_variant.title }}</b></strong></div>
+              <div class="tn-variant-label"><span>Color / Size</span><strong>Selected: <b data-tn-selected-option>{{ product.selected_or_first_available_variant.title }}</b></strong></div>
               <div class="tn-variant-grid">
                 {% for variant in product.variants %}
                   {% assign variant_color = '#e8d8bf' %}
                   {% assign variant_title_downcase = variant.title | downcase %}
                   {% if variant_title_downcase contains 'olive' %}{% assign variant_color = '#808769' %}{% endif %}
                   <button class="tn-variant-card" type="button" data-tn-variant-card data-variant-id="{{ variant.id }}" aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}" {% unless variant.available %}disabled{% endunless %}>
+                    <span class="tn-variant-image">
+                      {% if variant.featured_media.preview_image %}
+                        <img src="{{ variant.featured_media.preview_image | image_url: width: 260 }}" alt="{{ variant.title | escape }}" loading="lazy">
+                      {% elsif product.featured_image %}
+                        <img src="{{ product.featured_image | image_url: width: 260 }}" alt="{{ variant.title | escape }}" loading="lazy">
+                      {% endif %}
+                    </span>
                     <span class="tn-variant-top"><span class="tn-variant-name">{{ variant.title }}</span><span class="tn-variant-dot" style="--variant-color: {{ variant_color }}"></span></span>
                     <span class="tn-variant-meta"><span>{% if variant_title_downcase contains 'olive' %}Premium outdoor color{% else %}Best value color{% endif %}</span><span>{{ variant.price | money }}</span></span>
                   </button>
@@ -257,10 +359,12 @@
         {% endform %}
         <p class="tn-product-stock" data-tn-stock>{% if product.selected_or_first_available_variant.available %}In stock{% if product.selected_or_first_available_variant.inventory_management %}: {{ product.selected_or_first_available_variant.inventory_quantity }} available{% endif %}{% else %}Currently unavailable{% endif %}</p>
         <div class="tn-product-trust" aria-label="Purchase confidence">
-          <span>Secure checkout</span>
-          <span>Pump included</span>
-          <span>Shipping calculated at checkout</span>
-          <span>PayPal accepted at checkout</span>
+          <span>Ships to United States</span>
+          <span>Free shipping option</span>
+          <span>PayPal accepted</span>
+          <span>7-day support after delivery</span>
+          <span>Refund support if lost or damaged</span>
+          <span>Pump and storage bag included</span>
         </div>
         <div class="tn-buy-clarity" aria-label="Key buying details">
           <p class="tn-buy-clarity-title">Before you buy</p>
