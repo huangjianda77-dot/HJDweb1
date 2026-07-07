@@ -76,24 +76,26 @@
       {% if collection.products.size > 0 %}
         <div class="tn-product-grid">
           {% for product in collection.products %}
-            <a class="tn-product-card" href="{{ product.url }}">
-              {% if product.featured_image %}
-                {{ product.featured_image | image_url: width: 900 | image_tag: class: 'tn-product-image', loading: 'lazy', alt: product.title }}
-              {% else %}
-                <div class="tn-product-placeholder">TrailNest</div>
-              {% endif %}
-              <div class="tn-product-body">
-                <h2 class="tn-product-title">{{ product.title | escape }}</h2>
-                <div class="tn-product-price">
-                  {% if product.price_varies %}
-                    From {{ product.price_min | money }}
-                  {% else %}
-                    {{ product.price | money }}
-                  {% endif %}
+            {% unless product.handle == '1st-plunge-ice-bath-recovery-kit-premium-cold-therapy-system' %}
+              <a class="tn-product-card" href="{{ product.url }}">
+                {% if product.featured_image %}
+                  {{ product.featured_image | image_url: width: 900 | image_tag: class: 'tn-product-image', loading: 'lazy', alt: product.title }}
+                {% else %}
+                  <div class="tn-product-placeholder">TrailNest</div>
+                {% endif %}
+                <div class="tn-product-body">
+                  <h2 class="tn-product-title">{{ product.title | escape }}</h2>
+                  <div class="tn-product-price">
+                    {% if product.price_varies %}
+                      From {{ product.price_min | money }}
+                    {% else %}
+                      {{ product.price | money }}
+                    {% endif %}
+                  </div>
+                  <span class="tn-product-action">View product</span>
                 </div>
-                <span class="tn-product-action">View product</span>
-              </div>
-            </a>
+              </a>
+            {% endunless %}
           {% endfor %}
         </div>
       {% else %}
