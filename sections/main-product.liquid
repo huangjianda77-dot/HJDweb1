@@ -639,12 +639,9 @@
       if (addButton) { addButton.disabled = !variant.available; addButton.textContent = variant.available ? 'Add to cart' : 'Sold out'; }
       activeVariant = variant;
       syncVariantThumbs();
-      var indexes = activeGalleryIndexes();
-      if (isBuyMode()) {
-        show(indexes[0]);
-      } else {
-        show(activeIndex);
-      }
+      var variantIndexes = variantImageIndexes(variant);
+      var targetIndex = variantIndexes.length ? variantIndexes[0] : activeIndex;
+      show(targetIndex);
     }
     variantCards.forEach(function(card) { card.addEventListener('click', function() { chooseVariant(card.dataset.variantId); }); });
     if (variantSelect) variantSelect.addEventListener('change', function() { chooseVariant(variantSelect.value); });
