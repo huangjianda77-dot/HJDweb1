@@ -276,6 +276,89 @@
     .tn-sticky-buy { display: none; }
   }
 
+  /* Mobile polish: make the phone layout feel intentional instead of a cropped desktop page. */
+  @media (max-width: 720px) {
+    .tn-product-hero { padding-bottom: 64px; }
+    .tn-product-gallery {
+      gap: 8px;
+      padding: 10px 10px 0;
+      background: #fffdfa;
+      border-bottom: 1px solid var(--tn-line);
+    }
+    .tn-product-thumbs {
+      gap: 8px;
+      padding: 0 0 8px;
+      scroll-padding-left: 2px;
+    }
+    .tn-product-thumb-button {
+      width: 58px;
+      height: 58px;
+      flex-basis: 58px;
+      border-radius: 6px;
+      border-width: 1px;
+      background: #fffdfa;
+    }
+    .tn-product-thumb-button[aria-current="true"] {
+      border-width: 2px;
+      box-shadow: 0 0 0 1px rgba(202,167,106,.25);
+    }
+    .tn-product-main-image {
+      border: 0;
+      border-radius: 10px;
+      background: #f4efe5;
+    }
+    .tn-product-main-image img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #f4efe5;
+    }
+    .tn-gallery-count {
+      top: 10px;
+      right: 10px;
+      left: auto;
+      transform: none;
+      min-height: 30px;
+      padding: 0 10px;
+      background: rgba(255,253,250,.94);
+      color: var(--tn-ink);
+      font-size: 13px;
+    }
+    .tn-product-info {
+      padding: 16px 14px 0;
+    }
+    .tn-product-title {
+      font-size: 23px;
+      line-height: 1.15;
+    }
+    .tn-product-price {
+      border-radius: 10px;
+      padding: 13px 14px;
+    }
+    .tn-product-price-value {
+      font-size: 36px;
+    }
+    .tn-product-trust {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 12px;
+      margin: 16px 0;
+    }
+    .tn-product-trust span {
+      font-size: 12px;
+      line-height: 1.28;
+    }
+    .tn-variant-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tn-variant-image {
+      height: 72px;
+      background: #f4efe5;
+    }
+    .tn-variant-image img {
+      object-fit: cover;
+    }
+  }
+
 </style>
 
 <section class="tn-product" id="product-overview" data-tn-gallery-root>
