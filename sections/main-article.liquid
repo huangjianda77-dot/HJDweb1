@@ -1,0 +1,110 @@
+{% schema %}
+{
+  "name": "Article",
+  "settings": [],
+  "presets": [{ "name": "Article" }]
+}
+{% endschema %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --tn-paper: #f7f2e8;
+    --tn-cream: #fffdfa;
+    --tn-ink: #1f211d;
+    --tn-muted: #747064;
+    --tn-line: #e6ded1;
+    --tn-gold: #caa76a;
+    --tn-clay: #a76543;
+    --tn-forest: #182418;
+    background: var(--tn-paper);
+    color: var(--tn-ink);
+  }
+
+  .tn-article * { box-sizing: border-box; }
+  .tn-article { overflow-x: hidden; background: linear-gradient(180deg, #fffdfa 0, var(--tn-paper) 100%); }
+  .tn-article-wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+  .tn-article-hero { padding: 70px 0 40px; border-bottom: 1px solid var(--tn-line); }
+  .tn-article-breadcrumb { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; color: var(--tn-clay); font-size: 12px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+  .tn-article-breadcrumb:hover { color: var(--tn-forest); }
+  .tn-article-title { max-width: 940px; margin: 0; font-size: clamp(40px, 6vw, 72px); line-height: .98; font-weight: 950; letter-spacing: 0; }
+  .tn-article-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; color: var(--tn-muted); font-size: 14px; font-weight: 800; }
+  .tn-article-meta span { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border: 1px solid var(--tn-line); border-radius: 999px; background: var(--tn-cream); }
+  .tn-article-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 42px; align-items: start; padding: 42px 0 76px; }
+  .tn-article-body { min-width: 0; padding: 38px; border: 1px solid var(--tn-line); border-radius: 10px; background: var(--tn-cream); box-shadow: 0 14px 34px rgba(31,33,29,.05); }
+  .tn-article-body p { margin: 0 0 20px; color: #35382f; font-size: 18px; line-height: 1.78; }
+  .tn-article-body h2 { margin: 44px 0 16px; font-size: 34px; line-height: 1.12; font-weight: 950; letter-spacing: 0; color: var(--tn-ink); }
+  .tn-article-body h2:first-child { margin-top: 0; }
+  .tn-article-body h3 { margin: 30px 0 12px; font-size: 23px; line-height: 1.18; font-weight: 950; color: var(--tn-ink); }
+  .tn-article-body a { color: var(--tn-clay); font-weight: 900; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .tn-article-body ul, .tn-article-body ol { margin: 0 0 24px 22px; padding: 0; color: #35382f; font-size: 17px; line-height: 1.74; }
+  .tn-article-body li { margin-bottom: 9px; }
+  .tn-article-body table { display: block; width: 100%; max-width: 100%; margin: 26px 0 34px; overflow-x: auto; border-collapse: collapse; border: 1px solid var(--tn-line); border-radius: 8px; background: #fff; }
+  .tn-article-body th, .tn-article-body td { min-width: 180px; padding: 14px 16px; border-bottom: 1px solid var(--tn-line); text-align: left; vertical-align: top; font-size: 15px; line-height: 1.5; }
+  .tn-article-body th { color: var(--tn-forest); background: #efe6d7; font-weight: 950; }
+  .tn-article-body tr:last-child td { border-bottom: 0; }
+  .tn-article-side { position: sticky; top: 24px; display: grid; gap: 14px; }
+  .tn-article-card { padding: 22px; border: 1px solid var(--tn-line); border-radius: 10px; background: var(--tn-cream); }
+  .tn-article-card h2 { margin: 0; font-size: 20px; line-height: 1.2; font-weight: 950; }
+  .tn-article-card p { margin: 12px 0 0; color: var(--tn-muted); font-size: 14px; line-height: 1.58; }
+  .tn-article-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; width: 100%; margin-top: 16px; border-radius: 999px; background: var(--tn-forest); color: var(--tn-cream); text-decoration: none; font-size: 14px; font-weight: 950; }
+  .tn-article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tn-article-tags span { display: inline-flex; align-items: center; min-height: 30px; padding: 0 10px; border-radius: 999px; background: #efe6d7; color: var(--tn-muted); font-size: 12px; font-weight: 850; }
+  .tn-article-back { display: inline-flex; margin-top: 28px; color: var(--tn-clay); font-weight: 950; text-decoration: none; }
+
+  @media (max-width: 920px) {
+    .tn-article-layout { grid-template-columns: 1fr; gap: 24px; }
+    .tn-article-side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 640px) {
+    .tn-article-wrap { width: min(100% - 24px, 1120px); }
+    .tn-article-hero { padding: 46px 0 28px; }
+    .tn-article-title { font-size: 38px; line-height: 1.03; }
+    .tn-article-layout { padding: 28px 0 54px; }
+    .tn-article-body { padding: 22px; }
+    .tn-article-body p { font-size: 16px; line-height: 1.72; }
+    .tn-article-body h2 { margin-top: 34px; font-size: 27px; }
+    .tn-article-body h3 { font-size: 21px; }
+    .tn-article-body ul, .tn-article-body ol { font-size: 16px; margin-left: 18px; }
+    .tn-article-body th, .tn-article-body td { min-width: 150px; padding: 12px; font-size: 14px; }
+    .tn-article-side { grid-template-columns: 1fr; }
+  }
+</style>
+
+<article class="tn-article">
+  <div class="tn-article-wrap">
+    <header class="tn-article-hero">
+      <a class="tn-article-breadcrumb" href="{{ blog.url }}">TrailNest Guides</a>
+      <h1 class="tn-article-title">{{ article.title | escape }}</h1>
+      <div class="tn-article-meta">
+        <span>{{ article.published_at | date: "%b %d, %Y" }}</span>
+        {% if article.author != blank %}<span>{{ article.author }}</span>{% endif %}
+      </div>
+    </header>
+
+    <div class="tn-article-layout">
+      <div class="tn-article-body">
+        {{ article.content }}
+        <a class="tn-article-back" href="{{ blog.url }}">Back to TrailNest Guides</a>
+      </div>
+
+      <aside class="tn-article-side" aria-label="Related TrailNest links">
+        <div class="tn-article-card">
+          <h2>Find your inflatable tent</h2>
+          <p>Compare TrailNest cabin tents built for family camping, car camping, and glamping-style weekends.</p>
+          <a class="tn-article-button" href="/collections/all-products">Shop inflatable tents</a>
+        </div>
+        {% if article.tags.size > 0 %}
+          <div class="tn-article-card">
+            <h2>Topics</h2>
+            <div class="tn-article-tags">
+              {% for tag in article.tags %}
+                <span>{{ tag }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </aside>
+    </div>
+  </div>
+</article>
