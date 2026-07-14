@@ -513,8 +513,8 @@
           {% for media in product.media limit: 8 %}
             {% if media.media_type == 'image' %}
               {% assign thumb_image = media.preview_image %}
-              <button class="tn-product-thumb-button" type="button" aria-label="View image {{ forloop.index }}" aria-current="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" data-tn-thumb data-index="{{ forloop.index0 }}" data-media-id="{{ media.id }}" data-full-src="{{ thumb_image | image_url: width: 1400 }}" data-zoom-src="{{ thumb_image | image_url: width: 2400 }}" data-alt="{{ media.alt | default: product.title | escape }}">
-                <img src="{{ thumb_image | image_url: width: 360 }}" loading="lazy" alt="{{ media.alt | default: product.title | escape }}" width="{{ thumb_image.width }}" height="{{ thumb_image.height }}">
+              <button class="tn-product-thumb-button" type="button" aria-label="View image {{ forloop.index }}" aria-current="{% if media.id == product.featured_media.id %}true{% else %}false{% endif %}" data-tn-thumb data-index="{{ forloop.index0 }}" data-media-id="{{ media.id }}" data-full-src="{{ thumb_image | image_url: width: 1100 }}" data-zoom-src="{{ thumb_image | image_url: width: 1800 }}" data-alt="{{ media.alt | default: product.title | escape }}">
+                <img src="{{ thumb_image | image_url: width: 260 }}" loading="lazy" alt="{{ media.alt | default: product.title | escape }}" width="{{ thumb_image.width }}" height="{{ thumb_image.height }}">
               </button>
             {% endif %}
           {% endfor %}
@@ -524,7 +524,7 @@
           <div class="tn-product-main-wrap">
             <button class="tn-product-main-image" type="button" data-tn-main-image aria-label="Open product image">
               {% if featured_image %}
-                <img src="{{ featured_image | image_url: width: 1400 }}" alt="{{ product.featured_media.alt | default: product.title | escape }}" width="{{ featured_image.width }}" height="{{ featured_image.height }}" loading="eager" data-tn-main-img data-zoom-src="{{ featured_image | image_url: width: 2400 }}">
+                <img src="{{ featured_image | image_url: width: 1100 }}" alt="{{ product.featured_media.alt | default: product.title | escape }}" width="{{ featured_image.width }}" height="{{ featured_image.height }}" loading="eager" decoding="async" data-tn-main-img data-zoom-src="{{ featured_image | image_url: width: 1800 }}">
                 <span class="tn-product-zoom-hint">Click to enlarge</span>
               {% else %}
                 {{ 'product-1' | placeholder_svg_tag }}
@@ -568,10 +568,10 @@
                     {% if variant.featured_media.preview_image %}
                       {% assign variant_card_image = variant.featured_media.preview_image %}
                     {% endif %}
-                    <button class="tn-variant-card" type="button" data-tn-variant-card data-variant-id="{{ variant.id }}" {% if variant_card_image %}data-variant-image-src="{{ variant_card_image | image_url: width: 1400 }}" data-variant-image-zoom="{{ variant_card_image | image_url: width: 2400 }}" data-variant-image-alt="{{ variant.title | escape }}"{% endif %} aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}" {% unless variant.available %}disabled{% endunless %}>
+                    <button class="tn-variant-card" type="button" data-tn-variant-card data-variant-id="{{ variant.id }}" {% if variant_card_image %}data-variant-image-src="{{ variant_card_image | image_url: width: 1100 }}" data-variant-image-zoom="{{ variant_card_image | image_url: width: 1800 }}" data-variant-image-alt="{{ variant.title | escape }}"{% endif %} aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}" {% unless variant.available %}disabled{% endunless %}>
                       <span class="tn-variant-image">
                       {% if variant_card_image %}
-                        <img src="{{ variant_card_image | image_url: width: 260 }}" alt="{{ variant.title | escape }}" loading="lazy">
+                        <img src="{{ variant_card_image | image_url: width: 220 }}" alt="{{ variant.title | escape }}" loading="lazy">
                       {% endif %}
                       </span>
                       <span class="tn-variant-top"><span class="tn-variant-name">{{ variant.title }}</span><span class="tn-variant-dot" style="--variant-color: {{ variant_color }}"></span></span>
@@ -753,6 +753,7 @@
     }
     var activeVariant = null;
     if (!mainButton || !mainImg || !thumbs.length || !zoom || !zoomImg || !zoomClose) return;
+    var preloadedImages = {};
     function isOliveMedia(thumb) {
       return /olive/i.test(thumb.dataset.alt || '');
     }
@@ -786,6 +787,45 @@
     function activeGalleryIndexes() {
       return isBuyMode() && activeVariant ? variantImageIndexes(activeVariant) : allImageIndexes();
     }
+    function preloadImage(src) {
+      if (!src || preloadedImages[src]) return;
+      preloadedImages[src] = true;
+      var image = new Image();
+      image.decoding = 'async';
+      image.src = src;
+    }
+    function preloadNearbyImages() {
+      var indexes = activeGalleryIndexes();
+      if (!indexes.length) return;
+      var currentPosition = indexes.indexOf(activeIndex);
+      if (currentPosition < 0) currentPosition = 0;
+      [1, -1, 2].forEach(function(offset) {
+        var targetIndex = indexes[(currentPosition + offset + indexes.length) % indexes.length];
+        var thumb = thumbs[targetIndex];
+        if (thumb) preloadImage(thumb.dataset.fullSrc);
+      });
+      variantCards.forEach(function(card) {
+        preloadImage(card.dataset.variantImageSrc);
+      });
+    }
+    function schedulePreload() {
+      var run = preloadNearbyImages;
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(run, { timeout: 1200 });
+      } else {
+        window.setTimeout(run, 350);
+      }
+    }
+    function setMainSource(src, zoomSrc, alt) {
+      if (!src) return;
+      if (mainImg.getAttribute('src') !== src) {
+        mainImg.decoding = 'async';
+        mainImg.src = src;
+      }
+      mainImg.dataset.zoomSrc = zoomSrc || src;
+      mainImg.alt = alt || '';
+      mainButton.setAttribute('aria-label', 'Open ' + (alt || 'product image'));
+    }
     function syncVariantThumbs() {
       var indexes = activeGalleryIndexes();
       var shouldFilter = isBuyMode() && activeVariant;
@@ -810,28 +850,24 @@
     function show(index) {
       activeIndex = (index + thumbs.length) % thumbs.length;
       var thumb = thumbs[activeIndex];
-      mainImg.src = thumb.dataset.fullSrc;
-      mainImg.dataset.zoomSrc = thumb.dataset.zoomSrc;
-      mainImg.alt = thumb.dataset.alt || '';
-      mainButton.setAttribute('aria-label', 'Open ' + (thumb.dataset.alt || 'product image'));
+      setMainSource(thumb.dataset.fullSrc, thumb.dataset.zoomSrc, thumb.dataset.alt || '');
       syncVariantThumbs();
       thumbs.forEach(function(t, i) { t.setAttribute('aria-current', i === activeIndex ? 'true' : 'false'); });
-      if (thumb.scrollIntoView) thumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+      if (thumb.scrollIntoView) thumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
       if (count) count.textContent = (activeIndex + 1) + ' / ' + thumbs.length;
       if (zoom.classList.contains('is-open')) { zoomImg.src = thumb.dataset.zoomSrc || thumb.dataset.fullSrc; zoomImg.alt = thumb.dataset.alt || ''; }
+      schedulePreload();
     }
     function showVariantCardImage(card) {
       if (!card || !card.dataset.variantImageSrc) return false;
-      mainImg.src = card.dataset.variantImageSrc;
-      mainImg.dataset.zoomSrc = card.dataset.variantImageZoom || card.dataset.variantImageSrc;
-      mainImg.alt = card.dataset.variantImageAlt || '';
-      mainButton.setAttribute('aria-label', 'Open ' + (card.dataset.variantImageAlt || 'product image'));
+      setMainSource(card.dataset.variantImageSrc, card.dataset.variantImageZoom || card.dataset.variantImageSrc, card.dataset.variantImageAlt || '');
       thumbs.forEach(function(t) { t.setAttribute('aria-current', 'false'); });
       if (count) count.textContent = 'SKU';
       if (zoom.classList.contains('is-open')) {
         zoomImg.src = mainImg.dataset.zoomSrc || mainImg.src;
         zoomImg.alt = mainImg.alt || '';
       }
+      schedulePreload();
       return true;
     }
     thumbs.forEach(function(thumb, index) { thumb.addEventListener('click', function() { show(index); }); });
@@ -870,7 +906,7 @@
       }
       variantCards.forEach(function(card) { card.setAttribute('aria-pressed', String(card.dataset.variantId) === String(variant.id) ? 'true' : 'false'); });
       var selectedCard = variantCards.find(function(card) { return String(card.dataset.variantId) === String(variant.id); });
-      if (selectedCard && selectedCard.scrollIntoView) selectedCard.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+      if (selectedCard && selectedCard.scrollIntoView) selectedCard.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
       if (window.history && window.history.replaceState) {
         var url = new URL(window.location.href);
         url.searchParams.set('variant', variant.id);
