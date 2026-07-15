@@ -18,6 +18,8 @@
   .tn-product-thumb-button[aria-current="true"] { border-color: var(--tn-gold); }
   .tn-product-thumb-button[hidden] { display: none; }
   .tn-product-thumb-button.is-hidden { display: none !important; }
+  .tn-product-thumbs[hidden], .tn-gallery-nav[hidden], .tn-zoom-nav[hidden], .tn-thumb-scroll-controls[hidden] { display: none !important; }
+  .tn-thumb-scroll-controls { display: none; }
   .tn-product-thumb-button:focus-visible { outline: 3px solid var(--tn-forest); outline-offset: 2px; }
   .tn-product-thumb-button img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
   .tn-product-stage { position: relative; display: block; align-self: start; }
@@ -190,15 +192,24 @@
   @media (min-width: 961px) {
     .tn-product-wrap { width: min(1680px, calc(100% - 56px)); }
     .tn-product-hero { grid-template-columns: minmax(720px, 1.1fr) minmax(520px, .9fr); gap: 34px; padding: 26px 0 70px; }
-    .tn-product-gallery { padding-left: 110px; }
-    .tn-product-thumbs { width: 92px; gap: 14px; }
-    .tn-product-thumb-button { border-radius: 5px; background: var(--tn-cream); }
-    .tn-product-thumb-button img { aspect-ratio: 1 / 1; }
-    .tn-product-main-image { border-color: var(--tn-line); border-radius: 6px; background: var(--tn-cream); box-shadow: none; }
-    .tn-product-main-image img { aspect-ratio: 1 / 1; object-fit: contain; object-position: center; background: var(--tn-cream); }
+    .tn-product-gallery { padding-left: 134px; }
+    .tn-product-thumbs { position: absolute; left: 0; right: auto; top: 0; bottom: 50px; z-index: 4; width: 116px; height: auto; display: grid; align-content: start; grid-auto-rows: 88px; gap: 12px; transform: none; overflow-x: hidden; overflow-y: auto; padding: 0 4px 0 0; border-radius: 0; background: transparent; box-shadow: none; scrollbar-width: thin; }
+    .tn-product-thumb-button { width: 100%; height: 88px; min-height: 88px; overflow: hidden; border: 2px solid transparent; border-radius: 7px; background: #fffdfa; box-shadow: none; transition: border-color .16s ease; }
+    .tn-product-thumb-button:hover { border-color: rgba(202,167,106,.62); }
+    .tn-product-thumb-button[aria-current="true"] { border: 2px solid var(--tn-gold); background: #fffdfa; transform: none; box-shadow: none; }
+    .tn-product-thumb-button img { display: block; width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; object-position: center; background: #fffdfa; }
+    .tn-thumb-scroll-controls { position: absolute; left: 0; bottom: 0; z-index: 5; width: 116px; height: 38px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .tn-thumb-scroll-button { display: grid; place-items: center; border: 1px solid var(--tn-line); border-radius: 8px; background: rgba(255,253,250,.96); color: var(--tn-ink); font-size: 20px; font-weight: 900; cursor: pointer; box-shadow: 0 8px 18px rgba(31,33,29,.08); }
+    .tn-thumb-scroll-button:hover:not(:disabled) { border-color: var(--tn-gold); }
+    .tn-thumb-scroll-button:disabled { opacity: .35; cursor: default; }
+    .tn-product-main-image { border: 1px solid var(--tn-line); border-radius: 8px; background: #fffdfa; box-shadow: none; }
+    .tn-product-main-image img { aspect-ratio: 1 / 1; object-fit: contain; object-position: center; padding: 0; background: #fffdfa; }
     .tn-product-zoom-hint { display: none; }
-    .tn-gallery-count { top: 18px; left: 50%; right: auto; transform: translateX(-50%); background: rgba(255,253,250,.92); }
-    .tn-gallery-nav { width: 52px; height: 52px; background: rgba(255,253,250,.88); color: var(--tn-ink); box-shadow: none; }
+    .tn-gallery-count { display: inline-flex; }
+    .tn-gallery-nav { width: 52px; height: 52px; border: 1px solid rgba(32,38,31,.12); background: rgba(255,255,255,.9); color: var(--tn-ink); font-size: 32px; box-shadow: 0 8px 20px rgba(31,38,31,.12); }
+    .tn-gallery-nav:hover { background: #fff; }
+    .tn-gallery-prev { left: 16px; }
+    .tn-gallery-next { right: 16px; }
     .tn-product-info { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 0; padding: 4px 0 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
     .tn-product-kicker { order: 1; margin: 0 0 12px; color: var(--tn-clay); font-size: 12px; letter-spacing: .16em; }
     .tn-product-title { order: 2; max-width: 620px; margin: 0 0 14px; font-size: 28px; line-height: 1.18; letter-spacing: 0; }
@@ -232,6 +243,7 @@
   }
 
   @media (max-width: 720px) {
+    .tn-thumb-scroll-controls { display: none !important; }
     .tn-product-wrap { width: 100%; }
     .tn-product-hero { display: flex; flex-direction: column; gap: 0; padding: 0 0 92px; }
     .tn-product-gallery { display: flex; flex-direction: column-reverse; gap: 10px; padding: 12px 12px 0; background: var(--tn-cream); }
@@ -513,7 +525,7 @@
       <div class="tn-product-gallery">
         {% assign initial_featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media %}
         <div class="tn-product-thumbs" aria-label="Product images">
-          {% for media in product.media limit: 8 %}
+          {% for media in product.media %}
             {% if media.media_type == 'image' %}
               {% assign thumb_image = media.preview_image %}
               <button class="tn-product-thumb-button" type="button" aria-label="View image {{ forloop.index }}" aria-current="{% if media.id == initial_featured_media.id %}true{% else %}false{% endif %}" data-tn-thumb data-index="{{ forloop.index0 }}" data-media-id="{{ media.id }}" data-full-src="{{ thumb_image | image_url: width: 1100 }}" data-zoom-src="{{ thumb_image | image_url: width: 1800 }}" data-alt="{{ media.alt | default: product.title | escape }}">
@@ -521,6 +533,10 @@
               </button>
             {% endif %}
           {% endfor %}
+        </div>
+        <div class="tn-thumb-scroll-controls" data-tn-thumb-scroll-controls aria-label="Scroll product thumbnails" hidden>
+          <button class="tn-thumb-scroll-button" type="button" data-tn-thumb-scroll-up aria-label="Scroll thumbnails up">↑</button>
+          <button class="tn-thumb-scroll-button" type="button" data-tn-thumb-scroll-down aria-label="Scroll thumbnails down">↓</button>
         </div>
         <div class="tn-product-stage">
           {% assign featured_image = initial_featured_media.preview_image %}
@@ -565,26 +581,24 @@
                 {% for variant in product.variants %}
                   {% assign variant_color = '#e8d8bf' %}
                   {% assign variant_title_downcase = variant.title | downcase %}
-                  {% unless variant_title_downcase contains 'green 6x6.3' %}
-                    {% if variant_title_downcase contains 'olive' %}{% assign variant_color = '#808769' %}{% endif %}
-                    {% assign variant_card_image = product.featured_image %}
-                    {% if variant.featured_media.preview_image %}
-                      {% assign variant_card_image = variant.featured_media.preview_image %}
+                  {% if variant_title_downcase contains 'olive' %}{% assign variant_color = '#808769' %}{% endif %}
+                  {% assign variant_card_image = product.featured_image %}
+                  {% if variant.featured_media.preview_image %}
+                    {% assign variant_card_image = variant.featured_media.preview_image %}
+                  {% endif %}
+                  <button class="tn-variant-card" type="button" data-tn-variant-card data-variant-id="{{ variant.id }}" {% if variant_card_image %}data-variant-image-src="{{ variant_card_image | image_url: width: 1100 }}" data-variant-image-zoom="{{ variant_card_image | image_url: width: 1800 }}" data-variant-image-alt="{{ variant.title | escape }}"{% endif %} aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}" {% unless variant.available %}disabled{% endunless %}>
+                    <span class="tn-variant-image">
+                    {% if variant_card_image %}
+                      <img src="{{ variant_card_image | image_url: width: 220 }}" alt="{{ variant.title | escape }}" loading="lazy">
                     {% endif %}
-                    <button class="tn-variant-card" type="button" data-tn-variant-card data-variant-id="{{ variant.id }}" {% if variant_card_image %}data-variant-image-src="{{ variant_card_image | image_url: width: 1100 }}" data-variant-image-zoom="{{ variant_card_image | image_url: width: 1800 }}" data-variant-image-alt="{{ variant.title | escape }}"{% endif %} aria-pressed="{% if variant == product.selected_or_first_available_variant %}true{% else %}false{% endif %}" {% unless variant.available %}disabled{% endunless %}>
-                      <span class="tn-variant-image">
-                      {% if variant_card_image %}
-                        <img src="{{ variant_card_image | image_url: width: 220 }}" alt="{{ variant.title | escape }}" loading="lazy">
-                      {% endif %}
-                      </span>
-                      <span class="tn-variant-top"><span class="tn-variant-name">{{ variant.title }}</span><span class="tn-variant-dot" style="--variant-color: {{ variant_color }}"></span></span>
-                      <span class="tn-variant-meta"><span>{% if variant_title_downcase contains 'olive' %}Premium outdoor color{% else %}Best value color{% endif %}</span><span>{{ variant.price | money }}</span></span>
-                    </button>
-                  {% endunless %}
+                    </span>
+                    <span class="tn-variant-top"><span class="tn-variant-name">{{ variant.title }}</span><span class="tn-variant-dot" style="--variant-color: {{ variant_color }}"></span></span>
+                    <span class="tn-variant-meta"><span>{% if variant_title_downcase contains 'olive' %}Premium outdoor color{% else %}Best value color{% endif %}</span><span>{{ variant.price | money }}</span></span>
+                  </button>
                 {% endfor %}
               </div>
             </fieldset>
-            <select class="tn-product-select" name="id" aria-label="Variant" data-tn-variant-select>{% for variant in product.variants %}{% assign variant_title_downcase = variant.title | downcase %}{% unless variant_title_downcase contains 'green 6x6.3' %}<option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}</option>{% endunless %}{% endfor %}</select>
+            <select class="tn-product-select" name="id" aria-label="Variant" data-tn-variant-select>{% for variant in product.variants %}<option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}</option>{% endfor %}</select>
           {% else %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">{% endunless %}
           <div class="tn-product-row"><input class="tn-product-qty" type="number" name="quantity" value="1" min="1" aria-label="Quantity"><button class="tn-product-add" type="submit" data-tn-add {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>{% if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif %}</button></div>
         {% endform %}
@@ -724,6 +738,10 @@
   window.trailnestProductGallery = window.trailnestProductGallery || function(root) {
     var mainButton = root.querySelector('[data-tn-main-image]');
     var mainImg = root.querySelector('[data-tn-main-img]');
+    var thumbsWrap = root.querySelector('.tn-product-thumbs');
+    var thumbScrollControls = root.querySelector('[data-tn-thumb-scroll-controls]');
+    var thumbScrollUp = root.querySelector('[data-tn-thumb-scroll-up]');
+    var thumbScrollDown = root.querySelector('[data-tn-thumb-scroll-down]');
     var thumbs = Array.prototype.slice.call(root.querySelectorAll('[data-tn-thumb]'));
     var prev = root.querySelector('[data-tn-prev]');
     var next = root.querySelector('[data-tn-next]');
@@ -734,6 +752,7 @@
     var zoomPrev = document.querySelector('[data-tn-zoom-prev]');
     var zoomNext = document.querySelector('[data-tn-zoom-next]');
     var variantSelect = root.querySelector('[data-tn-variant-select]');
+    var variantGrid = root.querySelector('.tn-variant-grid');
     var variantCards = Array.prototype.slice.call(root.querySelectorAll('[data-tn-variant-card]'));
     var variantJson = document.querySelector('[data-tn-variants-json]');
     var variants = [];
@@ -752,6 +771,7 @@
     var buyClose = root.querySelector('[data-tn-close-buy]');
     var activeIndex = Math.max(0, thumbs.findIndex(function(thumb) { return thumb.getAttribute('aria-current') === 'true'; }));
     var activeVariant = null;
+    var skuGalleryActive = false;
     if (!mainButton || !mainImg || !thumbs.length || !zoom || !zoomImg || !zoomClose) return;
     var preloadedImages = {};
     function isOliveMedia(thumb) {
@@ -773,20 +793,18 @@
         if (firstOliveIndex >= 0) indexes = [firstOliveIndex];
       }
       if (!indexes.length && /beige/i.test(variant.title || '')) {
-        var firstBeigeIndex = thumbs.findIndex(function(thumb) { return !isOliveMedia(thumb); });
-        if (firstBeigeIndex >= 0) indexes = [firstBeigeIndex];
+        indexes = thumbs.reduce(function(acc, thumb, index) {
+          if (!isOliveMedia(thumb)) acc.push(index);
+          return acc;
+        }, []);
       }
-      if (!indexes.length) indexes = thumbs.map(function(_, index) { return index; });
-      return indexes.slice(0, 1);
+      return indexes;
     }
     function allImageIndexes() {
       return thumbs.map(function(_, index) { return index; });
     }
-    function isBuyMode() {
-      return root.classList.contains('tn-buy-mode');
-    }
     function activeGalleryIndexes() {
-      return isBuyMode() && activeVariant ? variantImageIndexes(activeVariant) : allImageIndexes();
+      return skuGalleryActive && activeVariant && variants.length > 1 ? variantImageIndexes(activeVariant) : allImageIndexes();
     }
     function preloadImage(src) {
       if (!src || preloadedImages[src]) return;
@@ -827,10 +845,45 @@
       mainImg.alt = alt || '';
       mainButton.setAttribute('aria-label', 'Open ' + (alt || 'product image'));
     }
+    function keepVisibleInScroller(scroller, item) {
+      if (!scroller || !item) return;
+      if (scroller.scrollWidth > scroller.clientWidth) {
+        var left = item.offsetLeft;
+        var right = left + item.offsetWidth;
+        if (left < scroller.scrollLeft) scroller.scrollLeft = left;
+        else if (right > scroller.scrollLeft + scroller.clientWidth) scroller.scrollLeft = right - scroller.clientWidth;
+      }
+      if (scroller.scrollHeight > scroller.clientHeight) {
+        var top = item.offsetTop;
+        var bottom = top + item.offsetHeight;
+        if (top < scroller.scrollTop) scroller.scrollTop = top;
+        else if (bottom > scroller.scrollTop + scroller.clientHeight) scroller.scrollTop = bottom - scroller.clientHeight;
+      }
+    }
+    function updateThumbScrollControls() {
+      if (!thumbsWrap || !thumbScrollControls) return;
+      var canScroll = window.innerWidth > 960 && thumbsWrap.scrollHeight > thumbsWrap.clientHeight + 2;
+      thumbScrollControls.hidden = !canScroll;
+      if (thumbScrollUp) thumbScrollUp.disabled = !canScroll || thumbsWrap.scrollTop <= 1;
+      if (thumbScrollDown) thumbScrollDown.disabled = !canScroll || thumbsWrap.scrollTop >= thumbsWrap.scrollHeight - thumbsWrap.clientHeight - 1;
+    }
+    function scrollThumbRail(direction) {
+      if (!thumbsWrap) return;
+      var visibleThumb = thumbs.find(function(thumb) { return !thumb.hidden; });
+      var step = (visibleThumb ? visibleThumb.offsetHeight : 88) + 12;
+      thumbsWrap.scrollTop += direction * step;
+      updateThumbScrollControls();
+    }
     function syncVariantThumbs() {
       var indexes = activeGalleryIndexes();
-      var shouldFilter = isBuyMode() && activeVariant;
+      var shouldFilter = skuGalleryActive && !!activeVariant && variants.length > 1;
+      root.classList.toggle('tn-sku-gallery-active', shouldFilter);
       root.classList.toggle('tn-single-sku-image', shouldFilter && indexes.length <= 1);
+      if (thumbsWrap) thumbsWrap.hidden = shouldFilter && indexes.length === 0;
+      if (prev) prev.hidden = indexes.length <= 1;
+      if (next) next.hidden = indexes.length <= 1;
+      if (zoomPrev) zoomPrev.hidden = indexes.length <= 1;
+      if (zoomNext) zoomNext.hidden = indexes.length <= 1;
       thumbs.forEach(function(thumb, index) {
         var shouldHide = shouldFilter && indexes.indexOf(index) < 0;
         thumb.hidden = shouldHide;
@@ -841,21 +894,26 @@
           thumb.removeAttribute('aria-hidden');
         }
       });
+      window.requestAnimationFrame(updateThumbScrollControls);
     }
     function scopedShow(direction) {
       var indexes = activeGalleryIndexes();
+      if (!indexes.length) return;
       var currentPosition = indexes.indexOf(activeIndex);
       if (currentPosition < 0) currentPosition = 0;
       show(indexes[(currentPosition + direction + indexes.length) % indexes.length]);
     }
     function show(index) {
+      if (typeof index !== 'number' || !thumbs[index]) return;
       activeIndex = (index + thumbs.length) % thumbs.length;
       var thumb = thumbs[activeIndex];
       setMainSource(thumb.dataset.fullSrc, thumb.dataset.zoomSrc, thumb.dataset.alt || '');
       syncVariantThumbs();
       thumbs.forEach(function(t, i) { t.setAttribute('aria-current', i === activeIndex ? 'true' : 'false'); });
-      if (thumb.scrollIntoView) thumb.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
-      if (count) count.textContent = (activeIndex + 1) + ' / ' + thumbs.length;
+      keepVisibleInScroller(thumbsWrap, thumb);
+      var activeIndexes = activeGalleryIndexes();
+      var activePosition = activeIndexes.indexOf(activeIndex);
+      if (count) count.textContent = (activePosition >= 0 ? activePosition + 1 : 1) + ' / ' + activeIndexes.length;
       if (zoom.classList.contains('is-open')) { zoomImg.src = thumb.dataset.zoomSrc || thumb.dataset.fullSrc; zoomImg.alt = thumb.dataset.alt || ''; }
       schedulePreload();
     }
@@ -907,8 +965,10 @@
       }
       variantCards.forEach(function(card) { card.setAttribute('aria-pressed', String(card.dataset.variantId) === String(variant.id) ? 'true' : 'false'); });
       var selectedCard = variantCards.find(function(card) { return String(card.dataset.variantId) === String(variant.id); });
-      if (selectedCard && selectedCard.scrollIntoView) selectedCard.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' });
-      if (window.history && window.history.replaceState) {
+      keepVisibleInScroller(variantGrid, selectedCard);
+      if (options.activateSkuGallery === true) skuGalleryActive = true;
+      if (options.activateSkuGallery === false) skuGalleryActive = false;
+      if (options.updateHistory !== false && window.history && window.history.replaceState) {
         var url = new URL(window.location.href);
         url.searchParams.set('variant', variant.id);
         window.history.replaceState({}, '', url.toString());
@@ -925,17 +985,29 @@
       syncVariantThumbs();
       if (options.updateGallery !== false) {
         var variantIndexes = variantImageIndexes(variant);
-        var targetIndex = variantIndexes.length ? variantIndexes[0] : activeIndex;
-        show(targetIndex);
+        if (!variantIndexes.length && showVariantCardImage(selectedCard)) {
+          syncVariantThumbs();
+        } else {
+          show(variantIndexes[0]);
+        }
       }
     }
-    variantCards.forEach(function(card) { card.addEventListener('click', function() { chooseVariant(card.dataset.variantId, { updateGallery: true, variantCard: card }); }); });
-    if (variantSelect) variantSelect.addEventListener('change', function() { chooseVariant(variantSelect.value, { updateGallery: true }); });
-    if (variantSelect && variantSelect.value) chooseVariant(variantSelect.value, { updateGallery: true });
+    variantCards.forEach(function(card) { card.addEventListener('click', function() { chooseVariant(card.dataset.variantId, { updateGallery: true, activateSkuGallery: true, updateHistory: true, variantCard: card }); }); });
+    if (variantSelect) variantSelect.addEventListener('change', function() { chooseVariant(variantSelect.value, { updateGallery: true, activateSkuGallery: true, updateHistory: true }); });
+    if (thumbScrollUp) thumbScrollUp.addEventListener('click', function() { scrollThumbRail(-1); });
+    if (thumbScrollDown) thumbScrollDown.addEventListener('click', function() { scrollThumbRail(1); });
+    if (thumbsWrap) thumbsWrap.addEventListener('scroll', updateThumbScrollControls, { passive: true });
+    window.addEventListener('resize', updateThumbScrollControls);
+    if (variantSelect && variantSelect.value) {
+      var initialVariantParam = new URL(window.location.href).searchParams.get('variant');
+      chooseVariant(variantSelect.value, { updateGallery: !!initialVariantParam, activateSkuGallery: !!initialVariantParam, updateHistory: false });
+    }
     function setBuyMode(enabled, shouldScroll) {
       root.classList.toggle('tn-buy-mode', enabled);
       var indexes = activeGalleryIndexes();
-      if (enabled && indexes.indexOf(activeIndex) < 0) {
+      if (!indexes.length) {
+        syncVariantThumbs();
+      } else if (indexes.indexOf(activeIndex) < 0) {
         show(indexes[0]);
       } else {
         show(activeIndex);
@@ -974,7 +1046,7 @@
     if (buyClose) buyClose.addEventListener('click', closeBuyFlow);
     window.addEventListener('hashchange', function() { setBuyMode(window.location.hash === '#trailnest-buy', false); });
     setBuyMode(window.location.hash === '#trailnest-buy', false);
-    function openZoom() { var thumb = thumbs[activeIndex]; zoomImg.src = thumb.dataset.zoomSrc || mainImg.src; zoomImg.alt = mainImg.alt || ''; zoom.classList.add('is-open'); zoom.setAttribute('aria-hidden','false'); document.documentElement.style.overflow = 'hidden'; zoomClose.focus(); }
+    function openZoom() { zoomImg.src = mainImg.dataset.zoomSrc || mainImg.src; zoomImg.alt = mainImg.alt || ''; zoom.classList.add('is-open'); zoom.setAttribute('aria-hidden','false'); document.documentElement.style.overflow = 'hidden'; zoomClose.focus(); }
     function closeZoom() { zoom.classList.remove('is-open'); zoom.setAttribute('aria-hidden','true'); zoomImg.src = ''; document.documentElement.style.overflow = ''; mainButton.focus(); }
     mainButton.addEventListener('click', openZoom);
     zoomClose.addEventListener('click', closeZoom);
@@ -982,7 +1054,10 @@
     if (zoomNext) zoomNext.addEventListener('click', function(e) { e.stopPropagation(); scopedShow(1); });
     zoom.addEventListener('click', function(event) { if (event.target === zoom) closeZoom(); });
     document.addEventListener('keydown', function(event) { if (event.key === 'Escape' && zoom.classList.contains('is-open')) closeZoom(); if (event.key === 'ArrowLeft' && zoom.classList.contains('is-open')) scopedShow(-1); if (event.key === 'ArrowRight' && zoom.classList.contains('is-open')) scopedShow(1); });
-    show(activeIndex);
+    var initialIndexes = activeGalleryIndexes();
+    if (initialIndexes.length) show(initialIndexes.indexOf(activeIndex) >= 0 ? activeIndex : initialIndexes[0]);
+    else syncVariantThumbs();
+    updateThumbScrollControls();
   };
   document.querySelectorAll('[data-tn-gallery-root]').forEach(window.trailnestProductGallery);
 </script>
