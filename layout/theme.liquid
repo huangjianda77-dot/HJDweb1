@@ -29,6 +29,10 @@
       elsif seo_page_description == blank and request.page_type == 'page'
         assign seo_page_description = page.content | strip_html | strip_newlines | truncate: 155
       endif
+
+      if seo_page_description != blank
+        assign seo_page_description = seo_page_description | strip_html | strip_newlines | truncate: 155
+      endif
     %}
     
     <title>{{ seo_page_title | escape }}</title>
