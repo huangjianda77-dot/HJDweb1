@@ -1,20 +1,20 @@
 {% for group in robots.default_groups %}
-{{- group.user_agent }}
+{{ group.user_agent }}
 
-{%- for rule in group.rules -%}
+{% for rule in group.rules %}
 {{ rule }}
-{%- endfor -%}
+{% endfor %}
 
-{%- if group.user_agent.value == '*' -%}
+{% if group.user_agent.value == '*' %}
 Disallow: /pages/hj1
 Disallow: /pages/1st-plunge-ice-bath-recovery-kit
 Disallow: /pages/ice-bath-recovery-kit
 Disallow: /pages/recovery-tech-system
 Disallow: /collections/frontpage
-{%- endif -%}
+{% endif %}
 
-{%- if group.sitemap != blank -%}
+{% if group.sitemap != blank %}
 {{ group.sitemap }}
-{%- endif -%}
+{% endif %}
 
 {% endfor %}
