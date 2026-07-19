@@ -2,51 +2,48 @@
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
     <meta charset="utf-8">
-  <meta name="google-site-verification" content="jbjVmXGG9gb7B6Lu6zkENYhGpKurZj_-HHBLXW2Bu8M" />
+    <meta name="google-site-verification" content="jbjVmXGG9gb7B6Lu6zkENYhGpKurZj_-HHBLXW2Bu8M" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="canonical" href="{{ canonical_url }}">
-
     {% liquid
-      assign seo_page_title = page_title
-      assign seo_page_description = page_description
+      assign trailnest_legacy_redirect_target = ''
 
-      if request.page_type == 'index'
-        assign seo_page_title = 'TrailNest Inflatable Camping Tents | Comfortable Family Camping'
-        assign seo_page_description = 'TrailNest offers spacious inflatable camping tents for family trips, weekend escapes, and glamping-style outdoor living. Set up faster and camp in comfort.'
-      elsif request.page_type == 'collection' and collection.handle == 'all-products'
-        assign seo_page_title = 'Inflatable Camping Tents | TrailNest'
-        assign seo_page_description = 'Shop TrailNest inflatable camping tents built for easy setup, roomy interiors, breathable comfort, and family-friendly outdoor living.'
-      elsif request.page_type == 'blog' and blog.handle == 'guides'
-        assign seo_page_title = 'Inflatable Tent Guides & Camping Advice | TrailNest'
-        assign seo_page_description = 'Explore practical inflatable tent guides, setup advice, family camping comparisons, and glamping tips from TrailNest.'
-      endif
-
-      if seo_page_description == blank and request.page_type == 'product'
-        assign seo_page_description = product.description | strip_html | strip_newlines | truncate: 155
-      elsif seo_page_description == blank and request.page_type == 'article'
-        assign seo_page_description = article.excerpt_or_content | strip_html | strip_newlines | truncate: 155
-      elsif seo_page_description == blank and request.page_type == 'page'
-        assign seo_page_description = page.content | strip_html | strip_newlines | truncate: 155
-      endif
-
-      if seo_page_description != blank
-        assign seo_page_description = seo_page_description | strip_html | strip_newlines | truncate: 155
-      endif
+      case request.path
+        when '/pages/hj1'
+          assign trailnest_legacy_redirect_target = '/'
+        when '/pages/1st-plunge-ice-bath-recovery-kit'
+          assign trailnest_legacy_redirect_target = '/collections/all-products'
+        when '/pages/ice-bath-recovery-kit'
+          assign trailnest_legacy_redirect_target = '/collections/all-products'
+        when '/pages/recovery-tech-system'
+          assign trailnest_legacy_redirect_target = '/collections/all-products'
+        when '/collections/frontpage'
+          assign trailnest_legacy_redirect_target = '/collections/all-products'
+      endcase
     %}
+    {% if trailnest_legacy_redirect_target != blank %}
+      <meta name="robots" content="noindex,follow">
+      <meta http-equiv="refresh" content="0;url={{ trailnest_legacy_redirect_target }}">
+      <link rel="canonical" href="{{ request.origin }}{{ trailnest_legacy_redirect_target }}">
+      <script>
+        window.location.replace({{ trailnest_legacy_redirect_target | json }});
+      </script>
+    {% else %}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {% endif %}
     
-    <title>{{ seo_page_title | escape }}</title>
+    <title>{{ page_title }}</title>
 
-  <meta property="og:title" content="{{ seo_page_title | escape }}">
+  <meta property="og:title" content="{{ page_title }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0813/4380/7725/files/61yue4AWqcL._AC_SY300_SX300_QL70_ML2_.jpg?v=1747631069">
   <meta property="og:image:width" content="300">
   <meta property="og:image:height" content="300">
-  <meta property="og:description" content="{{ seo_page_description | escape }}">
+  <meta property="og:description" content="{{ page_description }}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ seo_page_title | escape }}">
-  <meta name="twitter:description" content="{{ seo_page_description | escape }}">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_description }}">
   <meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/0813/4380/7725/files/61yue4AWqcL._AC_SY300_SX300_QL70_ML2_.jpg?v=1747631069">
 <script type="application/ld+json">
 {
@@ -58,11 +55,9 @@
 }
 </script>
 
-{% render 'trailnest-seo-jsonld' %}
 
-
-    {% if seo_page_description != blank %}
-      <meta name="description" content="{{ seo_page_description | escape }}">
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
     {{ content_for_header }}
