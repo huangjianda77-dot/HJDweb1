@@ -33,11 +33,11 @@
       endcase
 
       if request.page_type == 'index'
-        assign seo_page_title = 'TrailNest Inflatable Camping Tents | Comfortable Family Camping'
-        assign seo_page_description = 'TrailNest offers spacious inflatable camping tents for family trips, weekend escapes, and glamping-style outdoor living. Set up faster and camp in comfort.'
+        assign seo_page_title = 'TrailNest Rooftop & Inflatable Camping Tents | Go Far. Sleep Well.'
+        assign seo_page_description = 'Shop TrailNest rooftop tents and inflatable camping tents for road trips, family weekends, and comfortable nights outside.'
       elsif request.page_type == 'collection' and collection.handle == 'all-products'
-        assign seo_page_title = 'Inflatable Camping Tents | TrailNest'
-        assign seo_page_description = 'Shop TrailNest inflatable camping tents built for easy setup, roomy interiors, breathable comfort, and family-friendly outdoor living.'
+        assign seo_page_title = 'Rooftop & Inflatable Camping Tents | TrailNest'
+        assign seo_page_description = 'Explore TrailNest rooftop tents and inflatable shelters for road trips, family camping, and longer stays outdoors.'
       elsif request.page_type == 'blog' and blog.handle == 'guides'
         assign seo_page_title = 'Inflatable Tent Guides & Camping Advice | TrailNest'
         assign seo_page_description = 'Explore practical inflatable tent guides, setup advice, family camping comparisons, and glamping tips from TrailNest.'
@@ -71,14 +71,14 @@
   <meta property="og:title" content="{{ seo_page_title | escape }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ canonical_url }}">
-  <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0813/4380/7725/files/61yue4AWqcL._AC_SY300_SX300_QL70_ML2_.jpg?v=1747631069">
-  <meta property="og:image:width" content="300">
-  <meta property="og:image:height" content="300">
+  <meta property="og:image" content="https:{{ 'trailnest-national-park-hero.jpg' | asset_url }}">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
   <meta property="og:description" content="{{ seo_page_description | escape }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ seo_page_title | escape }}">
   <meta name="twitter:description" content="{{ seo_page_description | escape }}">
-  <meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/0813/4380/7725/files/61yue4AWqcL._AC_SY300_SX300_QL70_ML2_.jpg?v=1747631069">
+  <meta name="twitter:image" content="https:{{ 'trailnest-national-park-hero.jpg' | asset_url }}">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
