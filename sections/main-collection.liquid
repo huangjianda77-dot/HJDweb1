@@ -1,133 +1,47 @@
-{% schema %}
-{
-  "name": "Collection",
-  "settings": [],
-  "presets": [{ "name": "Collection" }]
-}
-{% endschema %}
+{% assign shelter_collection = collections['all-products'] %}
+<div class="tnp-collection">
+  <div class="tnp-shell">
+    <section class="tnp-collection__intro">
+      <p class="tnp-eyebrow">TrailNest Shelter Collection</p>
+      <h1>Shop Shelters</h1>
+      <span>Shelter systems for the road, the campsite, and everywhere between.</span>
+    </section>
 
-<style>
-  #shopify-section-{{ section.id }} {
-    --tn-paper: #f7f2e8;
-    --tn-cream: #fffdfa;
-    --tn-ink: #1f211d;
-    --tn-muted: #747064;
-    --tn-line: #e6ded1;
-    --tn-gold: #caa76a;
-    --tn-clay: #a76543;
-    background: var(--tn-paper);
-    color: var(--tn-ink);
-  }
-
-  .tn-collection * { box-sizing: border-box; }
-  .tn-collection { width: 100%; max-width: 100vw; min-height: 70vh; overflow-x: hidden; padding: 58px 0 74px; background: linear-gradient(180deg, #fffdfa 0, var(--tn-paper) 100%); }
-  .tn-collection-wrap { width: min(1320px, calc(100% - 32px)); margin: 0 auto; }
-  .tn-collection-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 34px; padding-bottom: 24px; border-bottom: 1px solid var(--tn-line); }
-  .tn-collection-kicker { margin: 0 0 10px; color: var(--tn-clay); font-size: 12px; font-weight: 950; letter-spacing: .16em; text-transform: uppercase; }
-  .tn-collection-title { margin: 0; font-size: clamp(34px, 5vw, 62px); line-height: 1; font-weight: 950; letter-spacing: 0; }
-  .tn-collection-desc { max-width: 560px; margin: 14px 0 0; color: var(--tn-muted); font-size: 16px; line-height: 1.6; }
-  .tn-collection-count { flex: 0 0 auto; min-height: 38px; display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid var(--tn-line); border-radius: 999px; background: var(--tn-cream); color: var(--tn-muted); font-size: 13px; font-weight: 850; }
-  .tn-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-  .tn-product-card { min-width: 0; display: grid; grid-template-rows: auto 1fr; overflow: hidden; border: 1px solid var(--tn-line); border-radius: 10px; background: var(--tn-cream); color: var(--tn-ink); text-decoration: none; box-shadow: 0 14px 34px rgba(31,33,29,.06); transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease; }
-  .tn-product-card:hover { transform: translateY(-2px); border-color: rgba(202,167,106,.72); box-shadow: 0 18px 42px rgba(31,33,29,.1); }
-  .tn-product-card:focus-visible { outline: 3px solid var(--tn-gold); outline-offset: 3px; }
-  .tn-product-image-box { width: 100%; aspect-ratio: 4 / 3; display: grid; place-items: center; overflow: hidden; border-bottom: 1px solid var(--tn-line); background: #fffdfa; }
-  .tn-product-image { display: block; width: 100%; height: 100%; padding: 10px; object-fit: contain; object-position: center center; }
-  .tn-product-placeholder { width: 100%; aspect-ratio: 4 / 3; display: grid; place-items: center; border-bottom: 1px solid var(--tn-line); background: #fffdfa; color: var(--tn-muted); font-size: 13px; font-weight: 850; }
-  .tn-product-body { display: grid; grid-template-rows: auto auto 1fr; gap: 10px; padding: 16px; }
-  .tn-product-title { margin: 0; font-size: 16px; line-height: 1.25; font-weight: 950; letter-spacing: 0; }
-  .tn-product-price { color: var(--tn-clay); font-size: 18px; font-weight: 950; }
-  .tn-product-action { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; margin-top: 4px; border-radius: 999px; background: var(--tn-ink); color: var(--tn-cream); font-size: 13px; font-weight: 950; }
-  .tn-empty { padding: 42px; border: 1px solid var(--tn-line); border-radius: 10px; background: var(--tn-cream); color: var(--tn-muted); font-size: 16px; }
-
-  @media (max-width: 1080px) {
-    .tn-product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
-
-  @media (max-width: 760px) {
-    .tn-collection { padding: 28px 0 52px; }
-    .tn-collection-wrap { width: 100vw; max-width: 100vw; padding: 0 14px; overflow: hidden; }
-    .tn-collection-head { display: grid; gap: 16px; margin-bottom: 22px; padding-bottom: 18px; }
-    .tn-collection-title { font-size: 36px; }
-    .tn-collection-desc { font-size: 14px; }
-    .tn-collection-count { width: max-content; }
-    .tn-product-grid { width: 100%; max-width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px; }
-    .tn-product-image-box,
-    .tn-product-placeholder { aspect-ratio: 4 / 3; }
-    .tn-product-image { padding: 6px; }
-    .tn-product-body { min-height: 188px; gap: 14px; padding: 14px 12px; }
-    .tn-product-title { min-height: 54px; overflow-wrap: anywhere; font-size: 16px; line-height: 1.08; }
-    .tn-product-price { font-size: 20px; line-height: 1; }
-    .tn-product-action { align-self: end; min-width: 0; min-height: 48px; padding: 0 10px; font-size: 15px; }
-  }
-
-  @media (max-width: 374px) {
-    .tn-collection-wrap { width: 100vw; max-width: 100vw; padding-inline: 10px; }
-    .tn-product-grid { gap: 10px 8px; }
-    .tn-product-body { padding-inline: 10px; }
-    .tn-product-title { font-size: 15px; }
-    .tn-product-action { font-size: 14px; }
-  }
-</style>
-
-<section class="tn-collection">
-  <div class="tn-collection-wrap">
-    <header class="tn-collection-head">
-      <div>
-        <p class="tn-collection-kicker">TrailNest Collection</p>
-        <h1 class="tn-collection-title">{{ collection.title | escape }}</h1>
-        {% if collection.description != blank %}
-          <div class="tn-collection-desc">{{ collection.description }}</div>
-        {% else %}
-          <p class="tn-collection-desc">Explore the current TrailNest product lineup for comfortable outdoor stays.</p>
-        {% endif %}
+    <section class="tnp-category" id="rooftop-tents">
+      <header class="tnp-category__head"><div><span>Flagship category</span><h2>Rooftop Tents</h2></div><a href="#rooftop-tents">View all <span class="tnp-arrow">→</span></a></header>
+      <div class="tnp-product-grid">
+        {% assign rooftop_count = 0 %}
+        {% for product in shelter_collection.products %}
+          {% if product.handle contains 'rooftop' %}
+            {% assign rooftop_count = rooftop_count | plus: 1 %}
+            <a class="tnp-card" href="{{ product.url }}">
+              <div class="tnp-card__image"><img src="{{ 'trailnest-wedge-132-rooftop-tent-minimal-suv-white.jpg' | asset_url }}" alt="{{ product.title | escape }}" loading="eager"></div>
+              <div class="tnp-card__copy"><span>Flagship rooftop system</span><h3>{{ product.title | escape }}</h3><div class="tnp-card__bottom"><b>{{ product.price | money }}</b><b>View product <span class="tnp-arrow">→</span></b></div></div>
+            </a>
+          {% endif %}
+        {% endfor %}
       </div>
-      <span class="tn-collection-count">{{ collection.products_count }} products</span>
-    </header>
+      {% if rooftop_count == 0 %}<div class="tnp-empty">Our rooftop tent collection is being prepared.</div>{% endif %}
+    </section>
 
-    {% paginate collection.products by 24 %}
-      {% if collection.products.size > 0 %}
-        <div class="tn-product-grid">
-          {% for product in collection.products %}
-            {% unless product.handle == '1st-plunge-ice-bath-recovery-kit-premium-cold-therapy-system' %}
-              {% assign card_asset = blank %}
-              {% if product.handle == 'trailnest-inflatable-cabin-tent' %}
-                {% assign card_asset = 'trailnest-card-beige.jpg' %}
-              {% elsif product.handle == 'trailnest-olive-6-person-inflatable-cabin-tent' %}
-                {% assign card_asset = 'trailnest-card-olive.jpg' %}
-              {% elsif product.handle == 'trailnest-skylight-inflatable-cabin-tent' %}
-                {% assign card_asset = 'trailnest-card-skylight.jpg' %}
-              {% endif %}
-              <a class="tn-product-card" href="{{ product.url }}">
-                {% if card_asset != blank %}
-                  <div class="tn-product-image-box">
-                    <img class="tn-product-image" src="{{ card_asset | asset_url }}" loading="lazy" alt="{{ product.title | escape }}">
-                  </div>
-                {% elsif product.featured_image %}
-                  <div class="tn-product-image-box">
-                    {{ product.featured_image | image_url: width: 900 | image_tag: class: 'tn-product-image', loading: 'lazy', alt: product.title }}
-                  </div>
-                {% else %}
-                  <div class="tn-product-placeholder">TrailNest</div>
-                {% endif %}
-                <div class="tn-product-body">
-                  <h2 class="tn-product-title">{{ product.title | escape }}</h2>
-                  <div class="tn-product-price">
-                    {% if product.price_varies %}
-                      From {{ product.price_min | money }}
-                    {% else %}
-                      {{ product.price | money }}
-                    {% endif %}
-                  </div>
-                  <span class="tn-product-action">View product</span>
-                </div>
-              </a>
-            {% endunless %}
-          {% endfor %}
-        </div>
-      {% else %}
-        <div class="tn-empty">No products are available in this collection yet.</div>
-      {% endif %}
-    {% endpaginate %}
+    <section class="tnp-category" id="inflatable-tents">
+      <header class="tnp-category__head"><div><span>Basecamp collection</span><h2>Inflatable Tents</h2></div><a href="#inflatable-tents">View all <span class="tnp-arrow">→</span></a></header>
+      <div class="tnp-product-grid">
+        {% assign inflatable_count = 0 %}
+        {% for product in shelter_collection.products %}
+          {% unless product.handle contains 'rooftop' %}
+            {% assign inflatable_count = inflatable_count | plus: 1 %}
+            <a class="tnp-card" href="{{ product.url }}">
+              <div class="tnp-card__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</div>
+              <div class="tnp-card__copy"><span>Inflatable shelter</span><h3>{{ product.title | escape }}</h3><div class="tnp-card__bottom"><b>{{ product.price | money }}</b><b>View product <span class="tnp-arrow">→</span></b></div></div>
+            </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+      {% if inflatable_count == 0 %}<div class="tnp-empty">No inflatable tents are available right now.</div>{% endif %}
+    </section>
   </div>
-</section>
+</div>
+{% schema %}
+{"name":"TrailNest Collection","settings":[],"presets":[{"name":"TrailNest Collection"}]}
+{% endschema %}
